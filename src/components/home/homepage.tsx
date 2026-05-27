@@ -41,7 +41,7 @@ const LIVE_ORDERS_EN = [
 ]
 
 export function Homepage() {
-  const { categories, setProducts, setCategories, language, getCartItemCount, cart, setCurrentView } = useStore()
+  const { categories, setCategories, language, getCartItemCount, setCurrentView } = useStore()
   const [liveOrderIndex, setLiveOrderIndex] = useState(0)
   const [showLiveOrder, setShowLiveOrder] = useState(false)
 

@@ -105,6 +105,7 @@ export function CustomerReviews() {
   const { language } = useStore()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [reviews, setReviews] = useState<Review[]>(HARDCODED_REVIEWS)
+  const [itemsPerView, setItemsPerView] = useState(1)
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -119,7 +120,16 @@ export function CustomerReviews() {
     fetchReviews()
   }, [])
 
-  const itemsPerView = typeof window !== 'undefined' && window.innerWidth >= 768 ? 3 : 1
+  // Set itemsPerView on client only to avoid hydration mismatch
+  useEffect(() => {
+    const updateItemsPerView = () => {
+      setItemsPerView(window.innerWidth >= 768 ? 3 : 1)
+    }
+    updateItemsPerView()
+    window.addEventListener('resize', updateItemsPerView)
+    return () => window.removeEventListener('resize', updateItemsPerView)
+  }, [])
+
   const maxIndex = Math.max(0, reviews.length - itemsPerView)
 
   const handlePrev = () => {

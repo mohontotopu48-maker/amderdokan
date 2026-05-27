@@ -708,7 +708,10 @@ export function AdminDashboard() {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => setIsAdminMode(false)}
+            onClick={async () => {
+              try { await fetch('/api/admin/logout', { method: 'POST' }) } catch { /* ignore */ }
+              setIsAdminMode(false)
+            }}
             className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/30 border-red-200 dark:border-red-800"
           >
             <LogOut className="size-4" />

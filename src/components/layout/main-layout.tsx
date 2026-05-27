@@ -268,7 +268,8 @@ export function MainLayout() {
         <Button
           variant="outline"
           size="sm"
-          onClick={() => {
+          onClick={async () => {
+            try { await fetch('/api/admin/logout', { method: 'POST' }) } catch { /* ignore */ }
             setIsAdminMode(false)
             setCurrentView('home')
           }}

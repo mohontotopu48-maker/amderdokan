@@ -11,8 +11,8 @@ import {
   CommandSeparator,
 } from '@/components/ui/command'
 import { Badge } from '@/components/ui/badge'
-import { Loader2, Search, TrendingUp, Clock, X, ShoppingBag, Folder } from 'lucide-react'
-import { useStore, type Product, type Category } from '@/store/use-store'
+import { Loader2, Search, TrendingUp, Clock, ShoppingBag, Folder } from 'lucide-react'
+import { useStore } from '@/store/use-store'
 
 interface SearchResultProduct {
   id: string
