@@ -690,3 +690,32 @@ Stage Summary:
 - All patterns use subtle opacity (4-7%) for visual texture without distraction
 - Mobile-first sticky cart bar with backdrop blur
 - Zero lint errors, server running correctly
+
+---
+Task ID: 3
+Agent: Main Agent
+Task: Add background images and competitor-inspired UI/UX improvements
+
+Work Log:
+- Downloaded 2 user-provided background images (bg-home.png, bg-pattern.png) to /public
+- Conducted competitor research on Chaldal, Shwapno, Daraz (BD grocery e-commerce)
+- Key findings: Chaldal uses search-in-hero, Daraz uses flash sale countdown, Shwapno uses shimmer loading
+- Added bg-home.png pattern overlay to hero section (7% opacity, 180x180 tiled)
+- Added bg-pattern.png pattern overlay to promo banner (6% opacity)
+- Added subtle pattern backgrounds to trust badges, categories, featured products, reviews sections
+- Implemented Chaldal-pattern embedded search bar in hero section
+- Implemented Chaldal-pattern area badge (MapPin + Mohammadpur Housing)
+- Implemented Daraz-pattern flash sale countdown timer in promo banner
+- Implemented Chaldal-pattern live order notification ticker (social proof)
+- Implemented Chaldal-pattern mobile bottom sticky cart bar
+- Added new CSS utilities: countdown-pulse, ticker-slide, bottom-cart-bar, bg-pattern-home/light, pattern-dots
+- ESLint passes with zero errors
+- Dev server running and serving pages (HTTP 200)
+- Committed to GitHub: main branch pushed
+- Created deployment branch and pushed to GitHub
+
+Stage Summary:
+- Both background images integrated across homepage and major pages
+- 5 competitor-inspired UI patterns implemented (search-in-hero, area badge, countdown, social proof, sticky cart)
+- Project pushed to https://github.com/mohontotopu48-maker/amderdokan.git
+- Branches: main, deployment
