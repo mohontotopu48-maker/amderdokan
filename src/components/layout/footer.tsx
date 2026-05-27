@@ -139,7 +139,7 @@ export function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <div className="relative w-12 h-12 rounded-full overflow-hidden bg-white/10 border-2 border-green-400/30">
                 <Image
-                  src="/logo-bazar.png"
+                  src="/logo-bazar-new.png"
                   alt="আমাদের বাজার"
                   fill
                   className="object-contain p-1"

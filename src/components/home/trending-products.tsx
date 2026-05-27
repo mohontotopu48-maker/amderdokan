@@ -39,18 +39,18 @@ export function TrendingProducts() {
 
   const handleAddToCart = (e: React.MouseEvent, product: Product) => {
     e.stopPropagation()
+    const discountedPrice = getDiscountedPrice(product)
+    const productImage = Array.isArray(product.images) ? product.images[0] || '' : ''
     addToCart({
       id: `cart-${product.id}-${Date.now()}`,
       productId: product.id,
       productNameBn: product.nameBn,
       productNameEn: product.nameEn,
-      price: product.originalPrice && product.discount > 0
-        ? Math.round(product.originalPrice * (1 - product.discount / 100) * 100) / 100
-        : product.price,
+      price: discountedPrice,
       originalPrice: product.originalPrice ?? undefined,
       unit: product.unit,
       quantity: 1,
-      image: product.images,
+      image: productImage,
       discount: product.discount,
     })
   }
@@ -69,10 +69,15 @@ export function TrendingProducts() {
   }
 
   const getDiscountedPrice = (product: Product) => {
-    if (product.discount > 0 && product.originalPrice) {
-      return Math.round(product.originalPrice * (1 - product.discount / 100) * 100) / 100
+    if (product.discountedPrice) return product.discountedPrice
+    if (product.discount > 0) {
+      return Math.round(product.price * (1 - product.discount / 100) * 100) / 100
     }
     return product.price
+  }
+
+  const getProductImage = (product: Product) => {
+    return Array.isArray(product.images) ? product.images[0] || '🛍️' : '🛍️'
   }
 
   if (!loading && products.length === 0) return null
@@ -138,7 +143,7 @@ export function TrendingProducts() {
                       {/* Product Image Area */}
                       <div className="relative bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-900/20 p-6 flex items-center justify-center min-h-[140px]">
                         <span className="text-5xl group-hover:scale-110 transition-transform duration-300">
-                          {product.images || '🛍️'}
+                          {getProductImage(product)}
                         </span>
 
                         {/* Badges */}
@@ -162,6 +167,11 @@ export function TrendingProducts() {
                         <h3 className="font-semibold text-sm leading-tight line-clamp-2">
                           {language === 'bn' ? product.nameBn : product.nameEn}
                         </h3>
+                        {product.brand && (
+                          <p className="text-xs italic text-muted-foreground/70 line-clamp-1">
+                            {language === 'bn' ? product.brand.nameBn : product.brand.nameEn}
+                          </p>
+                        )}
 
                         {/* Rating */}
                         <div className="flex items-center gap-1">

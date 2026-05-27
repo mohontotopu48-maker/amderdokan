@@ -20,6 +20,15 @@ export async function GET(
             icon: true,
           },
         },
+        brand: {
+          select: {
+            id: true,
+            nameBn: true,
+            nameEn: true,
+            slug: true,
+            logo: true,
+          },
+        },
         reviews: {
           include: {
             user: {

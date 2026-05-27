@@ -91,6 +91,15 @@ export async function GET(request: NextRequest) {
               icon: true,
             },
           },
+          brand: {
+            select: {
+              id: true,
+              nameBn: true,
+              nameEn: true,
+              slug: true,
+              logo: true,
+            },
+          },
         },
         orderBy,
         skip,

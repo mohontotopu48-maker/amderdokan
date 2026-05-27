@@ -59,6 +59,7 @@ export function ProductDetail() {
   const { toast } = useToast()
 
   const [product, setProduct] = useState<Product | null>(null)
+  const [couponDiscount, setCouponDiscount] = useState(0)
   const [loading, setLoading] = useState(true)
   const [quantity, setQuantity] = useState(1)
   const [addingToCart, setAddingToCart] = useState(false)
@@ -81,15 +82,8 @@ export function ProductDetail() {
       const res = await fetch(`/api/products/${selectedProductId}`)
       if (res.ok) {
         const data = await res.json()
-        let parsedImages: string[] = []
-        try {
-          parsedImages = JSON.parse(data.images)
-        } catch {
-          parsedImages = []
-        }
-        setProduct({ ...data, images: JSON.stringify(parsedImages) })
+        setProduct(data)
       } else {
-        // Fallback to store product
         setProduct(storeProduct || null)
       }
     } catch {
@@ -126,21 +120,14 @@ export function ProductDetail() {
   const isOutOfStock = displayProduct ? displayProduct.stock <= 0 : false
   const hasDiscount = displayProduct ? displayProduct.discount > 0 : false
   const discountedPrice = displayProduct
-    ? hasDiscount
+    ? displayProduct.discountedPrice ?? (hasDiscount
       ? Math.round(displayProduct.price * (1 - displayProduct.discount / 100) * 100) / 100
-      : displayProduct.price
+      : displayProduct.price)
     : 0
 
-  const parsedImages: string[] = (() => {
-    if (!displayProduct) return []
-    try {
-      return JSON.parse(displayProduct.images)
-    } catch {
-      return []
-    }
-  })()
-
-  const productImage = parsedImages[0] || ''
+  const productImage = displayProduct
+    ? Array.isArray(displayProduct.images) ? displayProduct.images[0] || '' : ''
+    : ''
 
   const category = displayProduct?.category ||
     categories.find((c) => c.id === displayProduct?.categoryId)
@@ -402,6 +389,11 @@ export function ProductDetail() {
             <p className="mt-1 text-lg text-muted-foreground">
               {!isBn ? displayProduct.nameBn : displayProduct.nameEn}
             </p>
+            {displayProduct.brand && (
+              <p className="mt-1 text-xs italic text-muted-foreground/70">
+                {isBn ? displayProduct.brand.nameBn : displayProduct.brand.nameEn}
+              </p>
+            )}
           </div>
 
           {/* Rating */}

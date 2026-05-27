@@ -165,7 +165,7 @@ export function Header() {
                 className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden bg-green-50 dark:bg-green-900/30 border-2 border-green-500/20 group-hover:border-green-500/50 transition-colors"
               >
                 <Image
-                  src="/logo-bazar.png"
+                  src="/logo-bazar-new.png"
                   alt="আমাদের বাজার"
                   fill
                   className="object-contain p-0.5"
@@ -374,7 +374,7 @@ export function Header() {
             <div className="flex items-center gap-3">
               <div className="relative w-12 h-12 rounded-full overflow-hidden bg-white/20 border-2 border-white/30">
                 <Image
-                  src="/logo-bazar.png"
+                  src="/logo-bazar-new.png"
                   alt="আমাদের বাজার"
                   fill
                   className="object-contain p-1"

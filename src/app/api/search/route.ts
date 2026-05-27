@@ -45,6 +45,13 @@ export async function GET(request: NextRequest) {
             slug: true,
           },
         },
+        brand: {
+          select: {
+            nameBn: true,
+            nameEn: true,
+            slug: true,
+          },
+        },
       },
       take: 8,
       orderBy: { rating: 'desc' },

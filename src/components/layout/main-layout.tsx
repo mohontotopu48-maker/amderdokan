@@ -18,6 +18,7 @@ import { Button } from '@/components/ui/button'
 import { ArrowLeft, ShoppingBag, Store } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
+import { motion, AnimatePresence } from 'framer-motion'
 
 function ProductsView() {
   const { language, categories, products, setProducts, setCategories, selectedCategoryId, searchQuery } = useStore()
@@ -29,7 +30,13 @@ function ProductsView() {
       setLoading(true)
       try {
         const params = new URLSearchParams()
-        if (selectedCategoryId) params.set('category', selectedCategoryId)
+        // Use category slug for API filter (API expects slug, not ID)
+        if (selectedCategoryId) {
+          const cat = categories.find(c => c.id === selectedCategoryId)
+          if (cat?.slug) {
+            params.set('category', cat.slug)
+          }
+        }
         if (searchQuery) params.set('search', searchQuery)
         params.set('limit', '50')
 
@@ -54,7 +61,7 @@ function ProductsView() {
       }
     }
     fetchData()
-  }, [selectedCategoryId, searchQuery, categories.length, setProducts, setCategories])
+  }, [selectedCategoryId, searchQuery, categories, setProducts, setCategories])
 
   const selectedCategory = categories.find(c => c.id === selectedCategoryId)
   const title = selectedCategory
@@ -183,6 +190,19 @@ export function MainLayout() {
     }
   }
 
+  // Page transition variants
+  const pageVariants = {
+    initial: { opacity: 0, y: 8 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -8 },
+  }
+
+  const pageTransition = {
+    type: 'tween',
+    ease: 'easeInOut',
+    duration: 0.25,
+  }
+
   const showBackButton = currentView !== 'home' && currentView !== 'admin'
   const showAdminButton = currentView === 'home'
 
@@ -208,7 +228,19 @@ export function MainLayout() {
             </div>
           </div>
         )}
-        {renderView()}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentView + (selectedProductId || '')}
+            variants={pageVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={pageTransition}
+            className="flex-1 flex flex-col"
+          >
+            {renderView()}
+          </motion.div>
+        </AnimatePresence>
       </main>
       <Footer />
 

@@ -78,6 +78,11 @@ async function main() {
     { nameBn: 'সিঙ্গার', nameEn: 'Singer', slug: 'singer', logo: '🎛️', description: 'সিঙ্গার, ইলেকট্রনিক্স ও হোম অ্যাপ্লায়েন্সেস' },
     { nameBn: 'বেবি', nameEn: 'BABY', slug: 'baby', logo: '👶', description: 'বেবি, শিশু যত্নের বিশ্বস্ত ব্র্যান্ড' },
     { nameBn: 'প্রাণ-আরএফএল', nameEn: 'PRAN-RFL', slug: 'pran-rfl', logo: '🏭', description: 'প্রাণ-আরএফএল গ্রুপ, ডাইভার্সিফাইড কনগ্লোমারেট' },
+    { nameBn: 'তীর', nameEn: 'Teer', slug: 'teer', logo: '🏹', description: 'তীর, বাংলাদেশের জনপ্রিয় আটা, সুজি ও ডাল ব্র্যান্ড' },
+    { nameBn: 'সিটি গ্রুপ', nameEn: 'City Group', slug: 'city-group', logo: '🏙️', description: 'সিটি গ্রুপ, বাংলাদেশের শীর্ষ আটা ও খাদ্যপণ্য ব্র্যান্ড' },
+    { nameBn: 'শান', nameEn: 'Shan', slug: 'shan', logo: '🏔️', description: 'শান ফুডস, পাকিস্তানের বিখ্যাত মসলা ব্র্যান্ড' },
+    { nameBn: 'লাল কেল্লা', nameEn: 'Lal Qilla', slug: 'lal-qilla', logo: '🏰', description: 'লাল কেল্লা, প্রিমিয়াম বাসমতি চালের ব্র্যান্ড' },
+    { nameBn: 'মিল্কভিটা', nameEn: 'Milk Vita', slug: 'milk-vita', logo: '🐄', description: 'মিল্কভিটা, বাংলাদেশের জাতীয় দুগ্ধ বোর্ডের ব্র্যান্ড' },
   ];
 
   const brands: Record<string, string> = {};
@@ -91,7 +96,7 @@ async function main() {
   console.log(`✅ ${brandsData.length} brands created.`);
 
   // ============================================================
-  // Step 3: Create Products (150+)
+  // Step 3: Create Products (200+)
   // ============================================================
   console.log('🛒 Creating products...');
 
@@ -1682,6 +1687,402 @@ async function main() {
       price: 850, originalPrice: 1000, unit: 'সেট', stock: 40, images: '["🍽️"]',
       categoryId: categories['household'], brandId: brands['pran-rfl'], isOrganic: false, isFeatured: false, isTrending: false,
       discount: 15, rating: 4.2, reviewCount: 28,
+    },
+
+    // ═══════════════════════════════════════════════════════════
+    // অতিরিক্ত ব্র্যান্ড পণ্য (Additional Brand Products) - 52+ products
+    // ═══════════════════════════════════════════════════════════
+
+    // --- PRAN Group (প্রাণ) - Additional ---
+    {
+      nameBn: 'প্রাণ লিচু জুস', nameEn: 'PRAN Litchi Juice', slug: 'pran-litchi-juice-1-ltr',
+      descriptionBn: 'প্রাণ লিচু জুস, ১ লিটার, তাজা লিচুর স্বাদ', descriptionEn: 'PRAN Litchi Juice, 1 liter, fresh lychee flavor',
+      price: 70, originalPrice: 80, unit: 'লিটার', stock: 220, images: '["🧃"]',
+      categoryId: categories['beverages'], brandId: brands['pran'], isOrganic: false, isFeatured: true, isTrending: true,
+      discount: 12, rating: 4.3, reviewCount: 112,
+    },
+    {
+      nameBn: 'প্রাণ অরেঞ্জ ড্রিংক', nameEn: 'PRAN Orange Drink', slug: 'pran-orange-drink-1-ltr',
+      descriptionBn: 'প্রাণ অরেঞ্জ ড্রিংক, ১ লিটার', descriptionEn: 'PRAN Orange Drink, 1 liter',
+      price: 60, originalPrice: 70, unit: 'লিটার', stock: 200, images: '["🍊"]',
+      categoryId: categories['beverages'], brandId: brands['pran'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.1, reviewCount: 78,
+    },
+    {
+      nameBn: 'প্রাণ স্পাইসি চানাচুর', nameEn: 'PRAN Spicy Chanachur', slug: 'pran-spicy-chanachur',
+      descriptionBn: 'প্রাণ স্পাইসি চানাচুর, অতিরিক্ত ঝাল', descriptionEn: 'PRAN Spicy Chanachur, extra hot',
+      price: 45, originalPrice: 50, unit: 'প্যাকেট', stock: 300, images: '["🌶️"]',
+      categoryId: categories['snacks'], brandId: brands['pran'], isOrganic: false, isFeatured: false, isTrending: true,
+      discount: 10, rating: 4.5, reviewCount: 167,
+    },
+    {
+      nameBn: 'প্রাণ নাটি বিস্কুট', nameEn: 'PRAN Nutty Biscuit', slug: 'pran-nutty-biscuit',
+      descriptionBn: 'প্রাণ নাটি বিস্কুট, বাদামযুক্ত ও মুক্তা', descriptionEn: 'PRAN Nutty Biscuit, nutty and crunchy',
+      price: 30, originalPrice: 35, unit: 'প্যাকেট', stock: 350, images: '["🍪"]',
+      categoryId: categories['snacks'], brandId: brands['pran'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.2, reviewCount: 89,
+    },
+    {
+      nameBn: 'প্রাণ ডাল', nameEn: 'PRAN Dal', slug: 'pran-dal-1kg',
+      descriptionBn: 'প্রাণ মসুর ডাল, পরিষ্কার ও বাছাই', descriptionEn: 'PRAN Masoor Dal, cleaned and sorted',
+      price: 125, originalPrice: 140, unit: 'কেজি', stock: 280, images: '["🫘"]',
+      categoryId: categories['rice-lentils'], brandId: brands['pran'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.3, reviewCount: 95,
+    },
+    {
+      nameBn: 'প্রাণ চিলি সস', nameEn: 'PRAN Chili Sauce', slug: 'pran-chili-sauce',
+      descriptionBn: 'প্রাণ চিলি সস, ঝাল ও মসলাযুক্ত', descriptionEn: 'PRAN Chili Sauce, spicy and flavorful',
+      price: 75, originalPrice: 85, unit: 'বোতল', stock: 200, images: '["🌶️"]',
+      categoryId: categories['spices-oil'], brandId: brands['pran'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.2, reviewCount: 67,
+    },
+    {
+      nameBn: 'প্রাণ আচার', nameEn: 'PRAN Pickles', slug: 'pran-pickles',
+      descriptionBn: 'প্রাণ মিশ্র আচার, ঐতিহ্যবাহী স্বাদ', descriptionEn: 'PRAN Mixed Pickles, traditional taste',
+      price: 95, originalPrice: 110, unit: 'বয়াম', stock: 180, images: '["🫙"]',
+      categoryId: categories['spices-oil'], brandId: brands['pran'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.4, reviewCount: 82,
+    },
+
+    // --- ACI Limited (এসিআই) - Additional ---
+    {
+      nameBn: 'এসিআই খাঁটি সরিষার তেল', nameEn: 'ACI Pure Mustard Oil', slug: 'aci-pure-mustard-oil',
+      descriptionBn: 'এসিআই খাঁটি সরিষার তেল, ঘ্রাণযুক্ত ও বিশুদ্ধ', descriptionEn: 'ACI Pure Mustard Oil, aromatic and pure',
+      price: 225, originalPrice: 250, unit: 'লিটার', stock: 160, images: '["🫗"]',
+      categoryId: categories['spices-oil'], brandId: brands['aci'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 10, rating: 4.5, reviewCount: 98,
+    },
+    {
+      nameBn: 'এসিআই সয়াবিন তেল', nameEn: 'ACI Soyabean Oil', slug: 'aci-soyabean-oil',
+      descriptionBn: 'এসিআই সয়াবিন তেল, রিফাইন্ড ও বিশুদ্ধ', descriptionEn: 'ACI Soyabean Oil, refined and pure',
+      price: 195, originalPrice: 215, unit: 'লিটার', stock: 200, images: '["🫙"]',
+      categoryId: categories['spices-oil'], brandId: brands['aci'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 9, rating: 4.3, reviewCount: 85,
+    },
+    {
+      nameBn: 'এসিআই আটা', nameEn: 'ACI Flour', slug: 'aci-flour-2kg',
+      descriptionBn: 'এসিআই আটা, রুটি ও পরোটার জন্য', descriptionEn: 'ACI Flour, for roti and paratha',
+      price: 90, originalPrice: 100, unit: '২ কেজি', stock: 250, images: '["🌾"]',
+      categoryId: categories['bakery'], brandId: brands['aci'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 10, rating: 4.2, reviewCount: 76,
+    },
+    {
+      nameBn: 'এসিআই চিনি', nameEn: 'ACI Sugar', slug: 'aci-sugar-1kg',
+      descriptionBn: 'এসিআই খাদ্যশর্করা, বিশুদ্ধ ও সাদা', descriptionEn: 'ACI Sugar, pure and white',
+      price: 125, originalPrice: 135, unit: 'কেজি', stock: 300, images: '["🍬"]',
+      categoryId: categories['beverages'], brandId: brands['aci'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 7, rating: 4.3, reviewCount: 88,
+    },
+    {
+      nameBn: 'এসিআই সুজি', nameEn: 'ACI Semolina', slug: 'aci-semolina-1kg',
+      descriptionBn: 'এসিআই সুজি, হালুয়া ও পায়েসের জন্য', descriptionEn: 'ACI Semolina, for halwa and payesh',
+      price: 65, originalPrice: 75, unit: 'কেজি', stock: 200, images: '["🥣"]',
+      categoryId: categories['bakery'], brandId: brands['aci'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 13, rating: 4.1, reviewCount: 54,
+    },
+
+    // --- Square Consumer Products ---
+    {
+      nameBn: 'স্কয়ার তুর ডাল', nameEn: 'Square Toor Dal', slug: 'square-toor-dal-1kg',
+      descriptionBn: 'স্কয়ার তুর ডাল, বিশুদ্ধ ও পরিষ্কার', descriptionEn: 'Square Toor Dal, pure and cleaned',
+      price: 140, originalPrice: 160, unit: 'কেজি', stock: 180, images: '["🟡"]',
+      categoryId: categories['rice-lentils'], brandId: brands['square'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.3, reviewCount: 67,
+    },
+    {
+      nameBn: 'স্কয়ার মুগ ডাল', nameEn: 'Square Moong Dal', slug: 'square-moong-dal-1kg',
+      descriptionBn: 'স্কয়ার মুগ ডাল, খিচুড়ির জন্য উৎকৃষ্ট', descriptionEn: 'Square Moong Dal, excellent for khichuri',
+      price: 155, originalPrice: 175, unit: 'কেজি', stock: 170, images: '["🟢"]',
+      categoryId: categories['rice-lentils'], brandId: brands['square'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.4, reviewCount: 72,
+    },
+    {
+      nameBn: 'স্কয়ার ছোলা ডাল', nameEn: 'Square Chana Dal', slug: 'square-chana-dal-1kg',
+      descriptionBn: 'স্কয়ার ছোলা ডাল, ঘুগনি ও তরকারির জন্য', descriptionEn: 'Square Chana Dal, for ghugni and curry',
+      price: 115, originalPrice: 130, unit: 'কেজি', stock: 200, images: '["🟤"]',
+      categoryId: categories['rice-lentils'], brandId: brands['square'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.2, reviewCount: 58,
+    },
+    {
+      nameBn: 'স্কয়ার সরিষার তেল', nameEn: 'Square Mustard Oil', slug: 'square-mustard-oil',
+      descriptionBn: 'স্কয়ার সরিষার তেল, খাঁটি ও ঘ্রাণযুক্ত', descriptionEn: 'Square Mustard Oil, pure and aromatic',
+      price: 220, originalPrice: 245, unit: 'লিটার', stock: 140, images: '["🫗"]',
+      categoryId: categories['spices-oil'], brandId: brands['square'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 10, rating: 4.4, reviewCount: 76,
+    },
+    {
+      nameBn: 'স্কয়ার সয়াবিন তেল', nameEn: 'Square Soyabean Oil', slug: 'square-soyabean-oil',
+      descriptionBn: 'স্কয়ার সয়াবিন তেল, রিফাইন্ড ও বিশুদ্ধ', descriptionEn: 'Square Soyabean Oil, refined and pure',
+      price: 190, originalPrice: 210, unit: 'লিটার', stock: 160, images: '["🫙"]',
+      categoryId: categories['spices-oil'], brandId: brands['square'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 10, rating: 4.3, reviewCount: 68,
+    },
+
+    // --- Unilever BD - Additional ---
+    {
+      nameBn: 'ভিম ডিশওয়াশ', nameEn: 'Vim Dishwash', slug: 'vim-dishwash',
+      descriptionBn: 'ভিম ডিশওয়াশ, বাসন মসৃণ ও চকচকে', descriptionEn: 'Vim Dishwash, smooth and shiny dishes',
+      price: 70, originalPrice: 80, unit: 'বোতল', stock: 280, images: '["🫧"]',
+      categoryId: categories['household'], brandId: brands['unilever-bd'], isOrganic: false, isFeatured: true, isTrending: false,
+      discount: 12, rating: 4.4, reviewCount: 134,
+    },
+    {
+      nameBn: 'লাইফবয় সাবান', nameEn: 'Lifebuoy Soap', slug: 'lifebuoy-soap',
+      descriptionBn: 'লাইফবয় সাবান, জীবাণুমুক্তি ও সুরক্ষা', descriptionEn: 'Lifebuoy Soap, germ protection',
+      price: 45, originalPrice: 52, unit: 'পিস', stock: 320, images: '["🧼"]',
+      categoryId: categories['personal-care'], brandId: brands['unilever-bd'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 13, rating: 4.3, reviewCount: 108,
+    },
+    {
+      nameBn: 'সানসিল্ক শ্যাম্পু', nameEn: 'Sunsilk Shampoo', slug: 'sunsilk-shampoo',
+      descriptionBn: 'সানসিল্ক শ্যাম্পু, চুলের পুষ্টি ও উজ্জ্বলতা', descriptionEn: 'Sunsilk Shampoo, hair nourishment and shine',
+      price: 170, originalPrice: 195, unit: 'বোতল', stock: 200, images: '["🧴"]',
+      categoryId: categories['personal-care'], brandId: brands['unilever-bd'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 13, rating: 4.4, reviewCount: 92,
+    },
+    {
+      nameBn: 'পন্ডস ফেস ওয়াশ', nameEn: "Pond's Face Wash", slug: 'ponds-face-wash',
+      descriptionBn: 'পন্ডস ফেস ওয়াশ, মুখ পরিষ্কার ও উজ্জ্বলতা', descriptionEn: "Pond's Face Wash, facial cleansing and brightness",
+      price: 160, originalPrice: 185, unit: 'টিউব', stock: 180, images: '["✨"]',
+      categoryId: categories['personal-care'], brandId: brands['unilever-bd'], isOrganic: false, isFeatured: false, isTrending: true,
+      discount: 14, rating: 4.5, reviewCount: 118,
+    },
+
+    // --- Fresh / BEOIL - Additional ---
+    {
+      nameBn: 'ফ্রেশ রাইস ব্রান অয়েল', nameEn: 'Fresh Rice Bran Oil', slug: 'fresh-rice-bran-oil',
+      descriptionBn: 'ফ্রেশ রাইস ব্রান অয়েল, স্বাস্থ্যকর রান্নার তেল', descriptionEn: 'Fresh Rice Bran Oil, healthy cooking oil',
+      price: 210, originalPrice: 235, unit: 'লিটার', stock: 120, images: '["🫙"]',
+      categoryId: categories['spices-oil'], brandId: brands['fresh'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.3, reviewCount: 54,
+    },
+
+    // --- Teer (তীর) ---
+    {
+      nameBn: 'তীর আটা', nameEn: 'Teer Atta', slug: 'teer-atta-2kg',
+      descriptionBn: 'তীর আটা, রুটি ও পরোটার জন্য উৎকৃষ্ট', descriptionEn: 'Teer Atta, excellent for roti and paratha',
+      price: 95, originalPrice: 110, unit: '২ কেজি', stock: 300, images: '["🌾"]',
+      categoryId: categories['bakery'], brandId: brands['teer'], isOrganic: false, isFeatured: true, isTrending: true,
+      discount: 14, rating: 4.5, reviewCount: 198,
+    },
+    {
+      nameBn: 'তীর সুজি', nameEn: 'Teer Suji', slug: 'teer-suji-1kg',
+      descriptionBn: 'তীর সুজি, হালুয়া ও পায়েসের জন্য', descriptionEn: 'Teer Suji, for halwa and payesh',
+      price: 60, originalPrice: 68, unit: 'কেজি', stock: 220, images: '["🥣"]',
+      categoryId: categories['bakery'], brandId: brands['teer'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.3, reviewCount: 86,
+    },
+    {
+      nameBn: 'তীর ডাল', nameEn: 'Teer Dal', slug: 'teer-dal-1kg',
+      descriptionBn: 'তীর মসুর ডাল, বিশুদ্ধ ও পরিষ্কার', descriptionEn: 'Teer Masoor Dal, pure and cleaned',
+      price: 120, originalPrice: 135, unit: 'কেজি', stock: 250, images: '["🫘"]',
+      categoryId: categories['rice-lentils'], brandId: brands['teer'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.4, reviewCount: 92,
+    },
+
+    // --- City Group ---
+    {
+      nameBn: 'সিটি আটা', nameEn: 'City Flour', slug: 'city-flour-2kg',
+      descriptionBn: 'সিটি আটা, মিষ্টি ও রুটির জন্য', descriptionEn: 'City Flour, for sweets and roti',
+      price: 85, originalPrice: 95, unit: '২ কেজি', stock: 280, images: '["🌾"]',
+      categoryId: categories['bakery'], brandId: brands['city-group'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.2, reviewCount: 74,
+    },
+    {
+      nameBn: 'সিটি সুজি', nameEn: 'City Semolina', slug: 'city-semolina-1kg',
+      descriptionBn: 'সিটি সুজি, হালুয়া ও পুডিংয়ের জন্য', descriptionEn: 'City Semolina, for halwa and pudding',
+      price: 55, originalPrice: 62, unit: 'কেজি', stock: 200, images: '["🥣"]',
+      categoryId: categories['bakery'], brandId: brands['city-group'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.1, reviewCount: 48,
+    },
+    {
+      nameBn: 'সিটি চিনি', nameEn: 'City Sugar', slug: 'city-sugar-1kg',
+      descriptionBn: 'সিটি চিনি, বিশুদ্ধ ও সাদা', descriptionEn: 'City Sugar, pure and white',
+      price: 120, originalPrice: 130, unit: 'কেজি', stock: 350, images: '["🍬"]',
+      categoryId: categories['beverages'], brandId: brands['city-group'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 8, rating: 4.2, reviewCount: 65,
+    },
+    {
+      nameBn: 'সিটি ডাল', nameEn: 'City Dal', slug: 'city-dal-1kg',
+      descriptionBn: 'সিটি মসুর ডাল, পরিষ্কার ও বাছাই', descriptionEn: 'City Masoor Dal, cleaned and sorted',
+      price: 115, originalPrice: 130, unit: 'কেজি', stock: 240, images: '["🫘"]',
+      categoryId: categories['rice-lentils'], brandId: brands['city-group'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.2, reviewCount: 56,
+    },
+
+    // --- Radhuni (রাধুনী) - Additional ---
+    {
+      nameBn: 'রাধুনী কারি পাউডার', nameEn: 'Radhuni Curry Powder', slug: 'radhuni-curry-powder',
+      descriptionBn: 'রাধুনী কারি পাউডার, তরকারির জন্য', descriptionEn: 'Radhuni Curry Powder, for curry',
+      price: 70, originalPrice: 80, unit: '১০০ গ্রাম', stock: 220, images: '["🟫"]',
+      categoryId: categories['spices-oil'], brandId: brands['radhuni'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.4, reviewCount: 86,
+    },
+    {
+      nameBn: 'রাধুনী ধনে গুঁড়া', nameEn: 'Radhuni Coriander Powder', slug: 'radhuni-coriander-powder',
+      descriptionBn: 'রাধুনী ধনে গুঁড়া, তাজা ও সুগন্ধি', descriptionEn: 'Radhuni Coriander Powder, fresh and aromatic',
+      price: 80, originalPrice: 90, unit: '২৫০ গ্রাম', stock: 200, images: '["🟫"]',
+      categoryId: categories['spices-oil'], brandId: brands['radhuni'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.3, reviewCount: 74,
+    },
+    {
+      nameBn: 'রাধুনী ফিশ মশলা', nameEn: 'Radhuni Fish Masala', slug: 'radhuni-fish-masala',
+      descriptionBn: 'রাধুনী ফিশ মশলা, মাছের তরকারির জন্য', descriptionEn: 'Radhuni Fish Masala, for fish curry',
+      price: 65, originalPrice: 75, unit: '১০০ গ্রাম', stock: 180, images: '["🐟"]',
+      categoryId: categories['spices-oil'], brandId: brands['radhuni'], isOrganic: false, isFeatured: true, isTrending: false,
+      discount: 13, rating: 4.5, reviewCount: 102,
+    },
+    {
+      nameBn: 'রাধুনী বিরিয়ানি মশলা', nameEn: 'Radhuni Biryani Masala', slug: 'radhuni-biryani-masala',
+      descriptionBn: 'রাধুনী বিরিয়ানি মশলা, ঘরোয়া বিরিয়ানির জন্য', descriptionEn: 'Radhuni Biryani Masala, for homemade biryani',
+      price: 90, originalPrice: 105, unit: '৫০ গ্রাম', stock: 160, images: '["🍚"]',
+      categoryId: categories['spices-oil'], brandId: brands['radhuni'], isOrganic: false, isFeatured: false, isTrending: true,
+      discount: 14, rating: 4.6, reviewCount: 118,
+    },
+    {
+      nameBn: 'রাধুনী কাবাব মশলা', nameEn: 'Radhuni Kebab Masala', slug: 'radhuni-kebab-masala',
+      descriptionBn: 'রাধুনী কাবাব মশলা, কাবাব ও ভুনার জন্য', descriptionEn: 'Radhuni Kebab Masala, for kebab and bhuna',
+      price: 75, originalPrice: 85, unit: '৫০ গ্রাম', stock: 140, images: '["🟫"]',
+      categoryId: categories['spices-oil'], brandId: brands['radhuni'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.3, reviewCount: 62,
+    },
+
+    // --- Shan (শান) ---
+    {
+      nameBn: 'শান বিরিয়ানি মশলা', nameEn: 'Shan Biryani Masala', slug: 'shan-biryani-masala',
+      descriptionBn: 'শান বিরিয়ানি মশলা, প্রিমিয়াম মশলা মিশ্রণ', descriptionEn: 'Shan Biryani Masala, premium spice mix',
+      price: 95, originalPrice: 110, unit: '৬০ গ্রাম', stock: 200, images: '["🍚"]',
+      categoryId: categories['spices-oil'], brandId: brands['shan'], isOrganic: false, isFeatured: true, isTrending: true,
+      discount: 14, rating: 4.7, reviewCount: 156,
+    },
+    {
+      nameBn: 'শান হালিম মিক্স', nameEn: 'Shan Haleem Mix', slug: 'shan-haleem-mix',
+      descriptionBn: 'শান হালিম মিক্স, ঐতিহ্যবাহী হালিমের জন্য', descriptionEn: 'Shan Haleem Mix, for traditional haleem',
+      price: 110, originalPrice: 125, unit: '১০০ গ্রাম', stock: 150, images: '["🥘"]',
+      categoryId: categories['spices-oil'], brandId: brands['shan'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.5, reviewCount: 84,
+    },
+    {
+      nameBn: 'শান নিহারি মিক্স', nameEn: 'Shan Nihari Mix', slug: 'shan-nihari-mix',
+      descriptionBn: 'শান নিহারি মিক্স, নিহারি রান্নার জন্য', descriptionEn: 'Shan Nihari Mix, for cooking nihari',
+      price: 105, originalPrice: 120, unit: '৮০ গ্রাম', stock: 130, images: '["🥘"]',
+      categoryId: categories['spices-oil'], brandId: brands['shan'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.4, reviewCount: 72,
+    },
+    {
+      nameBn: 'শান কোরমা মশলা', nameEn: 'Shan Korma Masala', slug: 'shan-korma-masala',
+      descriptionBn: 'শান কোরমা মশলা, মুগলাই কোরমার জন্য', descriptionEn: 'Shan Korma Masala, for Mughlai korma',
+      price: 90, originalPrice: 100, unit: '৫০ গ্রাম', stock: 170, images: '["🟫"]',
+      categoryId: categories['spices-oil'], brandId: brands['shan'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 10, rating: 4.5, reviewCount: 88,
+    },
+    {
+      nameBn: 'শান কড়াই মশলা', nameEn: 'Shan Karahi Masala', slug: 'shan-karahi-masala',
+      descriptionBn: 'শান কড়াই মশলা, কড়াই গোস্তের জন্য', descriptionEn: 'Shan Karahi Masala, for karahi gosht',
+      price: 85, originalPrice: 95, unit: '৫০ গ্রাম', stock: 160, images: '["🟫"]',
+      categoryId: categories['spices-oil'], brandId: brands['shan'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.4, reviewCount: 76,
+    },
+
+    // --- Aarong Dairy - Additional ---
+    {
+      nameBn: 'আড়ং পনির', nameEn: 'Aarong Paneer', slug: 'aarong-paneer',
+      descriptionBn: 'আড়ং পনির, তাজা ও নরম', descriptionEn: 'Aarong Paneer, fresh and soft',
+      price: 220, originalPrice: 250, unit: '২৫০ গ্রাম', stock: 80, images: '["🧀"]',
+      categoryId: categories['dairy-eggs'], brandId: brands['aarong'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.5, reviewCount: 62,
+    },
+    {
+      nameBn: 'আড়ং ক্রিম', nameEn: 'Aarong Cream', slug: 'aarong-cream',
+      descriptionBn: 'আড়ং ফ্রেশ ক্রিম, মিষ্টি ও ডেজার্টে', descriptionEn: 'Aarong Fresh Cream, for sweets and desserts',
+      price: 110, originalPrice: 125, unit: '২৫০ মিলি', stock: 90, images: '["🥛"]',
+      categoryId: categories['dairy-eggs'], brandId: brands['aarong'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.3, reviewCount: 48,
+    },
+
+    // --- Milk Vita (মিল্কভিটা) ---
+    {
+      nameBn: 'মিল্কভিটা ফুলক্রিম দুধ', nameEn: 'Milk Vita Full Cream Milk', slug: 'milk-vita-full-cream-milk',
+      descriptionBn: 'মিল্কভিটা ফুলক্রিম দুধ, খাঁটি ও পুষ্টিকর', descriptionEn: 'Milk Vita Full Cream Milk, pure and nutritious',
+      price: 75, originalPrice: 80, unit: 'লিটার', stock: 280, images: '["🥛"]',
+      categoryId: categories['dairy-eggs'], brandId: brands['milk-vita'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 6, rating: 4.3, reviewCount: 112,
+    },
+    {
+      nameBn: 'মিল্কভিটা মাখন', nameEn: 'Milk Vita Butter', slug: 'milk-vita-butter',
+      descriptionBn: 'মিল্কভিটা মাখন, তাজা ও ক্রিমি', descriptionEn: 'Milk Vita Butter, fresh and creamy',
+      price: 170, originalPrice: 190, unit: '২০০ গ্রাম', stock: 100, images: '["🧈"]',
+      categoryId: categories['dairy-eggs'], brandId: brands['milk-vita'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.2, reviewCount: 56,
+    },
+    {
+      nameBn: 'মিল্কভিটা ঘি', nameEn: 'Milk Vita Ghee', slug: 'milk-vita-ghee',
+      descriptionBn: 'মিল্কভিটা গাওয়া ঘি, খাঁটি ও সুগন্ধি', descriptionEn: 'Milk Vita Cow Ghee, pure and aromatic',
+      price: 620, originalPrice: 700, unit: '৫০০ মিলি', stock: 70, images: '["🧈"]',
+      categoryId: categories['dairy-eggs'], brandId: brands['milk-vita'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.5, reviewCount: 84,
+    },
+    {
+      nameBn: 'মিল্কভিটা দই', nameEn: 'Milk Vita Yogurt', slug: 'milk-vita-yogurt',
+      descriptionBn: 'মিল্কভিটা মিষ্টি দই, ঘন ও সুস্বাদু', descriptionEn: 'Milk Vita Sweet Yogurt, thick and delicious',
+      price: 50, originalPrice: 55, unit: 'পিস', stock: 200, images: '["🥣"]',
+      categoryId: categories['dairy-eggs'], brandId: brands['milk-vita'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 9, rating: 4.2, reviewCount: 68,
+    },
+
+    // --- Igloo (ইগলু) - Additional ---
+    {
+      nameBn: 'ইগলু আইসক্রিম ফ্যামিলি প্যাক', nameEn: 'Igloo Ice Cream Family Pack', slug: 'igloo-ice-cream-family-pack',
+      descriptionBn: 'ইগলু আইসক্রিম ফ্যামিলি প্যাক, ১ লিটার', descriptionEn: 'Igloo Ice Cream Family Pack, 1 liter',
+      price: 280, originalPrice: 320, unit: 'বক্স', stock: 80, images: '["🍦"]',
+      categoryId: categories['dairy-eggs'], brandId: brands['igloo'], isOrganic: false, isFeatured: true, isTrending: true,
+      discount: 12, rating: 4.6, reviewCount: 98,
+    },
+    {
+      nameBn: 'ইগলু চকবার', nameEn: 'Igloo Chocbar', slug: 'igloo-chocbar',
+      descriptionBn: 'ইগলু চকবার, চকলেট আইসক্রিম', descriptionEn: 'Igloo Chocbar, chocolate ice cream',
+      price: 40, originalPrice: 45, unit: 'পিস', stock: 250, images: '["🍫"]',
+      categoryId: categories['dairy-eggs'], brandId: brands['igloo'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.3, reviewCount: 87,
+    },
+    {
+      nameBn: 'ইগলু পোলার', nameEn: 'Igloo Polar', slug: 'igloo-polar',
+      descriptionBn: 'ইগলু পোলার, ক্রিমি আইসক্রিম বার', descriptionEn: 'Igloo Polar, creamy ice cream bar',
+      price: 25, originalPrice: 30, unit: 'পিস', stock: 300, images: '["🧊"]',
+      categoryId: categories['dairy-eggs'], brandId: brands['igloo'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 17, rating: 4.2, reviewCount: 72,
+    },
+    {
+      nameBn: 'ইগলু কোন', nameEn: 'Igloo Cones', slug: 'igloo-cones',
+      descriptionBn: 'ইগলু কোন আইসক্রিম, কুড়মুড়ে কোন', descriptionEn: 'Igloo Cones, crispy cone ice cream',
+      price: 35, originalPrice: 40, unit: 'পিস', stock: 200, images: '["🍦"]',
+      categoryId: categories['dairy-eggs'], brandId: brands['igloo'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.4, reviewCount: 65,
+    },
+
+    // --- Lal Qilla (লাল কেল্লা) ---
+    {
+      nameBn: 'লাল কেল্লা বাসমতি চাল', nameEn: 'Lal Qilla Basmati Rice', slug: 'lal-qilla-basmati-rice',
+      descriptionBn: 'লাল কেল্লা বাসমতি চাল, প্রিমিয়াম দীর্ঘ দানা', descriptionEn: 'Lal Qilla Basmati Rice, premium long grain',
+      price: 200, originalPrice: 230, unit: 'কেজি', stock: 200, images: '["🍚"]',
+      categoryId: categories['rice-lentils'], brandId: brands['lal-qilla'], isOrganic: false, isFeatured: true, isTrending: false,
+      discount: 13, rating: 4.7, reviewCount: 142,
+    },
+    {
+      nameBn: 'লাল কেল্লা মিনি বাসমতি', nameEn: 'Lal Qilla Mini Basmati', slug: 'lal-qilla-mini-basmati',
+      descriptionBn: 'লাল কেল্লা মিনি বাসমতি চাল, ছোট দানা', descriptionEn: 'Lal Qilla Mini Basmati, short grain',
+      price: 170, originalPrice: 195, unit: 'কেজি', stock: 180, images: '["🌾"]',
+      categoryId: categories['rice-lentils'], brandId: brands['lal-qilla'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 13, rating: 4.5, reviewCount: 96,
+    },
+
+    // --- Additional Rice Varieties ---
+    {
+      nameBn: 'কাতারিভোগ চাল', nameEn: 'Kataribhog Rice', slug: 'kataribhog-rice',
+      descriptionBn: 'কাতারিভোগ চাল, সুগন্ধি ও মিষ্টি', descriptionEn: 'Kataribhog Rice, aromatic and sweet',
+      price: 110, originalPrice: 125, unit: 'কেজি', stock: 200, images: '["🌾"]',
+      categoryId: categories['rice-lentils'], isOrganic: false, isFeatured: false, isTrending: true,
+      discount: 12, rating: 4.5, reviewCount: 88,
     },
   ];
 

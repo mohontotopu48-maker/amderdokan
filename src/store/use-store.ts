@@ -24,7 +24,7 @@ export interface Product {
   originalPrice: number | null
   unit: string
   stock: number
-  images: string
+  images: string[]
   categoryId: string
   isOrganic: boolean
   isFeatured: boolean
@@ -33,11 +33,20 @@ export interface Product {
   rating: number
   reviewCount: number
   isActive: boolean
+  discountedPrice?: number
+  brand?: {
+    id: string
+    nameBn: string
+    nameEn: string
+    slug: string
+    logo: string
+  }
   category?: {
     id: string
     nameBn: string
     nameEn: string
     icon: string
+    slug?: string
   }
 }
 

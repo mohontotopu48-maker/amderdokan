@@ -90,19 +90,11 @@ export function ProductCard({ product, onClick }: ProductCardProps) {
 
   const isOutOfStock = product.stock <= 0
   const hasDiscount = product.discount > 0
-  const discountedPrice = hasDiscount
+  const discountedPrice = product.discountedPrice ?? (hasDiscount
     ? Math.round(product.price * (1 - product.discount / 100) * 100) / 100
-    : product.price
+    : product.price)
 
-  const parsedImages: string[] = (() => {
-    try {
-      return JSON.parse(product.images)
-    } catch {
-      return []
-    }
-  })()
-
-  const productImage = parsedImages[0] || ''
+  const productImage = Array.isArray(product.images) ? product.images[0] || '' : ''
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -269,6 +261,11 @@ export function ProductCard({ product, onClick }: ProductCardProps) {
             <p className="line-clamp-1 text-xs text-muted-foreground">
               {!isBn ? product.nameBn : product.nameEn}
             </p>
+            {product.brand && (
+              <p className="line-clamp-1 text-xs italic text-muted-foreground/70">
+                {isBn ? product.brand.nameBn : product.brand.nameEn}
+              </p>
+            )}
           </div>
 
           {/* Rating with Staggered Animation */}

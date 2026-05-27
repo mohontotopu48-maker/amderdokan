@@ -35,6 +35,7 @@ import {
   MessageSquare,
   Truck,
   PartyPopper,
+  Tag,
 } from 'lucide-react'
 import { useStore } from '@/store/use-store'
 import { useToast } from '@/hooks/use-toast'
@@ -101,11 +102,16 @@ export function CheckoutDialog() {
   const [paymentMethod, setPaymentMethod] = useState('cod')
   const [paymentPhone, setPaymentPhone] = useState('')
   const [formErrors, setFormErrors] = useState<FormErrors>({})
+  const [couponDiscount, setCouponDiscount] = useState(0)
+  const [checkoutCoupon, setCheckoutCoupon] = useState('')
+  const [couponLoading, setCouponLoading] = useState(false)
+  const [couponApplied, setCouponApplied] = useState(false)
+  const [couponError, setCouponError] = useState('')
 
   const subtotal = getCartTotal()
   const savings = getCartSavings()
   const deliveryFee = subtotal > 500 ? 0 : 60
-  const total = subtotal + deliveryFee
+  const total = Math.max(0, subtotal - couponDiscount + deliveryFee)
 
   const validateStep1 = (): boolean => {
     const errors: FormErrors = {}
@@ -170,7 +176,7 @@ export function CheckoutDialog() {
           deliveryAddress: `${deliveryForm.address}, ${DELIVERY_AREAS.find((a) => a.value === deliveryForm.area)?.labelBn || deliveryForm.area}`,
           deliveryPhone: deliveryForm.phone,
           paymentMethod,
-          couponCode: appliedCoupon || null,
+          couponCode: couponApplied ? checkoutCoupon : (appliedCoupon || null),
           notes: deliveryForm.notes || null,
         }),
       })
@@ -219,6 +225,11 @@ export function CheckoutDialog() {
         setDeliveryForm({ name: '', phone: '', address: '', area: '', notes: '' })
         setPaymentMethod('cod')
         setPaymentPhone('')
+        setCouponDiscount(0)
+        setCheckoutCoupon('')
+        setCouponLoading(false)
+        setCouponApplied(false)
+        setCouponError('')
       }, 300)
     }
   }
@@ -663,6 +674,60 @@ export function CheckoutDialog() {
                     </div>
                   </div>
 
+                  {/* Coupon Code */}
+                  <div className="rounded-lg border p-3">
+                    <Label className="flex items-center gap-1.5 text-sm mb-2">
+                      <Tag className="size-3.5" />
+                      {isBn ? 'কুপন কোড' : 'Coupon Code'}
+                    </Label>
+                    <div className="flex gap-2">
+                      <Input
+                        placeholder={isBn ? 'কুপন কোড লিখুন' : 'Enter coupon code'}
+                        value={checkoutCoupon}
+                        onChange={(e) => {
+                          setCheckoutCoupon(e.target.value)
+                          setCouponError('')
+                        }}
+                        disabled={couponApplied}
+                        className="text-sm"
+                      />
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={async () => {
+                          if (!checkoutCoupon.trim()) return
+                          setCouponLoading(true)
+                          try {
+                            const res = await fetch(`/api/coupons?code=${encodeURIComponent(checkoutCoupon.trim())}&totalAmount=${subtotal}`)
+                            const data = await res.json()
+                            if (data.valid) {
+                              setCouponDiscount(data.discountAmount)
+                              setCouponApplied(true)
+                              toast({ title: isBn ? 'কুপন প্রয়োগ হয়েছে!' : 'Coupon applied!', description: isBn ? `৳${data.discountAmount} ছাড়` : `৳${data.discountAmount} discount` })
+                            } else {
+                              setCouponError(data.error || 'Invalid coupon')
+                              setCouponDiscount(0)
+                            }
+                          } catch {
+                            setCouponError(isBn ? 'কুপন যাচাই ব্যর্থ' : 'Coupon validation failed')
+                          } finally {
+                            setCouponLoading(false)
+                          }
+                        }}
+                        disabled={couponLoading || couponApplied || !checkoutCoupon.trim()}
+                        className="shrink-0"
+                      >
+                        {couponLoading ? <Loader2 className="size-3.5 animate-spin" /> : couponApplied ? '✓' : isBn ? 'প্রয়োগ' : 'Apply'}
+                      </Button>
+                    </div>
+                    {couponError && <p className="text-xs text-destructive mt-1">{couponError}</p>}
+                    {couponApplied && couponDiscount > 0 && (
+                      <p className="text-xs text-green-600 dark:text-green-400 mt-1">
+                        {isBn ? `৳${couponDiscount} ছাড় প্রয়োগ হয়েছে` : `৳${couponDiscount} discount applied`}
+                      </p>
+                    )}
+                  </div>
+
                   {/* Totals */}
                   <div className="rounded-lg bg-muted/50 p-3">
                     <div className="space-y-1.5 text-sm">
@@ -697,6 +762,16 @@ export function CheckoutDialog() {
                           </span>
                           <span className="text-green-600 dark:text-green-400">
                             -৳{savings.toFixed(2)}
+                          </span>
+                        </div>
+                      )}
+                      {couponDiscount > 0 && (
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">
+                            {isBn ? 'কুপন ছাড়' : 'Coupon Discount'}
+                          </span>
+                          <span className="text-green-600 dark:text-green-400">
+                            -৳{couponDiscount.toFixed(2)}
                           </span>
                         </div>
                       )}

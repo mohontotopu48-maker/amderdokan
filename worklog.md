@@ -427,3 +427,63 @@ Stage Summary:
 - All TypeScript errors in src/ resolved (0 remaining)
 - ESLint passes with zero errors
 - Only errors remaining are in examples/ and skills/ folders (excluded per instructions)
+
+---
+Task ID: 3
+Agent: UI Brand Display Agent
+Task: Add brand display to product cards, detail page, and product grid
+
+Work Log:
+- Read all 5 target files to understand current structure and identify insertion points
+- Updated product-card.tsx: Added conditional brand name display (text-xs, italic, muted-foreground/70) below the secondary product name line
+- Updated product-detail.tsx: Added conditional brand name display below the secondary product name in the product info section
+- Updated trending-products.tsx: Added conditional brand name display below the product name heading
+- Updated featured-products.tsx: Added conditional brand name display below the product name heading
+- Reviewed product-grid.tsx: No changes needed — it delegates rendering to ProductCard which already shows brand
+- All brand displays use bilingual rendering: `isBn ? brand.nameBn : brand.nameEn`
+- All brand displays are conditionally rendered: only shown when `product.brand` exists
+- Styling consistent across all components: `text-xs italic text-muted-foreground/70 line-clamp-1`
+- Ran `bun run lint` — zero errors
+
+Stage Summary:
+- Brand name now visible on 4 UI components: ProductCard, ProductDetail, TrendingProducts, FeaturedProducts
+- ProductGrid inherits brand display via ProductCard (no changes needed)
+- Consistent bilingual display and conditional rendering across all components
+- Zero lint errors
+
+---
+Task ID: 4
+Agent: Seed Data Expansion Agent
+Task: Expand seed data with 200+ Bangladeshi brand products
+
+Work Log:
+- Read current seed file (1930 lines, ~156 products across 20 brands)
+- Added 5 new brands to brandsData: Teer (তীর), City Group (সিটি গ্রুপ), Shan (শান), Lal Qilla (লাল কেল্লা), Milk Vita (মিল্কভিটা)
+- Total brands now: 25 (from 20)
+- Added 52 new branded products across 13 brand sections:
+  - PRAN Group (7): Litchi Juice, Orange Drink, Spicy Chanachur, Nutty Biscuit, Dal, Chili Sauce, Pickles
+  - ACI Limited (5): Pure Mustard Oil, Soyabean Oil, Flour, Sugar, Semolina
+  - Square Consumer (5): Toor Dal, Moong Dal, Chana Dal, Mustard Oil, Soyabean Oil
+  - Unilever BD (4): Vim Dishwash, Lifebuoy Soap, Sunsilk Shampoo, Pond's Face Wash
+  - Fresh/BEOIL (1): Rice Bran Oil
+  - Teer (3): Atta, Suji, Dal
+  - City Group (4): Flour, Semolina, Sugar, Dal
+  - Radhuni (5): Curry Powder, Coriander Powder, Fish Masala, Biryani Masala, Kebab Masala
+  - Shan (5): Biryani Masala, Haleem Mix, Nihari Mix, Korma Masala, Karahi Masala
+  - Aarong Dairy (2): Paneer, Cream
+  - Milk Vita (4): Full Cream Milk, Butter, Ghee, Yogurt
+  - Igloo (4): Family Pack Ice Cream, Chocbar, Polar, Cones
+  - Lal Qilla (2): Basmati Rice, Mini Basmati
+  - Kataribhog Rice (1): Kataribhog Rice variety
+- Updated Step 3 comment from "150+" to "200+"
+- Ran db:push (schema already in sync)
+- Ran seed script: 268 products, 25 brands, 12 categories created successfully
+- Ran lint check: zero errors
+
+Stage Summary:
+- Product count expanded from 156 to 268 products (1.7x increase, well over 200+ target)
+- Brand count expanded from 20 to 25 brands (added Teer, City Group, Shan, Lal Qilla, Milk Vita)
+- All products have realistic Bangladeshi prices, bilingual names, descriptive slugs, and emoji images
+- Many products have discount > 0, originalPrice set, isFeatured/isTrending flags
+- Database re-seeded successfully with no errors
+- Lint passes with zero errors

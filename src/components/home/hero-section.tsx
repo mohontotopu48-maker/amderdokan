@@ -136,7 +136,7 @@ export function HeroSection() {
       <motion.div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/hero-banner.png')",
+          backgroundImage: "url('/hero-banner-new.png')",
           y: imageY,
         }}
       />

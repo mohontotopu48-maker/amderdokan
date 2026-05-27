@@ -22,7 +22,7 @@ export function PromoBanner() {
           {/* Background Image */}
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: "url('/promo-banner.png')" }}
+            style={{ backgroundImage: "url('/promo-banner-new.png')" }}
           />
 
           {/* Gradient Overlay */}
