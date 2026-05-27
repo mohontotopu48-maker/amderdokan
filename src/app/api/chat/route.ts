@@ -14,9 +14,9 @@ export async function POST(req: NextRequest) {
 
     const zai = await ZAI.create();
 
-    const systemPrompt = `তুমি "আমাদের বাজার" এর AI কাস্টমার সাপোর্ট অ্যাসিস্ট্যান্ট। তুমি বাংলায় কথা বলো।
+    const systemPrompt = `তুমি "আমাদের দোকান" এর AI কাস্টমার সাপোর্ট অ্যাসিস্ট্যান্ট। তুমি বাংলায় কথা বলো।
 
-আমাদের বাজার একটি অনলাইন গ্রোসারি শপ, মোহাম্মদপুর, ঢাকায় অবস্থিত।
+আমাদের দোকান একটি অনলাইন গ্রোসারি শপ, মোহাম্মদপুর, ঢাকায় অবস্থিত।
 ঠিকানা: Mohammadpur Housing, Limited Art, House Number 123, Dhaka 1207
 মালিক: নিবির হোসেন
 

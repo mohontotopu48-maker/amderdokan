@@ -276,7 +276,7 @@ export function ChatWidget() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm">
-                    {isBn ? 'আমাদের বাজার সাহায্যকারী' : 'Amar Bazar Assistant'}
+                    {isBn ? 'আমাদের দোকান সাহায্যকারী' : 'Amar Dokaan Assistant'}
                   </h3>
                   <p className="text-xs text-green-100">
                     {isBn ? 'অনলাইন • সাহায্য করতে প্রস্তুত' : 'Online • Ready to help'}

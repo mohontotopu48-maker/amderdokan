@@ -17,20 +17,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://amarbazar.com.bd"),
-  title: "আমাদের বাজার - Online Grocery Shop in Mohammadpur, Dhaka",
+  metadataBase: new URL("https://amardokaan.com.bd"),
+  title: "আমাদের দোকান - Online Grocery Shop in Mohammadpur, Dhaka",
   description:
-    "আমাদের বাজার - Mohammadpur, Dhaka-এর সেরা অনলাইন গ্রোসারি শপ। তাজা শাকসবজি, ফলমূল, মাছ, মাংস, চাল, ডাল সহ সব পণ্য ঘরে বসে অর্ডার করুন। ৫০০ টাকার উপরে ফ্রি ডেলিভারি।",
+    "আমাদের দোকান - Mohammadpur, Dhaka-এর সেরা অনলাইন গ্রোসারি শপ। তাজা শাকসবজি, ফলমূল, মাছ, মাংস, চাল, ডাল সহ সব পণ্য ঘরে বসে অর্ডার করুন। ৫০০ টাকার উপরে ফ্রি ডেলিভারি।",
   keywords: [
-    "আমাদের বাজার",
-    "Amar Bazar",
+    "আমাদের দোকান",
+    "Amar Dokaan",
     "online grocery Bangladesh",
     "Mohammadpur grocery",
     "Dhaka grocery shop",
     "তাজা শাকসবজি",
-    "অনলাইন বাজার",
+    "অনলাইন দোকান",
     "গ্রোসারি শপ ঢাকা",
-    "online bazar",
+    "online dokaan",
     "grocery delivery Dhaka",
     "বাংলাদেশ গ্রোসারি",
   ],
@@ -39,11 +39,11 @@ export const metadata: Metadata = {
     icon: "/logo-bazar.png",
   },
   openGraph: {
-    title: "আমাদের বাজার - Online Grocery Shop in Mohammadpur, Dhaka",
+    title: "আমাদের দোকান - Online Grocery Shop in Mohammadpur, Dhaka",
     description:
       "Mohammadpur-এর সেরা অনলাইন গ্রোসারি শপ। তাজা পণ্য, দ্রুত ডেলিভারি, সেরা দাম।",
-    url: "https://amarbazar.com.bd",
-    siteName: "আমাদের বাজার",
+    url: "https://amardokaan.com.bd",
+    siteName: "আমাদের দোকান",
     type: "website",
     locale: "bn_BD",
     images: [
@@ -51,13 +51,13 @@ export const metadata: Metadata = {
         url: "/logo-bazar.png",
         width: 512,
         height: 512,
-        alt: "আমাদের বাজার - Online Grocery Shop",
+        alt: "আমাদের দোকান - Online Grocery Shop",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "আমাদের বাজার - Online Grocery Shop",
+    title: "আমাদের দোকান - Online Grocery Shop",
     description:
       "Mohammadpur-এর সেরা অনলাইন গ্রোসারি শপ। তাজা পণ্য, দ্রুত ডেলিভারি।",
   },
@@ -70,13 +70,13 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: "আমাদের বাজার",
-  alternateName: "Amar Bazar",
+  name: "আমাদের দোকান",
+  alternateName: "Amar Dokaan",
   description:
     "Mohammadpur, Dhaka-এর সেরা অনলাইন গ্রোসারি শপ। তাজা শাকসবজি, ফলমূল, মাছ, মাংস সহ সব পণ্য ঘরে বসে অর্ডার করুন।",
-  url: "https://amarbazar.com.bd",
+  url: "https://amardokaan.com.bd",
   telephone: "+8801700000000",
-  image: "https://amarbazar.com.bd/logo-bazar.png",
+  image: "https://amardokaan.com.bd/logo-bazar.png",
   priceRange: "৳৳",
   address: {
     "@type": "PostalAddress",
@@ -108,8 +108,8 @@ const jsonLd = {
     },
   ],
   sameAs: [
-    "https://facebook.com/amarbazar",
-    "https://instagram.com/amarbazar",
+    "https://facebook.com/amardokaan",
+    "https://instagram.com/amardokaan",
   ],
   paymentAccepted: "bKash, Nagad, Rocket, Cash on Delivery",
   founder: {

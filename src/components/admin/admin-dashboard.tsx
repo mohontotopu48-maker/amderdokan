@@ -700,7 +700,7 @@ export function AdminDashboard() {
             </div>
             <div>
               <h1 className="text-lg font-bold bg-gradient-to-r from-green-600 to-green-800 dark:from-green-400 dark:to-green-600 bg-clip-text text-transparent">
-                {isBn ? 'আমাদের বাজার' : 'Amar Bazar'}
+                {isBn ? 'আমাদের দোকান' : 'Amar Dokaan'}
               </h1>
               <p className="text-xs text-muted-foreground">{isBn ? 'অ্যাডমিন ড্যাশবোর্ড' : 'Admin Dashboard'}</p>
             </div>

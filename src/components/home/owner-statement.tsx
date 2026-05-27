@@ -58,8 +58,8 @@ export function OwnerStatement() {
               {/* Quote Text */}
               <blockquote className="text-lg md:text-2xl lg:text-3xl font-medium text-white leading-relaxed max-w-3xl mx-auto mb-8">
                 {language === 'bn'
-                  ? 'আমাদের বাজার শুধু একটি দোকান নয়, এটি আমাদের এলাকার মানুষের জন্য নির্ভরতার একটি নাম।'
-                  : 'Amar Bazar is not just a shop, it is a name of trust for the people of our area.'}
+                  ? 'আমাদের দোকান শুধু একটি দোকান নয়, এটি আমাদের এলাকার মানুষের জন্য নির্ভরতার একটি নাম।'
+                  : 'Amar Dokaan is not just a shop, it is a name of trust for the people of our area.'}
               </blockquote>
 
               {/* Attribution */}
@@ -70,7 +70,7 @@ export function OwnerStatement() {
                     {language === 'bn' ? '— নিবির হোসেন' : '— Nibir Hossain'}
                   </p>
                   <p className="text-white/70 text-sm mt-0.5">
-                    {language === 'bn' ? 'প্রতিষ্ঠাতা, আমাদের বাজার' : 'Founder, Amar Bazar'}
+                    {language === 'bn' ? 'প্রতিষ্ঠাতা, আমাদের দোকান' : 'Founder, Amar Dokaan'}
                   </p>
                 </div>
                 <div className="w-12 h-0.5 bg-white/40" />

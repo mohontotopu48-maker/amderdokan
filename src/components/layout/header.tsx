@@ -270,7 +270,7 @@ export function Header() {
               >
                 <Image
                   src="/logo-bazar-new.png"
-                  alt="আমাদের বাজার"
+                  alt="আমাদের দোকান"
                   fill
                   className="object-contain p-0.5"
                   priority
@@ -278,10 +278,10 @@ export function Header() {
               </motion.div>
               <div className="hidden sm:block">
                 <h1 className="text-lg sm:text-xl font-bold text-green-700 dark:text-green-400 leading-tight">
-                  আমাদের বাজার
+                  আমাদের দোকান
                 </h1>
                 <p className="text-[10px] text-muted-foreground leading-tight">
-                  {isBn ? 'ভরসার বাজার' : 'Trusted Market'}
+                  {isBn ? 'ভরসার দোকান' : 'Trusted Market'}
                 </p>
               </div>
             </button>
@@ -480,17 +480,17 @@ export function Header() {
               <div className="relative w-12 h-12 rounded-full overflow-hidden bg-white/20 border-2 border-white/30">
                 <Image
                   src="/logo-bazar-new.png"
-                  alt="আমাদের বাজার"
+                  alt="আমাদের দোকান"
                   fill
                   className="object-contain p-1"
                 />
               </div>
               <div>
                 <SheetTitle className="text-white text-lg font-bold">
-                  আমাদের বাজার
+                  আমাদের দোকান
                 </SheetTitle>
                 <p className="text-white/70 text-xs">
-                  {isBn ? 'ভরসার বাজার' : 'Trusted Market'}
+                  {isBn ? 'ভরসার দোকান' : 'Trusted Market'}
                 </p>
               </div>
             </div>

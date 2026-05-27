@@ -148,13 +148,13 @@ export function Footer() {
               <div className="relative w-12 h-12 rounded-full overflow-hidden bg-white/10 border-2 border-green-400/30">
                 <Image
                   src="/logo-bazar-new.png"
-                  alt="আমাদের বাজার"
+                  alt="আমাদের দোকান"
                   fill
                   className="object-contain p-1"
                 />
               </div>
               <div>
-                <h2 className="text-lg font-bold text-green-100">আমাদের বাজার</h2>
+                <h2 className="text-lg font-bold text-green-100">আমাদের দোকান</h2>
                 <p className="text-xs text-green-300/70">
                   {isBn ? 'নির্ভরতার একটি নাম' : 'A Name of Trust'}
                 </p>
@@ -188,8 +188,8 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 shrink-0 text-green-400" />
-                <a href="mailto:info@amarbazar.com.bd" className="hover:text-green-300 transition-colors">
-                  info@amarbazar.com.bd
+                <a href="mailto:info@amardokaan.com.bd" className="hover:text-green-300 transition-colors">
+                  info@amardokaan.com.bd
                 </a>
               </div>
             </div>
@@ -256,9 +256,9 @@ export function Footer() {
               </h4>
               <div className="flex gap-2">
                 {[
-                  { icon: Facebook, href: 'https://facebook.com/amarbazar', label: 'Facebook', hoverColor: 'hover:bg-blue-600', hoverText: 'hover:text-white' },
-                  { icon: Instagram, href: 'https://instagram.com/amarbazar', label: 'Instagram', hoverColor: 'hover:bg-pink-600', hoverText: 'hover:text-white' },
-                  { icon: Youtube, href: 'https://youtube.com/@amarbazar', label: 'YouTube', hoverColor: 'hover:bg-red-600', hoverText: 'hover:text-white' },
+                  { icon: Facebook, href: 'https://facebook.com/amardokaan', label: 'Facebook', hoverColor: 'hover:bg-blue-600', hoverText: 'hover:text-white' },
+                  { icon: Instagram, href: 'https://instagram.com/amardokaan', label: 'Instagram', hoverColor: 'hover:bg-pink-600', hoverText: 'hover:text-white' },
+                  { icon: Youtube, href: 'https://youtube.com/@amardokaan', label: 'YouTube', hoverColor: 'hover:bg-red-600', hoverText: 'hover:text-white' },
                 ].map((social) => {
                   const Icon = social.icon
                   return (
@@ -334,7 +334,7 @@ export function Footer() {
         <div className="max-w-7xl mx-auto px-4 lg:px-8 py-4">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
             <p className="text-xs text-green-300/60 text-center sm:text-left">
-              © {new Date().getFullYear()} আমাদের বাজার (Amar Bazar).{' '}
+              © {new Date().getFullYear()} আমাদের দোকান (Amar Dokaan).{' '}
               {isBn ? 'সর্বস্বত্ব সংরক্ষিত।' : 'All rights reserved.'}
             </p>
             <p className="text-xs text-green-400/80 font-medium">

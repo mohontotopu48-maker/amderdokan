@@ -111,12 +111,12 @@ function AboutView() {
       <div className="prose dark:prose-invert max-w-none">
         <div className="bg-white dark:bg-card rounded-2xl p-8 shadow-sm border border-border">
           <h2 className="text-2xl font-bold text-green-700 dark:text-green-400 mb-4">
-            {isBn ? 'আমাদের বাজার' : 'Amar Bazar'}
+            {isBn ? 'আমাদের দোকান' : 'Amar Dokaan'}
           </h2>
           <p className="text-muted-foreground leading-relaxed mb-6">
             {isBn
-              ? 'আমাদের বাজার মোহাম্মদপুর, ঢাকায় অবস্থিত একটি বিশ্বস্ত অনলাইন গ্রোসারি শপ। আমরা আমাদের এলাকার মানুষদের জন্য তাজা শাকসবজি, ফলমূল, মাছ, মাংস এবং দৈনন্দিন প্রয়োজনীয় সব পণ্য সরবরাহ করি। ১ ঘণ্টায় দ্রুত ডেলিভারি এবং সেরা দামের গ্যারান্টি দিই।'
-              : 'Amar Bazar is a trusted online grocery shop located in Mohammadpur, Dhaka. We supply fresh vegetables, fruits, fish, meat and all daily essentials for our local community. We guarantee 1-hour fast delivery and the best prices.'}
+              ? 'আমাদের দোকান মোহাম্মদপুর, ঢাকায় অবস্থিত একটি বিশ্বস্ত অনলাইন গ্রোসারি শপ। আমরা আমাদের এলাকার মানুষদের জন্য তাজা শাকসবজি, ফলমূল, মাছ, মাংস এবং দৈনন্দিন প্রয়োজনীয় সব পণ্য সরবরাহ করি। ১ ঘণ্টায় দ্রুত ডেলিভারি এবং সেরা দামের গ্যারান্টি দিই।'
+              : 'Amar Dokaan is a trusted online grocery shop located in Mohammadpur, Dhaka. We supply fresh vegetables, fruits, fish, meat and all daily essentials for our local community. We guarantee 1-hour fast delivery and the best prices.'}
           </p>
 
           <div className="grid sm:grid-cols-2 gap-6 mb-6">
@@ -142,7 +142,7 @@ function AboutView() {
 
           <blockquote className="border-l-4 border-green-500 pl-4 py-2 my-6 bg-green-50/50 dark:bg-green-900/10 rounded-r-lg">
             <p className="text-lg font-medium italic text-green-700 dark:text-green-400">
-              "আমাদের বাজার শুধু একটি দোকান নয়, এটি আমাদের এলাকার মানুষের জন্য নির্ভরতার একটি নাম।"
+              "আমাদের দোকান শুধু একটি দোকান নয়, এটি আমাদের এলাকার মানুষের জন্য নির্ভরতার একটি নাম।"
             </p>
             <cite className="text-sm text-muted-foreground mt-2 block">
               — নিবির হোসেন
