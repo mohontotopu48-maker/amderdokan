@@ -51,12 +51,14 @@ async function main() {
   console.log(`✅ ${categoriesData.length} categories created.`);
 
   // ============================================================
-  // Step 3: Create Products (60+)
+  // Step 3: Create Products (150+)
   // ============================================================
   console.log('🛒 Creating products...');
 
   const productsData = [
-    // ─── শাকসবজি (Vegetables) ─────────────────────────────
+    // ═══════════════════════════════════════════════════════════
+    // শাকসবজি (Vegetables) - 25 products
+    // ═══════════════════════════════════════════════════════════
     {
       nameBn: 'আলু', nameEn: 'Potato', slug: 'potato',
       descriptionBn: 'তাজা দেশি আলু, রান্নার জন্য উৎকৃষ্ট', descriptionEn: 'Fresh local potatoes, excellent for cooking',
@@ -114,7 +116,7 @@ async function main() {
       discount: 17, rating: 3.9, reviewCount: 28,
     },
     {
-      nameBn: 'পেঁপে', nameEn: 'Papaya', slug: 'papaya-vegetable',
+      nameBn: 'পেঁপে', nameEn: 'Papaya (Raw)', slug: 'papaya-vegetable',
       descriptionBn: 'কাঁচা পেঁপে, তরকারির জন্য', descriptionEn: 'Raw papaya, great for curry',
       price: 20, originalPrice: 25, unit: 'পিস', stock: 200, images: '["🫒"]',
       categoryId: categories['vegetables'], isOrganic: false, isFeatured: false, isTrending: false,
@@ -134,8 +136,108 @@ async function main() {
       categoryId: categories['vegetables'], isOrganic: false, isFeatured: false, isTrending: false,
       discount: 11, rating: 4.0, reviewCount: 33,
     },
+    {
+      nameBn: 'লাল শাক', nameEn: 'Red Spinach', slug: 'red-spinach',
+      descriptionBn: 'তাজা লাল শাক, ভাজির জন্য', descriptionEn: 'Fresh red spinach, great for stir-fry',
+      price: 20, originalPrice: 25, unit: 'আঁটি', stock: 200, images: '["🥬"]',
+      categoryId: categories['vegetables'], isOrganic: true, isFeatured: false, isTrending: false,
+      discount: 20, rating: 4.3, reviewCount: 41,
+    },
+    {
+      nameBn: 'পুঁইশাক', nameEn: 'Pui Shak', slug: 'pui-shak',
+      descriptionBn: 'তাজা পুঁইশাক, ভর্তার জন্য উৎকৃষ্ট', descriptionEn: 'Fresh pui shak, excellent for bharta',
+      price: 18, originalPrice: 22, unit: 'আঁটি', stock: 180, images: '["🥬"]',
+      categoryId: categories['vegetables'], isOrganic: true, isFeatured: false, isTrending: false,
+      discount: 18, rating: 4.2, reviewCount: 35,
+    },
+    {
+      nameBn: 'পালংশাক', nameEn: 'Spinach', slug: 'spinach',
+      descriptionBn: 'তাজা পালংশাক, পুষ্টিকর শাক', descriptionEn: 'Fresh spinach, nutritious greens',
+      price: 20, originalPrice: 25, unit: 'আঁটি', stock: 220, images: '["🥬"]',
+      categoryId: categories['vegetables'], isOrganic: true, isFeatured: false, isTrending: false,
+      discount: 20, rating: 4.3, reviewCount: 38,
+    },
+    {
+      nameBn: 'শিম', nameEn: 'Flat Beans', slug: 'flat-beans',
+      descriptionBn: 'তাজা শিম, তরকারি ও ভুনার জন্য', descriptionEn: 'Fresh flat beans, great for curry and bhuna',
+      price: 50, originalPrice: 60, unit: 'কেজি', stock: 150, images: '["🫛"]',
+      categoryId: categories['vegetables'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 17, rating: 4.1, reviewCount: 29,
+    },
+    {
+      nameBn: 'বরবটি', nameEn: 'Long Beans', slug: 'long-beans',
+      descriptionBn: 'তাজা বরবটি, ভাজির জন্য', descriptionEn: 'Fresh long beans, great for stir-fry',
+      price: 45, originalPrice: 55, unit: 'কেজি', stock: 160, images: '["🫘"]',
+      categoryId: categories['vegetables'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 18, rating: 4.0, reviewCount: 24,
+    },
+    {
+      nameBn: 'কুমড়া', nameEn: 'Pumpkin', slug: 'pumpkin',
+      descriptionBn: 'তাজা কুমড়া, তরকারি ও হালুয়ার জন্য', descriptionEn: 'Fresh pumpkin, great for curry and halwa',
+      price: 25, originalPrice: 30, unit: 'কেজি', stock: 200, images: '["🎃"]',
+      categoryId: categories['vegetables'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 17, rating: 4.0, reviewCount: 31,
+    },
+    {
+      nameBn: 'ঝিঙ্গা', nameEn: 'Ridge Gourd', slug: 'ridge-gourd',
+      descriptionBn: 'তাজা ঝিঙ্গা, তরকারির জন্য', descriptionEn: 'Fresh ridge gourd, great for curry',
+      price: 35, originalPrice: 40, unit: 'কেজি', stock: 130, images: '["🥒"]',
+      categoryId: categories['vegetables'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 3.9, reviewCount: 19,
+    },
+    {
+      nameBn: 'কাঁচকলা ফুল', nameEn: 'Banana Flower', slug: 'banana-flower',
+      descriptionBn: 'তাজা কাঁচকলা ফুল, ভর্তার জন্য', descriptionEn: 'Fresh banana flower, great for bharta',
+      price: 30, originalPrice: 35, unit: 'পিস', stock: 80, images: '["🌸"]',
+      categoryId: categories['vegetables'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.2, reviewCount: 26,
+    },
+    {
+      nameBn: 'মিষ্টি কুমড়া', nameEn: 'Sweet Gourd', slug: 'sweet-gourd',
+      descriptionBn: 'মিষ্টি কুমড়া, হালুয়া ও পায়েসের জন্য', descriptionEn: 'Sweet gourd, great for halwa and payesh',
+      price: 30, originalPrice: 35, unit: 'কেজি', stock: 140, images: '["🟧"]',
+      categoryId: categories['vegetables'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.1, reviewCount: 22,
+    },
+    {
+      nameBn: 'শসা', nameEn: 'Cucumber', slug: 'cucumber',
+      descriptionBn: 'তাজা শসা, সালাদ ও রায়তার জন্য', descriptionEn: 'Fresh cucumber, great for salad and raita',
+      price: 30, originalPrice: 35, unit: 'কেজি', stock: 250, images: '["🥒"]',
+      categoryId: categories['vegetables'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.2, reviewCount: 34,
+    },
+    {
+      nameBn: 'ক্যাপসিকাম', nameEn: 'Capsicum', slug: 'capsicum',
+      descriptionBn: 'সবুজ ক্যাপসিকাম, সালাদ ও ফ্রাইয়ের জন্য', descriptionEn: 'Green capsicum, great for salad and fry',
+      price: 80, originalPrice: 90, unit: 'কেজি', stock: 100, images: '["🫑"]',
+      categoryId: categories['vegetables'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.0, reviewCount: 18,
+    },
+    {
+      nameBn: 'দেশি কাঁচামরিচ', nameEn: 'Green Chili', slug: 'green-chili',
+      descriptionBn: 'ঝাল কাঁচামরিচ, রান্নায় অপরিহার্য', descriptionEn: 'Hot green chili, essential for cooking',
+      price: 60, originalPrice: 70, unit: 'কেজি', stock: 300, images: '["🌶️"]',
+      categoryId: categories['vegetables'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.3, reviewCount: 45,
+    },
+    {
+      nameBn: 'লাল গাজর', nameEn: 'Red Carrot', slug: 'red-carrot',
+      descriptionBn: 'লাল গাজর, হালুয়া ও সালাদের জন্য', descriptionEn: 'Red carrot, great for halwa and salad',
+      price: 50, originalPrice: 60, unit: 'কেজি', stock: 200, images: '["🥕"]',
+      categoryId: categories['vegetables'], isOrganic: false, isFeatured: false, isTrending: true,
+      discount: 17, rating: 4.4, reviewCount: 56,
+    },
+    {
+      nameBn: 'মূলা', nameEn: 'Radish', slug: 'radish',
+      descriptionBn: 'তাজা মূলা, সালাদ ও ভর্তার জন্য', descriptionEn: 'Fresh radish, great for salad and bharta',
+      price: 20, originalPrice: 25, unit: 'কেজি', stock: 180, images: '["⚪"]',
+      categoryId: categories['vegetables'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 20, rating: 3.8, reviewCount: 16,
+    },
 
-    // ─── ফলমূল (Fruits) ─────────────────────────────
+    // ═══════════════════════════════════════════════════════════
+    // ফলমূল (Fruits) - 15 products
+    // ═══════════════════════════════════════════════════════════
     {
       nameBn: 'আম', nameEn: 'Mango', slug: 'mango',
       descriptionBn: 'হিমসাগর আম, মৌসুমী ফল', descriptionEn: 'Himsagar mango, seasonal fruit',
@@ -178,8 +280,73 @@ async function main() {
       categoryId: categories['fruits'], isOrganic: false, isFeatured: false, isTrending: false,
       discount: 17, rating: 4.5, reviewCount: 93,
     },
+    {
+      nameBn: 'কলা', nameEn: 'Banana', slug: 'banana',
+      descriptionBn: 'পাকা সবরি কলা, পুষ্টিকর ফল', descriptionEn: 'Ripe sabri banana, nutritious fruit',
+      price: 50, originalPrice: 60, unit: 'ডজন', stock: 250, images: '["🍌"]',
+      categoryId: categories['fruits'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 17, rating: 4.4, reviewCount: 88,
+    },
+    {
+      nameBn: 'তরমুজ', nameEn: 'Watermelon', slug: 'watermelon',
+      descriptionBn: 'তাজা তরমুজ, গরমে শরণাপন্ন', descriptionEn: 'Fresh watermelon, perfect for summer',
+      price: 40, originalPrice: 50, unit: 'কেজি', stock: 150, images: '["🍉"]',
+      categoryId: categories['fruits'], isOrganic: false, isFeatured: false, isTrending: true,
+      discount: 20, rating: 4.5, reviewCount: 76,
+    },
+    {
+      nameBn: 'মাল্টা', nameEn: 'Malta (Orange)', slug: 'malta',
+      descriptionBn: 'তাজা মাল্টা, ভিটামিন সি এর উৎস', descriptionEn: 'Fresh malta, rich source of Vitamin C',
+      price: 150, originalPrice: 180, unit: 'কেজি', stock: 100, images: '["🍊"]',
+      categoryId: categories['fruits'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 17, rating: 4.3, reviewCount: 48,
+    },
+    {
+      nameBn: 'আনারস', nameEn: 'Pineapple', slug: 'pineapple',
+      descriptionBn: 'তাজা আনারস, মিষ্টি ও রসালো', descriptionEn: 'Fresh pineapple, sweet and juicy',
+      price: 60, originalPrice: 70, unit: 'পিস', stock: 80, images: '["🍍"]',
+      categoryId: categories['fruits'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.4, reviewCount: 55,
+    },
+    {
+      nameBn: 'আমড়া', nameEn: 'Hog Plum', slug: 'hog-plum',
+      descriptionBn: 'টক আমড়া, চাটনি ও কাঁচা খাওয়ার জন্য', descriptionEn: 'Sour hog plum, great for chutney or eating raw',
+      price: 40, originalPrice: 50, unit: 'কেজি', stock: 100, images: '["🟢"]',
+      categoryId: categories['fruits'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 20, rating: 4.0, reviewCount: 22,
+    },
+    {
+      nameBn: 'জাম', nameEn: 'Black Berry', slug: 'black-berry',
+      descriptionBn: 'তাজা জাম, মৌসুমী ফল', descriptionEn: 'Fresh black berry, seasonal fruit',
+      price: 100, originalPrice: 120, unit: 'কেজি', stock: 60, images: '["🫐"]',
+      categoryId: categories['fruits'], isOrganic: true, isFeatured: false, isTrending: false,
+      discount: 17, rating: 4.2, reviewCount: 33,
+    },
+    {
+      nameBn: 'লিচু', nameEn: 'Lychee', slug: 'lychee',
+      descriptionBn: 'দিনাজপুরের লিচু, মিষ্টি ও সুগন্ধি', descriptionEn: "Dinajpur's lychee, sweet and aromatic",
+      price: 200, originalPrice: 250, unit: 'কেজি', stock: 80, images: '["🔴"]',
+      categoryId: categories['fruits'], isOrganic: true, isFeatured: true, isTrending: true,
+      discount: 20, rating: 4.7, reviewCount: 134,
+    },
+    {
+      nameBn: 'সফেদ আঁতলা', nameEn: 'Amla (Indian Gooseberry)', slug: 'amla',
+      descriptionBn: 'তাজা আঁতলা, ভিটামিন সি সমৃদ্ধ', descriptionEn: 'Fresh amla, rich in Vitamin C',
+      price: 70, originalPrice: 80, unit: 'কেজি', stock: 90, images: '["🟢"]',
+      categoryId: categories['fruits'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.1, reviewCount: 20,
+    },
+    {
+      nameBn: 'বেল', nameEn: 'Wood Apple', slug: 'wood-apple',
+      descriptionBn: 'পাকা বেল, শরবত ও মিষ্টির জন্য', descriptionEn: 'Ripe wood apple, great for sherbet and sweets',
+      price: 45, originalPrice: 55, unit: 'পিস', stock: 70, images: '["🟤"]',
+      categoryId: categories['fruits'], isOrganic: true, isFeatured: false, isTrending: false,
+      discount: 18, rating: 4.0, reviewCount: 15,
+    },
 
-    // ─── মাছ ও মাংস (Fish & Meat) ─────────────────────────────
+    // ═══════════════════════════════════════════════════════════
+    // মাছ ও মাংস (Fish & Meat) - 14 products
+    // ═══════════════════════════════════════════════════════════
     {
       nameBn: 'তাজা রুই মাছ', nameEn: 'Fresh Rui Fish', slug: 'rui-fish',
       descriptionBn: 'তাজা রুই মাছ, ঝাল ও ভুনার জন্য উৎকৃষ্ট', descriptionEn: 'Fresh Rui fish, excellent for curry',
@@ -215,8 +382,73 @@ async function main() {
       categoryId: categories['fish-meat'], isOrganic: false, isFeatured: false, isTrending: true,
       discount: 12, rating: 4.4, reviewCount: 156,
     },
+    {
+      nameBn: 'গরুর মাংস', nameEn: 'Beef', slug: 'beef',
+      descriptionBn: 'তাজা গরুর মাংস, কোরমার জন্য', descriptionEn: 'Fresh beef, great for korma',
+      price: 650, originalPrice: 700, unit: 'কেজি', stock: 50, images: '["🥩"]',
+      categoryId: categories['fish-meat'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 7, rating: 4.4, reviewCount: 76,
+    },
+    {
+      nameBn: 'কাতলা মাছ', nameEn: 'Katla Fish', slug: 'katla-fish',
+      descriptionBn: 'তাজা কাতলা মাছ, ঝালের জন্য উৎকৃষ্ট', descriptionEn: 'Fresh Katla fish, excellent for curry',
+      price: 380, originalPrice: 420, unit: 'কেজি', stock: 60, images: '["🐟"]',
+      categoryId: categories['fish-meat'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 10, rating: 4.5, reviewCount: 78,
+    },
+    {
+      nameBn: 'ভেটকি মাছ', nameEn: 'Bhetki Fish', slug: 'bhetki-fish',
+      descriptionBn: 'তাজা ভেটকি মাছ, ভাজার জন্য উৎকৃষ্ট', descriptionEn: 'Fresh Bhetki fish, excellent for frying',
+      price: 500, originalPrice: 580, unit: 'কেজি', stock: 40, images: '["🐠"]',
+      categoryId: categories['fish-meat'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.6, reviewCount: 65,
+    },
+    {
+      nameBn: 'তাজা পুটি মাছ', nameEn: 'Puti Fish', slug: 'puti-fish',
+      descriptionBn: 'তাজা পুটি মাছ, ঝাল তরকারির জন্য', descriptionEn: 'Fresh Puti fish, great for spicy curry',
+      price: 250, originalPrice: 280, unit: 'কেজি', stock: 70, images: '["🐟"]',
+      categoryId: categories['fish-meat'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.2, reviewCount: 42,
+    },
+    {
+      nameBn: 'ডোবা মাছ', nameEn: 'Sing Fish', slug: 'sing-fish',
+      descriptionBn: 'তাজা ডোবা মাছ, ঝালের জন্য', descriptionEn: 'Fresh Sing fish, great for spicy curry',
+      price: 300, originalPrice: 350, unit: 'কেজি', stock: 45, images: '["🐟"]',
+      categoryId: categories['fish-meat'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.3, reviewCount: 38,
+    },
+    {
+      nameBn: 'ব্রয়লার মুরগি', nameEn: 'Broiler Chicken', slug: 'broiler-chicken',
+      descriptionBn: 'তাজা ব্রয়লার মুরগি, দৈনন্দিন রান্নায়', descriptionEn: 'Fresh broiler chicken, for daily cooking',
+      price: 220, originalPrice: 250, unit: 'কেজি', stock: 120, images: '["🍗"]',
+      categoryId: categories['fish-meat'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.2, reviewCount: 98,
+    },
+    {
+      nameBn: 'মুরগির ডিম (ফার্ম)', nameEn: 'Farm Eggs', slug: 'farm-eggs',
+      descriptionBn: 'ফার্মের মুরগির ডিম, ১২টি প্রতি ডজন', descriptionEn: 'Farm chicken eggs, 12 per dozen',
+      price: 120, originalPrice: 135, unit: '১২ পিস', stock: 300, images: '["🥚"]',
+      categoryId: categories['fish-meat'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.1, reviewCount: 85,
+    },
+    {
+      nameBn: 'কড়াই মাছ', nameEn: 'Carp Fish', slug: 'carp-fish',
+      descriptionBn: 'তাজা কড়াই মাছ, ঝাল ও ভুনার জন্য', descriptionEn: 'Fresh carp fish, great for curry and bhuna',
+      price: 320, originalPrice: 360, unit: 'কেজি', stock: 55, images: '["🐟"]',
+      categoryId: categories['fish-meat'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.4, reviewCount: 55,
+    },
+    {
+      nameBn: 'হাঁসের ডিম', nameEn: 'Duck Eggs', slug: 'duck-eggs',
+      descriptionBn: 'তাজা হাঁসের ডিম, ৬টি প্রতি প্যাকেট', descriptionEn: 'Fresh duck eggs, 6 per pack',
+      price: 90, originalPrice: 100, unit: '৬ পিস', stock: 100, images: '["🥚"]',
+      categoryId: categories['fish-meat'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 10, rating: 4.0, reviewCount: 28,
+    },
 
-    // ─── চাল ও ডাল (Rice & Lentils) ─────────────────────────────
+    // ═══════════════════════════════════════════════════════════
+    // চাল ও ডাল (Rice & Lentils) - 14 products
+    // ═══════════════════════════════════════════════════════════
     {
       nameBn: 'বাসমতি চাল', nameEn: 'Basmati Rice', slug: 'basmati-rice',
       descriptionBn: 'প্রিমিয়াম বাসমতি চাল, বিরিয়ানির জন্য', descriptionEn: 'Premium basmati rice, perfect for biryani',
@@ -252,8 +484,73 @@ async function main() {
       categoryId: categories['rice-lentils'], isOrganic: false, isFeatured: false, isTrending: false,
       discount: 12, rating: 4.2, reviewCount: 76,
     },
+    {
+      nameBn: 'নাজিরশাইল চাল', nameEn: 'Nazirshail Rice', slug: 'nazirshail-rice',
+      descriptionBn: 'নাজিরশাইল চাল, খিচুড়ির জন্য উৎকৃষ্ট', descriptionEn: 'Nazirshail rice, excellent for khichuri',
+      price: 75, originalPrice: 82, unit: 'কেজি', stock: 350, images: '["🌾"]',
+      categoryId: categories['rice-lentils'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 9, rating: 4.3, reviewCount: 102,
+    },
+    {
+      nameBn: 'চিনিগুঁড়া চাল', nameEn: 'Chinigura Rice', slug: 'chinigura-rice',
+      descriptionBn: 'সুগন্ধি চিনিগুঁড়া চাল, পোলাও ও পায়েসের জন্য', descriptionEn: 'Aromatic chinigura rice, for polao and payesh',
+      price: 120, originalPrice: 135, unit: 'কেজি', stock: 250, images: '["🍚"]',
+      categoryId: categories['rice-lentils'], isOrganic: false, isFeatured: true, isTrending: false,
+      discount: 11, rating: 4.6, reviewCount: 145,
+    },
+    {
+      nameBn: 'কালিজিরা চাল', nameEn: 'Kalijira Rice', slug: 'kalijira-rice',
+      descriptionBn: 'দেশি কালিজিরা চাল, সুগন্ধি ও ছোট দানা', descriptionEn: 'Local kalijira rice, aromatic small grain',
+      price: 100, originalPrice: 110, unit: 'কেজি', stock: 200, images: '["🌾"]',
+      categoryId: categories['rice-lentils'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 9, rating: 4.4, reviewCount: 88,
+    },
+    {
+      nameBn: 'অড়হর ডাল', nameEn: 'Arhar Dal', slug: 'arhar-dal',
+      descriptionBn: 'অড়হর ডাল, সাম্বার ও ডাল ফ্রাইয়ের জন্য', descriptionEn: 'Arhar dal, great for sambar and dal fry',
+      price: 140, originalPrice: 160, unit: 'কেজি', stock: 200, images: '["🟡"]',
+      categoryId: categories['rice-lentils'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.3, reviewCount: 64,
+    },
+    {
+      nameBn: 'মুগ ডাল', nameEn: 'Mung Dal', slug: 'mung-dal',
+      descriptionBn: 'মুগ ডাল, খিচুড়ি ও ডালের জন্য', descriptionEn: 'Mung dal, great for khichuri and dal',
+      price: 150, originalPrice: 170, unit: 'কেজি', stock: 250, images: '["🟢"]',
+      categoryId: categories['rice-lentils'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.4, reviewCount: 72,
+    },
+    {
+      nameBn: 'চিড়া', nameEn: 'Flattened Rice', slug: 'flattened-rice',
+      descriptionBn: 'চিড়া, চিরার পান্তা ও নাস্তায়', descriptionEn: 'Flattened rice, for panta and snacks',
+      price: 60, originalPrice: 70, unit: 'কেজি', stock: 300, images: '["🥣"]',
+      categoryId: categories['rice-lentils'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.1, reviewCount: 55,
+    },
+    {
+      nameBn: 'মুড়ি', nameEn: 'Puffed Rice', slug: 'puffed-rice',
+      descriptionBn: 'কুড়মুড়ে মুড়ি, ঝালমুড়ি ও নাস্তায়', descriptionEn: 'Crispy puffed rice, for jhalmuri and snacks',
+      price: 50, originalPrice: 55, unit: 'কেজি', stock: 400, images: '["🥣"]',
+      categoryId: categories['rice-lentils'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 9, rating: 4.2, reviewCount: 89,
+    },
+    {
+      nameBn: 'খই', nameEn: 'Parched Rice', slug: 'parched-rice',
+      descriptionBn: 'মুড়ি খই, মুড়ির সাথে মেশানো যায়', descriptionEn: 'Parched rice, great mixed with puffed rice',
+      price: 80, originalPrice: 90, unit: 'কেজি', stock: 250, images: '["🌾"]',
+      categoryId: categories['rice-lentils'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.0, reviewCount: 34,
+    },
+    {
+      nameBn: 'লাটি ডাল', nameEn: 'Lathyrus Dal', slug: 'lathyrus-dal',
+      descriptionBn: 'লাটি ডাল, বিশেষ রান্নার জন্য', descriptionEn: 'Lathyrus dal, for special cooking',
+      price: 90, originalPrice: 100, unit: 'কেজি', stock: 180, images: '["🟠"]',
+      categoryId: categories['rice-lentils'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 10, rating: 3.9, reviewCount: 28,
+    },
 
-    // ─── মসলা ও তেল (Spices & Oil) ─────────────────────────────
+    // ═══════════════════════════════════════════════════════════
+    // মসলা ও তেল (Spices & Oil) - 16 products
+    // ═══════════════════════════════════════════════════════════
     {
       nameBn: 'সরিষার তেল', nameEn: 'Mustard Oil', slug: 'mustard-oil',
       descriptionBn: 'খাঁটি সরিষার তেল, রান্নায় অপরিহার্য', descriptionEn: 'Pure mustard oil, essential for cooking',
@@ -296,8 +593,80 @@ async function main() {
       categoryId: categories['spices-oil'], isOrganic: false, isFeatured: false, isTrending: false,
       discount: 14, rating: 4.1, reviewCount: 45,
     },
+    {
+      nameBn: 'লবণ', nameEn: 'Salt', slug: 'salt',
+      descriptionBn: 'আয়োডিনযুক্ত লবণ', descriptionEn: 'Iodized salt',
+      price: 30, originalPrice: 35, unit: 'কেজি', stock: 500, images: '["🧂"]',
+      categoryId: categories['spices-oil'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.1, reviewCount: 89,
+    },
+    {
+      nameBn: 'দারুচিনি', nameEn: 'Cinnamon', slug: 'cinnamon',
+      descriptionBn: 'সিলন দারুচিনি, বিরিয়ানি ও পোলাওয়ে', descriptionEn: 'Ceylon cinnamon, for biryani and polao',
+      price: 350, originalPrice: 400, unit: '১০০ গ্রাম', stock: 150, images: '["🪵"]',
+      categoryId: categories['spices-oil'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.5, reviewCount: 67,
+    },
+    {
+      nameBn: 'এলাচ', nameEn: 'Cardamom', slug: 'cardamom',
+      descriptionBn: 'সবুজ এলাচ, চা ও মিষ্টিতে', descriptionEn: 'Green cardamom, for tea and sweets',
+      price: 800, originalPrice: 900, unit: '১০০ গ্রাম', stock: 80, images: '["🫛"]',
+      categoryId: categories['spices-oil'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.6, reviewCount: 54,
+    },
+    {
+      nameBn: 'লবঙ্গ', nameEn: 'Cloves', slug: 'cloves',
+      descriptionBn: 'লবঙ্গ, বিরিয়ানি ও কোরমায়', descriptionEn: 'Cloves, for biryani and korma',
+      price: 600, originalPrice: 700, unit: '১০০ গ্রাম', stock: 100, images: '["🟤"]',
+      categoryId: categories['spices-oil'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.4, reviewCount: 48,
+    },
+    {
+      nameBn: 'তেজপাতা', nameEn: 'Bay Leaves', slug: 'bay-leaves',
+      descriptionBn: 'শুকনো তেজপাতা, রান্নায় সুগন্ধের জন্য', descriptionEn: 'Dried bay leaves, for aroma in cooking',
+      price: 80, originalPrice: 90, unit: '৫০ গ্রাম', stock: 250, images: '["🍃"]',
+      categoryId: categories['spices-oil'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.2, reviewCount: 42,
+    },
+    {
+      nameBn: 'ধনে বীজ', nameEn: 'Coriander Seeds', slug: 'coriander-seeds',
+      descriptionBn: 'শুকনো ধনে বীজ, মসলা বাটার জন্য', descriptionEn: 'Dried coriander seeds, for spice paste',
+      price: 100, originalPrice: 115, unit: '২৫০ গ্রাম', stock: 280, images: '["🟤"]',
+      categoryId: categories['spices-oil'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 13, rating: 4.3, reviewCount: 58,
+    },
+    {
+      nameBn: 'শুকনো মরিচ', nameEn: 'Dry Chili', slug: 'dry-chili',
+      descriptionBn: 'শুকনো লাল মরিচ, তরকারিতে ঝালের জন্য', descriptionEn: 'Dry red chili, for spiciness in curry',
+      price: 150, originalPrice: 170, unit: 'কেজি', stock: 200, images: '["🌶️"]',
+      categoryId: categories['spices-oil'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.3, reviewCount: 72,
+    },
+    {
+      nameBn: 'গরম মসলা গুঁড়া', nameEn: 'Garam Masala', slug: 'garam-masala',
+      descriptionBn: 'গরম মসলা মিশ্রণ, রান্নায় সুগন্ধের জন্য', descriptionEn: 'Garam masala blend, for aroma in cooking',
+      price: 150, originalPrice: 170, unit: '১০০ গ্রাম', stock: 220, images: '["🟫"]',
+      categoryId: categories['spices-oil'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.5, reviewCount: 84,
+    },
+    {
+      nameBn: 'নারকেল তেল', nameEn: 'Coconut Oil', slug: 'coconut-oil',
+      descriptionBn: 'খাঁটি নারকেল তেল, রান্না ও চুলায়', descriptionEn: 'Pure coconut oil, for cooking and hair',
+      price: 280, originalPrice: 320, unit: 'লিটার', stock: 120, images: '["🥥"]',
+      categoryId: categories['spices-oil'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.4, reviewCount: 65,
+    },
+    {
+      nameBn: 'জায়ফল', nameEn: 'Nutmeg', slug: 'nutmeg',
+      descriptionBn: 'জায়ফল, মিষ্টি ও গোস্তের রান্নায়', descriptionEn: 'Nutmeg, for sweets and meat dishes',
+      price: 500, originalPrice: 580, unit: '১০০ গ্রাম', stock: 80, images: '["🟤"]',
+      categoryId: categories['spices-oil'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.3, reviewCount: 36,
+    },
 
-    // ─── দুগ্ধ ও ডিম (Dairy & Eggs) ─────────────────────────────
+    // ═══════════════════════════════════════════════════════════
+    // দুগ্ধ ও ডিম (Dairy & Eggs) - 10 products
+    // ═══════════════════════════════════════════════════════════
     {
       nameBn: 'দেশি মুরগির ডিম', nameEn: 'Local Chicken Eggs', slug: 'local-eggs',
       descriptionBn: 'তাজা দেশি মুরগির ডিম, ১২টি প্রতি ডজন', descriptionEn: 'Fresh local chicken eggs, 12 per dozen',
@@ -333,8 +702,45 @@ async function main() {
       categoryId: categories['dairy-eggs'], isOrganic: false, isFeatured: false, isTrending: false,
       discount: 10, rating: 4.3, reviewCount: 67,
     },
+    {
+      nameBn: 'পনির', nameEn: 'Paneer', slug: 'paneer',
+      descriptionBn: 'তাজা পনির, সালাদ ও তরকারিতে', descriptionEn: 'Fresh paneer, for salad and curry',
+      price: 200, originalPrice: 230, unit: '২৫০ গ্রাম', stock: 80, images: '["🧀"]',
+      categoryId: categories['dairy-eggs'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 13, rating: 4.5, reviewCount: 56,
+    },
+    {
+      nameBn: 'দুধের ছানা', nameEn: 'Cottage Cheese (Chana)', slug: 'cottage-cheese',
+      descriptionBn: 'তাজা দুধের ছানা, মিষ্টি ও তরকারিতে', descriptionEn: 'Fresh cottage cheese, for sweets and curry',
+      price: 120, originalPrice: 140, unit: '২৫০ গ্রাম', stock: 100, images: '["🧀"]',
+      categoryId: categories['dairy-eggs'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.3, reviewCount: 48,
+    },
+    {
+      nameBn: 'টক দই', nameEn: 'Sour Yogurt', slug: 'sour-yogurt',
+      descriptionBn: 'টক দই, রান্না ও মাখন তৈরিতে', descriptionEn: 'Sour yogurt, for cooking and making butter',
+      price: 50, originalPrice: 55, unit: '৫০০ গ্রাম', stock: 150, images: '["🥣"]',
+      categoryId: categories['dairy-eggs'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 9, rating: 4.2, reviewCount: 42,
+    },
+    {
+      nameBn: 'ক্রিম', nameEn: 'Cream', slug: 'cream',
+      descriptionBn: 'ফ্রেশ ক্রিম, মিষ্টি ও ডেজার্টে', descriptionEn: 'Fresh cream, for sweets and desserts',
+      price: 100, originalPrice: 110, unit: '২৫০ মিলি', stock: 80, images: '["🥛"]',
+      categoryId: categories['dairy-eggs'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 9, rating: 4.1, reviewCount: 32,
+    },
+    {
+      nameBn: 'ক্ষীর', nameEn: 'Condensed Milk', slug: 'condensed-milk',
+      descriptionBn: 'মিষ্টি ক্ষীর, পায়েস ও মিষ্টিতে', descriptionEn: 'Sweet condensed milk, for payesh and sweets',
+      price: 120, originalPrice: 135, unit: '৪০০ গ্রাম', stock: 120, images: '["🥫"]',
+      categoryId: categories['dairy-eggs'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.4, reviewCount: 75,
+    },
 
-    // ─── বেকারি (Bakery) ─────────────────────────────
+    // ═══════════════════════════════════════════════════════════
+    // বেকারি (Bakery) - 10 products
+    // ═══════════════════════════════════════════════════════════
     {
       nameBn: 'পাউরুটি', nameEn: 'Bread', slug: 'bread',
       descriptionBn: 'তাজা পাউরুটি, প্রতিদিনের নাস্তায়', descriptionEn: 'Fresh bread, for daily breakfast',
@@ -363,8 +769,52 @@ async function main() {
       categoryId: categories['bakery'], isOrganic: false, isFeatured: false, isTrending: false,
       discount: 14, rating: 4.1, reviewCount: 43,
     },
+    {
+      nameBn: 'সমুচা', nameEn: 'Samosa', slug: 'samosa',
+      descriptionBn: 'তাজা আলু সমুচা, ইফতারের জন্য', descriptionEn: 'Fresh potato samosa, for iftar',
+      price: 15, originalPrice: 20, unit: 'পিস', stock: 300, images: '["🔺"]',
+      categoryId: categories['bakery'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 25, rating: 4.3, reviewCount: 67,
+    },
+    {
+      nameBn: 'পাউরুটি (ফ্রুট)', nameEn: 'Fruit Bread', slug: 'fruit-bread',
+      descriptionBn: 'ফ্রুট পাউরুটি, কিশমিশ ও ফ্রুটসহ', descriptionEn: 'Fruit bread, with raisins and fruits',
+      price: 70, originalPrice: 80, unit: 'পিস', stock: 100, images: '["🍞"]',
+      categoryId: categories['bakery'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.3, reviewCount: 45,
+    },
+    {
+      nameBn: 'বান', nameEn: 'Bun', slug: 'bun',
+      descriptionBn: 'সফেদ বান, বার্গার ও স্ন্যাকসে', descriptionEn: 'White bun, for burgers and snacks',
+      price: 20, originalPrice: 25, unit: 'পিস', stock: 200, images: '["🍔"]',
+      categoryId: categories['bakery'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 20, rating: 4.0, reviewCount: 34,
+    },
+    {
+      nameBn: 'নিমকি', nameEn: 'Nimki', slug: 'nimki',
+      descriptionBn: 'কুড়মুড়ে নিমকি, চায়ের সাথে', descriptionEn: 'Crispy nimki, great with tea',
+      price: 40, originalPrice: 45, unit: 'প্যাকেট', stock: 200, images: '["🥐"]',
+      categoryId: categories['bakery'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.1, reviewCount: 38,
+    },
+    {
+      nameBn: 'পেস্ট্রি', nameEn: 'Pastry', slug: 'pastry',
+      descriptionBn: 'ক্রিম পেস্ট্রি, সফেদ ক্রিমসহ', descriptionEn: 'Cream pastry, with white cream',
+      price: 30, originalPrice: 35, unit: 'পিস', stock: 150, images: '["🧁"]',
+      categoryId: categories['bakery'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.2, reviewCount: 52,
+    },
+    {
+      nameBn: 'টোস্ট বিস্কুট', nameEn: 'Toast Biscuit', slug: 'toast-biscuit',
+      descriptionBn: 'কুড়মুড়ে টোস্ট, চায়ে ডুবিয়ে খাওয়ার জন্য', descriptionEn: 'Crispy toast, for dipping in tea',
+      price: 45, originalPrice: 50, unit: 'প্যাকেট', stock: 250, images: '["🍪"]',
+      categoryId: categories['bakery'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 10, rating: 4.2, reviewCount: 62,
+    },
 
-    // ─── পানীয় (Beverages) ─────────────────────────────
+    // ═══════════════════════════════════════════════════════════
+    // পানীয় (Beverages) - 12 products
+    // ═══════════════════════════════════════════════════════════
     {
       nameBn: 'চা পাতা', nameEn: 'Tea Leaves', slug: 'tea-leaves',
       descriptionBn: 'সিলেটের চা পাতা, সুগন্ধি ও স্বাদে ভরপুর', descriptionEn: "Sylhet's tea leaves, aromatic and flavorful",
@@ -393,8 +843,66 @@ async function main() {
       categoryId: categories['beverages'], isOrganic: false, isFeatured: false, isTrending: false,
       discount: 15, rating: 4.2, reviewCount: 65,
     },
+    {
+      nameBn: 'লাচ্ছি', nameEn: 'Lassi', slug: 'lassi',
+      descriptionBn: 'মিষ্টি লাচ্ছি, দই থেকে তৈরি', descriptionEn: 'Sweet lassi, made from yogurt',
+      price: 40, originalPrice: 50, unit: 'গ্লাস', stock: 100, images: '["🥛"]',
+      categoryId: categories['beverages'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 20, rating: 4.5, reviewCount: 78,
+    },
+    {
+      nameBn: 'পানি (খনিজ)', nameEn: 'Mineral Water', slug: 'mineral-water',
+      descriptionBn: 'বিশুদ্ধ খনিজ পানি, ১ লিটার', descriptionEn: 'Pure mineral water, 1 liter',
+      price: 20, originalPrice: 25, unit: 'বোতল', stock: 500, images: '["💧"]',
+      categoryId: categories['beverages'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 20, rating: 4.0, reviewCount: 45,
+    },
+    {
+      nameBn: 'কোকাকোলা', nameEn: 'Coca-Cola', slug: 'coca-cola',
+      descriptionBn: 'কোকাকোলা, ৫০০ মিলি বোতল', descriptionEn: 'Coca-Cola, 500ml bottle',
+      price: 30, originalPrice: 35, unit: 'বোতল', stock: 400, images: '["🥤"]',
+      categoryId: categories['beverages'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.1, reviewCount: 89,
+    },
+    {
+      nameBn: 'স্প্রাইট', nameEn: 'Sprite', slug: 'sprite',
+      descriptionBn: 'স্প্রাইট, ৫০০ মিলি বোতল', descriptionEn: 'Sprite, 500ml bottle',
+      price: 30, originalPrice: 35, unit: 'বোতল', stock: 350, images: '["🥤"]',
+      categoryId: categories['beverages'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.0, reviewCount: 56,
+    },
+    {
+      nameBn: 'দুধের চা', nameEn: 'Milk Tea Pack', slug: 'milk-tea-pack',
+      descriptionBn: '৩ ইন ১ দুধের চা প্যাকেট', descriptionEn: '3 in 1 milk tea packet',
+      price: 10, originalPrice: 12, unit: 'পিস', stock: 600, images: '["☕"]',
+      categoryId: categories['beverages'], isOrganic: false, isFeatured: false, isTrending: true,
+      discount: 17, rating: 4.1, reviewCount: 98,
+    },
+    {
+      nameBn: 'পাকা আমের শরবত', nameEn: 'Mango Squash', slug: 'mango-squash',
+      descriptionBn: 'ঘন আমের শরবত, পানি মিশিয়ে খাওয়ার জন্য', descriptionEn: 'Concentrated mango squash, mix with water',
+      price: 120, originalPrice: 140, unit: 'বোতল', stock: 150, images: '["🧃"]',
+      categoryId: categories['beverages'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.3, reviewCount: 62,
+    },
+    {
+      nameBn: 'লেমন স্কোয়াশ', nameEn: 'Lemon Squash', slug: 'lemon-squash',
+      descriptionBn: 'ঘন লেবুর শরবত, গরমে শরণাপন্ন', descriptionEn: 'Concentrated lemon squash, perfect for summer',
+      price: 100, originalPrice: 115, unit: 'বোতল', stock: 140, images: '["🍋"]',
+      categoryId: categories['beverages'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 13, rating: 4.2, reviewCount: 48,
+    },
+    {
+      nameBn: 'মধু', nameEn: 'Honey', slug: 'honey',
+      descriptionBn: 'খাঁটি সুন্দরবনের মধু, স্বাস্থ্যকর', descriptionEn: 'Pure Sundarbans honey, healthy',
+      price: 500, originalPrice: 600, unit: '৫০০ গ্রাম', stock: 60, images: '["🍯"]',
+      categoryId: categories['beverages'], isOrganic: true, isFeatured: true, isTrending: true,
+      discount: 17, rating: 4.8, reviewCount: 176,
+    },
 
-    // ─── স্ন্যাকস (Snacks) ─────────────────────────────
+    // ═══════════════════════════════════════════════════════════
+    // স্ন্যাকস (Snacks) - 12 products
+    // ═══════════════════════════════════════════════════════════
     {
       nameBn: 'বিস্কুট', nameEn: 'Biscuits', slug: 'biscuits',
       descriptionBn: 'কুকিজ বিস্কুট, চায়ের সাথে', descriptionEn: 'Cookies biscuits, great with tea',
@@ -423,8 +931,66 @@ async function main() {
       categoryId: categories['snacks'], isOrganic: false, isFeatured: false, isTrending: true,
       discount: 20, rating: 4.2, reviewCount: 198,
     },
+    {
+      nameBn: 'ঝালমুড়ি', nameEn: 'Jhalmuri', slug: 'jhalmuri',
+      descriptionBn: 'ঝাল মুড়ি, চায়ের সাথে', descriptionEn: 'Spicy puffed rice, with tea',
+      price: 20, originalPrice: 25, unit: 'প্যাকেট', stock: 300, images: '["🥣"]',
+      categoryId: categories['snacks'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 20, rating: 4.2, reviewCount: 56,
+    },
+    {
+      nameBn: 'মুড়ি ভাজা', nameEn: 'Fried Puffed Rice', slug: 'fried-puffed-rice',
+      descriptionBn: 'ভাজা মুড়ি, সরিষার তেলে ভাজা', descriptionEn: 'Fried puffed rice, fried in mustard oil',
+      price: 40, originalPrice: 45, unit: 'প্যাকেট', stock: 250, images: '["🥣"]',
+      categoryId: categories['snacks'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.1, reviewCount: 38,
+    },
+    {
+      nameBn: 'পাকোড়া মশলা', nameEn: 'Pakora Mix', slug: 'pakora-mix',
+      descriptionBn: 'পাকোড়া তৈরির মশলা মিশ্রণ', descriptionEn: 'Spice mix for making pakora',
+      price: 35, originalPrice: 40, unit: 'প্যাকেট', stock: 200, images: '["🟡"]',
+      categoryId: categories['snacks'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.0, reviewCount: 28,
+    },
+    {
+      nameBn: 'পেঁয়াজু', nameEn: 'Peyaju', slug: 'peyaju',
+      descriptionBn: 'তাজা পেঁয়াজু, ইফতারের জন্য', descriptionEn: 'Fresh lentil fritters, for iftar',
+      price: 10, originalPrice: 15, unit: 'পিস', stock: 400, images: '["🧅"]',
+      categoryId: categories['snacks'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 33, rating: 4.2, reviewCount: 45,
+    },
+    {
+      nameBn: 'শুকনো মিষ্টি', nameEn: 'Dry Sweets', slug: 'dry-sweets',
+      descriptionBn: 'নিমকি ও শুকনো মিষ্টি মিশ্রণ', descriptionEn: 'Mix of nimki and dry sweets',
+      price: 80, originalPrice: 95, unit: 'প্যাকেট', stock: 150, images: '["🍬"]',
+      categoryId: categories['snacks'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 16, rating: 4.3, reviewCount: 52,
+    },
+    {
+      nameBn: 'ভুজিয়া', nameEn: 'Bhujiya', slug: 'bhujiya',
+      descriptionBn: 'ঝাল ভুজিয়া, চানাচুরের মতো', descriptionEn: 'Spicy bhujiya, similar to chanachur',
+      price: 40, originalPrice: 45, unit: 'প্যাকেট', stock: 200, images: '["🥜"]',
+      categoryId: categories['snacks'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.1, reviewCount: 34,
+    },
+    {
+      nameBn: 'চিড়া ভাজা', nameEn: 'Fried Flattened Rice', slug: 'fried-flattened-rice',
+      descriptionBn: 'ভাজা চিড়া, নাস্তায়', descriptionEn: 'Fried flattened rice, for snacks',
+      price: 50, originalPrice: 55, unit: 'প্যাকেট', stock: 180, images: '["🥣"]',
+      categoryId: categories['snacks'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 9, rating: 4.0, reviewCount: 22,
+    },
+    {
+      nameBn: 'মাখন বিস্কুট', nameEn: 'Butter Biscuits', slug: 'butter-biscuits',
+      descriptionBn: 'মাখন বিস্কুট, চায়ের সাথে', descriptionEn: 'Butter biscuits, great with tea',
+      price: 45, originalPrice: 50, unit: 'প্যাকেট', stock: 280, images: '["🍪"]',
+      categoryId: categories['snacks'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 10, rating: 4.3, reviewCount: 65,
+    },
 
-    // ─── পরিষ্কার (Household) ─────────────────────────────
+    // ═══════════════════════════════════════════════════════════
+    // পরিষ্কার (Household) - 10 products
+    // ═══════════════════════════════════════════════════════════
     {
       nameBn: 'সাবান', nameEn: 'Soap', slug: 'soap',
       descriptionBn: 'হাত ধোয়ার সাবান, জীবাণুমুক্তি', descriptionEn: 'Hand washing soap, germ protection',
@@ -453,8 +1019,52 @@ async function main() {
       categoryId: categories['household'], isOrganic: false, isFeatured: false, isTrending: false,
       discount: 13, rating: 4.0, reviewCount: 56,
     },
+    {
+      nameBn: 'ফেনি', nameEn: 'Phenyl', slug: 'phenyl',
+      descriptionBn: 'মেঝে মোছার ফেনি', descriptionEn: 'Floor mop phenyl',
+      price: 55, originalPrice: 65, unit: 'বোতল', stock: 180, images: '["🧴"]',
+      categoryId: categories['household'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 15, rating: 4.0, reviewCount: 32,
+    },
+    {
+      nameBn: 'হার্পিক', nameEn: 'Toilet Cleaner', slug: 'toilet-cleaner',
+      descriptionBn: 'টয়লেট পরিষ্কারের তরল', descriptionEn: 'Toilet cleaning liquid',
+      price: 140, originalPrice: 160, unit: 'বোতল', stock: 150, images: '["🚽"]',
+      categoryId: categories['household'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.3, reviewCount: 48,
+    },
+    {
+      nameBn: 'স্পঞ্জ', nameEn: 'Sponge', slug: 'sponge',
+      descriptionBn: 'বাসন মাজার স্পঞ্জ', descriptionEn: 'Dish washing sponge',
+      price: 25, originalPrice: 30, unit: 'পিস', stock: 300, images: '["🟡"]',
+      categoryId: categories['household'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 17, rating: 3.9, reviewCount: 22,
+    },
+    {
+      nameBn: 'ঝাড়ু', nameEn: 'Broom', slug: 'broom',
+      descriptionBn: 'দেশি ঝাড়ু, মেঝে পরিষ্কারের জন্য', descriptionEn: 'Local broom, for floor cleaning',
+      price: 60, originalPrice: 70, unit: 'পিস', stock: 100, images: '["🧹"]',
+      categoryId: categories['household'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.0, reviewCount: 18,
+    },
+    {
+      nameBn: 'মসল কাপড়', nameEn: 'Mop Cloth', slug: 'mop-cloth',
+      descriptionBn: 'মেঝে মোছার কাপড়', descriptionEn: 'Floor mop cloth',
+      price: 30, originalPrice: 35, unit: 'পিস', stock: 200, images: '["🧽"]',
+      categoryId: categories['household'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 3.8, reviewCount: 14,
+    },
+    {
+      nameBn: 'মশা কয়েল', nameEn: 'Mosquito Coil', slug: 'mosquito-coil',
+      descriptionBn: 'মশা তাড়ানোর কয়েল, ১০ পিস', descriptionEn: 'Mosquito repellent coil, 10 pieces',
+      price: 35, originalPrice: 40, unit: 'প্যাকেট', stock: 250, images: '["🪵"]',
+      categoryId: categories['household'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.1, reviewCount: 56,
+    },
 
-    // ─── ব্যক্তিগত যত্ন (Personal Care) ─────────────────────────────
+    // ═══════════════════════════════════════════════════════════
+    // ব্যক্তিগত যত্ন (Personal Care) - 10 products
+    // ═══════════════════════════════════════════════════════════
     {
       nameBn: 'টুথপেস্ট', nameEn: 'Toothpaste', slug: 'toothpaste',
       descriptionBn: 'দাঁতের পেস্ট, দাঁত ও মাড়ি রক্ষায়', descriptionEn: 'Toothpaste, for teeth and gum protection',
@@ -483,8 +1093,52 @@ async function main() {
       categoryId: categories['personal-care'], isOrganic: false, isFeatured: false, isTrending: false,
       discount: 13, rating: 4.3, reviewCount: 67,
     },
+    {
+      nameBn: 'হেয়ার অয়েল', nameEn: 'Hair Oil', slug: 'hair-oil',
+      descriptionBn: 'নারকেল হেয়ার অয়েল, চুলের যত্নে', descriptionEn: 'Coconut hair oil, for hair care',
+      price: 120, originalPrice: 140, unit: 'বোতল', stock: 200, images: '["💧"]',
+      categoryId: categories['personal-care'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.3, reviewCount: 62,
+    },
+    {
+      nameBn: 'তোয়ালে', nameEn: 'Towel', slug: 'towel',
+      descriptionBn: 'সুতির তোয়ালে, গোসলের জন্য', descriptionEn: 'Cotton towel, for bath',
+      price: 200, originalPrice: 250, unit: 'পিস', stock: 80, images: '["🧣"]',
+      categoryId: categories['personal-care'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 20, rating: 4.2, reviewCount: 34,
+    },
+    {
+      nameBn: 'ডিওডোরেন্ট', nameEn: 'Deodorant', slug: 'deodorant',
+      descriptionBn: 'বডি স্প্রে ডিওডোরেন্ট', descriptionEn: 'Body spray deodorant',
+      price: 180, originalPrice: 200, unit: 'বোতল', stock: 120, images: '["💨"]',
+      categoryId: categories['personal-care'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 10, rating: 4.1, reviewCount: 42,
+    },
+    {
+      nameBn: 'ফেস ক্রিম', nameEn: 'Face Cream', slug: 'face-cream',
+      descriptionBn: 'ত্বকের যত্নে ফেস ক্রিম', descriptionEn: 'Face cream for skin care',
+      price: 150, originalPrice: 170, unit: 'টিউব', stock: 160, images: '["🫧"]',
+      categoryId: categories['personal-care'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.2, reviewCount: 48,
+    },
+    {
+      nameBn: 'সেভিং ক্রিম', nameEn: 'Shaving Cream', slug: 'shaving-cream',
+      descriptionBn: 'শেভিং ক্রিম, পুরুষদের জন্য', descriptionEn: 'Shaving cream, for men',
+      price: 100, originalPrice: 115, unit: 'টিউব', stock: 100, images: '["🪒"]',
+      categoryId: categories['personal-care'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 13, rating: 4.0, reviewCount: 28,
+    },
+    {
+      nameBn: 'টিস্যু পেপার', nameEn: 'Tissue Paper', slug: 'tissue-paper',
+      descriptionBn: 'ফেসিয়াল টিস্যু, ১০০ পিস', descriptionEn: 'Facial tissue, 100 pieces',
+      price: 50, originalPrice: 55, unit: 'বক্স', stock: 350, images: '["🧻"]',
+      categoryId: categories['personal-care'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 9, rating: 4.0, reviewCount: 36,
+    },
 
-    // ─── ফ্রোজেন (Frozen) ─────────────────────────────
+    // ═══════════════════════════════════════════════════════════
+    // ফ্রোজেন (Frozen) - 8 products
+    // ═══════════════════════════════════════════════════════════
     {
       nameBn: 'ফ্রোজেন সামুদ্রিক মাছ', nameEn: 'Frozen Sea Fish', slug: 'frozen-sea-fish',
       descriptionBn: 'ফ্রোজেন সামুদ্রিক মাছ, যেকোনো সময় রান্নার জন্য', descriptionEn: 'Frozen sea fish, cook anytime',
@@ -506,87 +1160,45 @@ async function main() {
       categoryId: categories['frozen'], isOrganic: false, isFeatured: false, isTrending: false,
       discount: 10, rating: 3.9, reviewCount: 28,
     },
-
-    // ─── Extra products to reach 60+ ─────────────────────────────
-    // More vegetables
     {
-      nameBn: 'লাল শাক', nameEn: 'Red Spinach', slug: 'red-spinach',
-      descriptionBn: 'তাজা লাল শাক, ভাজির জন্য', descriptionEn: 'Fresh red spinach, great for stir-fry',
-      price: 20, originalPrice: 25, unit: 'আঁটি', stock: 200, images: '["🥬"]',
-      categoryId: categories['vegetables'], isOrganic: true, isFeatured: false, isTrending: false,
-      discount: 20, rating: 4.3, reviewCount: 41,
+      nameBn: 'ফ্রোজেন পরোটা', nameEn: 'Frozen Paratha', slug: 'frozen-paratha',
+      descriptionBn: 'ফ্রোজেন লেয়ার্ড পরোটা, ৫ পিস', descriptionEn: 'Frozen layered paratha, 5 pieces',
+      price: 80, originalPrice: 90, unit: 'প্যাকেট', stock: 150, images: '["🫓"]',
+      categoryId: categories['frozen'], isOrganic: false, isFeatured: false, isTrending: true,
+      discount: 11, rating: 4.4, reviewCount: 89,
     },
     {
-      nameBn: 'পুঁইশাক', nameEn: 'Pui Shak', slug: 'pui-shak',
-      descriptionBn: 'তাজা পুঁইশাক, ভর্তার জন্য উৎকৃষ্ট', descriptionEn: 'Fresh pui shak, excellent for bharta',
-      price: 18, originalPrice: 22, unit: 'আঁটি', stock: 180, images: '["🥬"]',
-      categoryId: categories['vegetables'], isOrganic: true, isFeatured: false, isTrending: false,
-      discount: 18, rating: 4.2, reviewCount: 35,
+      nameBn: 'ফ্রোজেন চিংড়ি', nameEn: 'Frozen Shrimp', slug: 'frozen-shrimp',
+      descriptionBn: 'ফ্রোজেন চিংড়ি, সারাবছর পাওয়া যায়', descriptionEn: 'Frozen shrimp, available year-round',
+      price: 450, originalPrice: 520, unit: 'কেজি', stock: 60, images: '["🦐"]',
+      categoryId: categories['frozen'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 13, rating: 4.3, reviewCount: 42,
     },
-    // More fruits
     {
-      nameBn: 'কলা', nameEn: 'Banana', slug: 'banana',
-      descriptionBn: 'পাকা সবরি কলা, পুষ্টিকর ফল', descriptionEn: 'Ripe sabri banana, nutritious fruit',
-      price: 50, originalPrice: 60, unit: 'ডজন', stock: 250, images: '["🍌"]',
-      categoryId: categories['fruits'], isOrganic: false, isFeatured: false, isTrending: false,
-      discount: 17, rating: 4.4, reviewCount: 88,
+      nameBn: 'ফ্রোজেন সমুচা', nameEn: 'Frozen Samosa', slug: 'frozen-samosa',
+      descriptionBn: 'ফ্রোজেন আলু সমুচা, ভেজে খাওয়ার জন্য', descriptionEn: 'Frozen potato samosa, fry and eat',
+      price: 60, originalPrice: 70, unit: '১০ পিস', stock: 100, images: '["🔺"]',
+      categoryId: categories['frozen'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.2, reviewCount: 38,
     },
-    // More fish & meat
     {
-      nameBn: 'গরুর মাংস', nameEn: 'Beef', slug: 'beef',
-      descriptionBn: 'তাজা গরুর মাংস, কোরমার জন্য', descriptionEn: 'Fresh beef, great for korma',
-      price: 650, originalPrice: 700, unit: 'কেজি', stock: 50, images: '["🥩"]',
-      categoryId: categories['fish-meat'], isOrganic: false, isFeatured: false, isTrending: false,
-      discount: 7, rating: 4.4, reviewCount: 76,
+      nameBn: 'ফ্রোজেন মুরগি', nameEn: 'Frozen Chicken', slug: 'frozen-chicken',
+      descriptionBn: 'ফ্রোজেন ব্রয়লার মুরগি, পুরো পিস', descriptionEn: 'Frozen broiler chicken, whole piece',
+      price: 200, originalPrice: 230, unit: 'কেজি', stock: 80, images: '["🍗"]',
+      categoryId: categories['frozen'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 13, rating: 4.1, reviewCount: 35,
     },
-    // More rice & lentils
     {
-      nameBn: 'নাজিরশাইল চাল', nameEn: 'Nazirshail Rice', slug: 'nazirshail-rice',
-      descriptionBn: 'নাজিরশাইল চাল, খিচুড়ির জন্য উৎকৃষ্ট', descriptionEn: 'Nazirshail rice, excellent for khichuri',
-      price: 75, originalPrice: 82, unit: 'কেজি', stock: 350, images: '["🌾"]',
-      categoryId: categories['rice-lentils'], isOrganic: false, isFeatured: false, isTrending: false,
-      discount: 9, rating: 4.3, reviewCount: 102,
-    },
-    // More dairy
-    {
-      nameBn: 'পনির', nameEn: 'Paneer', slug: 'paneer',
-      descriptionBn: 'তাজা পনির, সালাদ ও তরকারিতে', descriptionEn: 'Fresh paneer, for salad and curry',
-      price: 200, originalPrice: 230, unit: '২৫০ গ্রাম', stock: 80, images: '["🧀"]',
-      categoryId: categories['dairy-eggs'], isOrganic: false, isFeatured: false, isTrending: false,
-      discount: 13, rating: 4.5, reviewCount: 56,
-    },
-    // More spices
-    {
-      nameBn: 'লবণ', nameEn: 'Salt', slug: 'salt',
-      descriptionBn: 'আয়োডিনযুক্ত লবণ', descriptionEn: 'Iodized salt',
-      price: 30, originalPrice: 35, unit: 'কেজি', stock: 500, images: '["🧂"]',
-      categoryId: categories['spices-oil'], isOrganic: false, isFeatured: false, isTrending: false,
-      discount: 14, rating: 4.1, reviewCount: 89,
-    },
-    // More bakery
-    {
-      nameBn: 'সমুচা', nameEn: 'Samosa', slug: 'samosa',
-      descriptionBn: 'তাজা আলু সমুচা, ইফতারের জন্য', descriptionEn: 'Fresh potato samosa, for iftar',
-      price: 15, originalPrice: 20, unit: 'পিস', stock: 300, images: '["🔺"]',
-      categoryId: categories['bakery'], isOrganic: false, isFeatured: false, isTrending: false,
-      discount: 25, rating: 4.3, reviewCount: 67,
-    },
-    // More beverages
-    {
-      nameBn: 'লাচ্ছি', nameEn: 'Lassi', slug: 'lassi',
-      descriptionBn: 'মিষ্টি লাচ্ছি, দই থেকে তৈরি', descriptionEn: 'Sweet lassi, made from yogurt',
-      price: 40, originalPrice: 50, unit: 'গ্লাস', stock: 100, images: '["🥛"]',
-      categoryId: categories['beverages'], isOrganic: false, isFeatured: false, isTrending: false,
-      discount: 20, rating: 4.5, reviewCount: 78,
+      nameBn: 'ফ্রোজেন নুগেট', nameEn: 'Frozen Nuggets', slug: 'frozen-nuggets',
+      descriptionBn: 'চিকেন নুগেট, ভেজে খাওয়ার জন্য', descriptionEn: 'Chicken nuggets, fry and eat',
+      price: 250, originalPrice: 280, unit: 'প্যাকেট', stock: 90, images: '["🍗"]',
+      categoryId: categories['frozen'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.3, reviewCount: 48,
     },
   ];
 
-  let productCount = 0;
-  for (const product of productsData) {
-    await db.product.create({ data: product });
-    productCount++;
-  }
-
+  // Bulk create products for performance
+  const productCount = (await db.product.createMany({ data: productsData })).count;
   console.log(`✅ ${productCount} products created.`);
 
   // ============================================================
@@ -601,8 +1213,8 @@ async function main() {
       email: 'nibir@amarbazar.com',
       password: 'demo123456',
       role: 'admin',
-      address: 'বনানী, ঢাকা',
-      area: 'বনানী',
+      address: 'মোহাম্মদপুর, ঢাকা',
+      area: 'মোহাম্মদপুর',
       city: 'ঢাকা',
       loyaltyPoints: 500,
     },
@@ -615,11 +1227,14 @@ async function main() {
   // ============================================================
   console.log('⭐ Creating demo reviews...');
 
-  // Get some popular products for reviews
   const hilsa = await db.product.findUnique({ where: { slug: 'hilsa-fish' } });
   const mishtiDoi = await db.product.findUnique({ where: { slug: 'sweet-yogurt' } });
   const basmati = await db.product.findUnique({ where: { slug: 'basmati-rice' } });
   const mustardOil = await db.product.findUnique({ where: { slug: 'mustard-oil' } });
+  const honey = await db.product.findUnique({ where: { slug: 'honey' } });
+  const mango = await db.product.findUnique({ where: { slug: 'mango' } });
+  const chinigura = await db.product.findUnique({ where: { slug: 'chinigura-rice' } });
+  const frozenParatha = await db.product.findUnique({ where: { slug: 'frozen-paratha' } });
 
   const reviewsData = [
     {
@@ -645,6 +1260,30 @@ async function main() {
       productId: mustardOil!.id,
       rating: 5,
       comment: 'খাঁটি সরিষার তেল, শুধু এই তেলেই আসল বাঙালি রান্নার স্বাদ আসে!',
+    },
+    {
+      userId: demoUser.id,
+      productId: honey!.id,
+      rating: 5,
+      comment: 'সুন্দরবনের খাঁটি মধু! সকালে এক চামচ মধু খেলে সারাদিন এনার্জি থাকে।',
+    },
+    {
+      userId: demoUser.id,
+      productId: mango!.id,
+      rating: 5,
+      comment: 'হিমসাগর আম অসাধারণ! এত মিষ্টি আম আগে খাইনি।',
+    },
+    {
+      userId: demoUser.id,
+      productId: chinigura!.id,
+      rating: 4,
+      comment: 'চিনিগুঁড়া চালের ভাত খুবই সুগন্ধি, পোলাও বানালে সবাই প্রশংসা করে।',
+    },
+    {
+      userId: demoUser.id,
+      productId: frozenParatha!.id,
+      rating: 4,
+      comment: 'ফ্রোজেন পরোটা খুবই সুবিধাজনক, দ্রুত তৈরি হয় আর স্বাদও ভালো।',
     },
   ];
 
@@ -680,37 +1319,55 @@ async function main() {
       usageLimit: 500,
       usedCount: 0,
       isActive: true,
+      expiresAt: new Date('2026-12-31'),
+    },
+    {
+      code: 'FIRST20',
+      discount: 20,
+      discountType: 'percentage',
+      minOrder: 300,
+      maxDiscount: 150,
+      usageLimit: 2000,
+      usedCount: 0,
+      isActive: true,
       expiresAt: new Date('2026-06-30'),
+    },
+    {
+      code: 'FREEDELIVERY',
+      discount: 60,
+      discountType: 'flat',
+      minOrder: 800,
+      maxDiscount: 60,
+      usageLimit: 300,
+      usedCount: 0,
+      isActive: true,
+      expiresAt: new Date('2025-12-31'),
     },
   ];
 
   for (const coupon of couponsData) {
     await db.coupon.create({ data: coupon });
-    console.log(`  ✓ ${coupon.code} - ${coupon.discount}${coupon.discountType === 'percentage' ? '% off' : '৳ off'}`);
   }
 
   console.log(`✅ ${couponsData.length} coupons created.`);
 
   // ============================================================
-  // Done!
+  // Final Summary
   // ============================================================
-  console.log('');
-  console.log('🎉 Database seeding completed successfully!');
-  console.log('');
-  console.log('📊 Summary:');
-  console.log(`   📂 Categories: ${categoriesData.length}`);
-  console.log(`   🛒 Products:   ${productCount}`);
-  console.log(`   👤 Users:      1`);
-  console.log(`   ⭐ Reviews:    ${reviewsData.length}`);
-  console.log(`   🎫 Coupons:    ${couponsData.length}`);
-  console.log('');
-
-  await db.$disconnect();
+  console.log('\n🎉 Database seeding completed!');
+  console.log(`  📂 ${categoriesData.length} categories`);
+  console.log(`  🛒 ${productCount} products`);
+  console.log(`  👤 1 admin user`);
+  console.log(`  ⭐ ${reviewsData.length} reviews`);
+  console.log(`  🎫 ${couponsData.length} coupons`);
+  console.log('\n  Admin: phone=01700000000, password=demo123456');
 }
 
 main()
-  .catch(async (e) => {
+  .catch((e) => {
     console.error('❌ Seeding failed:', e);
-    await db.$disconnect();
     process.exit(1);
+  })
+  .finally(async () => {
+    await db.$disconnect();
   });
