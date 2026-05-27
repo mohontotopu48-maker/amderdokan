@@ -134,8 +134,18 @@ export function CategorySection() {
   }
 
   return (
-    <section className="py-12 md:py-16">
-      <div className="container mx-auto px-4">
+    <section className="py-12 md:py-16 relative">
+      {/* Decorative pattern background */}
+      <div
+        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        style={{
+          backgroundImage: "url('/bg-home.png')",
+          backgroundRepeat: 'repeat',
+          backgroundSize: '180px 180px',
+        }}
+      />
+
+      <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

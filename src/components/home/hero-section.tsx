@@ -2,9 +2,10 @@
 
 import { useEffect, useState, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ShoppingCart, Percent, Gift, Truck, Clock, Banknote } from 'lucide-react'
+import { ShoppingCart, Percent, Gift, Truck, Clock, Banknote, Search, MapPin } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { Input } from '@/components/ui/input'
 import { useStore } from '@/store/use-store'
 
 // Animated counter component
@@ -130,7 +131,7 @@ const counterData = [
 ]
 
 export function HeroSection() {
-  const { language, setCurrentView } = useStore()
+  const { language, setCurrentView, setIsSearchOpen } = useStore()
   const sectionRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -149,6 +150,16 @@ export function HeroSection() {
         }}
       />
 
+      {/* Pattern overlay using user's bg-home.png */}
+      <div
+        className="absolute inset-0 opacity-[0.07]"
+        style={{
+          backgroundImage: "url('/bg-home.png')",
+          backgroundRepeat: 'repeat',
+          backgroundSize: '180px 180px',
+        }}
+      />
+
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/50 to-black/30 dark:from-black/85 dark:via-black/70 dark:to-black/50" />
 
@@ -160,6 +171,17 @@ export function HeroSection() {
         className="relative z-10 container mx-auto px-4 py-12 md:py-20 lg:py-28 flex flex-col justify-center min-h-[500px] md:min-h-[600px] lg:min-h-[700px]"
       >
         <div className="max-w-2xl">
+          {/* Area Badge (like Chaldal city selector) */}
+          <motion.div
+            variants={itemVariants}
+            className="mb-4"
+          >
+            <Badge className="bg-green-500/20 text-green-300 border-green-400/30 backdrop-blur-sm gap-1.5 px-3 py-1">
+              <MapPin className="size-3" />
+              Mohammadpur Housing, Dhaka 1207
+            </Badge>
+          </motion.div>
+
           {/* Main Headline with Gradient Text + Typing Effect */}
           <motion.h1
             variants={itemVariants}
@@ -177,12 +199,31 @@ export function HeroSection() {
           {/* Subheadline */}
           <motion.p
             variants={itemVariants}
-            className="text-base md:text-lg lg:text-xl text-white/90 mb-6 md:mb-8 max-w-xl"
+            className="text-base md:text-lg lg:text-xl text-white/90 mb-4 md:mb-6 max-w-xl"
           >
             {language === 'bn'
               ? 'মোহাম্মদপুরের সেরা অনলাইন গ্রোসারি শপ - ১ ঘণ্টায় ডেলিভারি'
               : "Mohammadpur's Best Online Grocery Shop - 1 Hour Delivery"}
           </motion.p>
+
+          {/* Embedded Search Bar (Chaldal competitor pattern - search in hero) */}
+          <motion.div
+            variants={itemVariants}
+            className="mb-6 max-w-lg"
+          >
+            <div className="relative group">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-green-400" />
+              <Input
+                placeholder={language === 'bn' ? 'পণ্য খুঁজুন... (যেমন: আলু, পেঁয়াজ, চাল)' : 'Search products... (e.g., potato, onion, rice)'}
+                className="pl-11 pr-4 h-12 md:h-14 text-base bg-white/95 dark:bg-card/95 backdrop-blur-md border-2 border-green-400/50 focus-visible:border-green-400 focus-visible:ring-green-400/30 shadow-xl rounded-xl"
+                onFocus={() => setIsSearchOpen(true)}
+                readOnly
+              />
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 hidden sm:flex items-center gap-1">
+                <kbd className="px-2 py-0.5 text-[10px] font-mono bg-muted rounded border text-muted-foreground">⌘K</kbd>
+              </div>
+            </div>
+          </motion.div>
 
           {/* Animated Counters */}
           <motion.div

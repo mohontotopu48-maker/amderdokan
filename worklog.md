@@ -635,3 +635,58 @@ Stage Summary:
 - All code compiles without errors
 - Server serves pages correctly but gets OOM killed due to memory constraints
 - Key fix: favicon and OG image now point to correct logo file
+
+---
+Task ID: 3-bg
+Agent: UI Pattern & Competitor Agent
+Task: Implement background images and competitor-inspired UI/UX improvements
+
+Work Log:
+- Updated globals.css with new CSS classes:
+  - `.bg-pattern-light` and `.bg-pattern-home` for tiled background patterns using bg-pattern.png and bg-home.png
+  - `@keyframes countdown-pulse` and `.animate-countdown-pulse` for flash sale countdown animation
+  - `@keyframes ticker-slide` and `.animate-ticker` for social proof live ticker
+  - `.bottom-cart-bar` for mobile sticky cart bar with backdrop blur
+  - `.pattern-dots` for decorative dots pattern overlay
+- Rewrote homepage.tsx with:
+  - Fixed background pattern overlay (`bg-pattern-home`) for the entire page
+  - Live order notification ticker (social proof from Daraz/Chaldal) with AnimatePresence
+  - Mobile bottom sticky cart bar (Chaldal competitor pattern) with item count
+  - 8 Bangla/English live order messages cycling every 8 seconds
+- Rewrote hero-section.tsx with:
+  - bg-home.png pattern overlay on the hero section (7% opacity, 180x180 tiled)
+  - Area badge (Chaldal city selector pattern) showing Mohammadpur Housing, Dhaka 1207
+  - Embedded search bar (Chaldal competitor pattern) with ⌘K hint
+  - Reduced subheadline margin (mb-4 on mobile, mb-6 on md+)
+  - Added Search, MapPin imports from lucide-react
+  - Added setIsSearchOpen from store for search bar focus
+- Rewrote promo-banner.tsx with:
+  - bg-pattern.png pattern overlay (6% opacity, 180x180 tiled)
+  - Flash sale countdown (Daraz competitor pattern) with animated pulse
+  - Clock icon with "Offer ends in" label and 05:23:47 countdown display
+  - Increased min-height to 220px/300px
+- Rewrote trust-badges.tsx with:
+  - bg-pattern.png pattern background (4% opacity, 180x180 tiled)
+  - Added `relative` to section and `relative z-10` to container
+- Updated category-section.tsx:
+  - Added `relative` to section class
+  - Added bg-home.png decorative pattern background (4% opacity, pointer-events-none)
+  - Added `relative z-10` to container
+- Updated featured-products.tsx:
+  - Added `relative` to section class
+  - Added bg-pattern.png decorative pattern (4% opacity, pointer-events-none)
+  - Added `relative z-10` to container
+- Updated customer-reviews.tsx:
+  - Added `relative` to section class
+  - Added bg-home.png pattern background (4% opacity, pointer-events-none)
+  - Added `relative z-10` to container
+- ESLint passes with zero errors
+- Dev server running and serving pages correctly (HTTP 200)
+- Verified setIsSearchOpen exists in store (used by new hero search bar)
+
+Stage Summary:
+- Background images (bg-home.png, bg-pattern.png) integrated as tiled patterns across 7 components
+- Competitor-inspired features added: live order ticker, sticky cart bar, hero search bar, flash sale countdown, area badge
+- All patterns use subtle opacity (4-7%) for visual texture without distraction
+- Mobile-first sticky cart bar with backdrop blur
+- Zero lint errors, server running correctly

@@ -113,8 +113,18 @@ export function TrustBadges() {
   const { language } = useStore()
 
   return (
-    <section className="py-12 md:py-16">
-      <div className="container mx-auto px-4">
+    <section className="py-12 md:py-16 relative">
+      {/* Pattern background for trust section */}
+      <div
+        className="absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: "url('/bg-pattern.png')",
+          backgroundRepeat: 'repeat',
+          backgroundSize: '180px 180px',
+        }}
+      />
+
+      <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

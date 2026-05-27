@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Tag, ArrowRight } from 'lucide-react'
+import { Tag, ArrowRight, Clock } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { useStore } from '@/store/use-store'
@@ -17,7 +17,7 @@ export function PromoBanner() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.6 }}
-          className="relative overflow-hidden rounded-2xl min-h-[200px] md:min-h-[280px]"
+          className="relative overflow-hidden rounded-2xl min-h-[220px] md:min-h-[300px]"
         >
           {/* Background Image */}
           <div
@@ -25,11 +25,21 @@ export function PromoBanner() {
             style={{ backgroundImage: "url('/promo-banner-new.png')" }}
           />
 
+          {/* User's pattern overlay */}
+          <div
+            className="absolute inset-0 opacity-[0.06]"
+            style={{
+              backgroundImage: "url('/bg-pattern.png')",
+              backgroundRepeat: 'repeat',
+              backgroundSize: '180px 180px',
+            }}
+          />
+
           {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-green-900/90 via-green-800/80 to-green-700/50 dark:from-green-950/95 dark:via-green-900/85 dark:to-green-800/60" />
 
           {/* Content */}
-          <div className="relative z-10 flex flex-col justify-center h-full min-h-[200px] md:min-h-[280px] px-6 md:px-12 py-8">
+          <div className="relative z-10 flex flex-col justify-center h-full min-h-[220px] md:min-h-[300px] px-6 md:px-12 py-8">
             {/* Offer Badge */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -59,12 +69,33 @@ export function PromoBanner() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="text-white/90 text-sm md:text-base mb-5 max-w-md"
+              className="text-white/90 text-sm md:text-base mb-3 max-w-md"
             >
               {language === 'bn'
                 ? 'ফলমূল, সবজি ও মসলায় বিশেষ ছাড়। সীমিত সময়ের অফার, এখনই অর্ডার করুন!'
                 : 'Special discounts on fruits, vegetables & spices. Limited time offer, order now!'}
             </motion.p>
+
+            {/* Flash Sale Countdown (Daraz competitor pattern) */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.45 }}
+              className="flex items-center gap-2 mb-5"
+            >
+              <Clock className="size-4 text-orange-400" />
+              <span className="text-orange-300 text-sm font-semibold">
+                {language === 'bn' ? 'অফার শেষ হতে আর' : 'Offer ends in'}:
+              </span>
+              <div className="flex gap-1">
+                {['05', '23', '47'].map((val, i) => (
+                  <span key={i} className="bg-white/20 backdrop-blur-sm rounded px-2 py-0.5 text-white font-mono font-bold text-sm animate-countdown-pulse">
+                    {val}{i < 2 && <span className="text-orange-300 ml-1">:</span>}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
 
             {/* CTA Button */}
             <motion.div
