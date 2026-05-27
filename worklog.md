@@ -610,3 +610,28 @@ Stage Summary:
 - fetchProduct no longer causes infinite re-render loops
 - 6 CSS animations changed from infinite to finite iterations, reducing constant repaints
 - ESLint passes with zero errors
+---
+Task ID: 1
+Agent: Main Agent
+Task: Fix preview and recheck all project components
+
+Work Log:
+- Verified dev server compiles and serves pages correctly (HTTP 200)
+- Confirmed 12 categories, 268 products, 25 brands in database
+- Verified no remaining "আমাদের বাজার" references - all changed to "আমাদের দোকান"
+- Confirmed logo (/logo-bazar-new.png) is properly referenced in Header, Footer, mobile menu
+- Fixed favicon from /logo-bazar.png to /logo-bazar-new.png in layout.tsx
+- Fixed OpenGraph image from /logo-bazar.png to /logo-bazar-new.png
+- Fixed JSON-LD schema image URL from logo-bazar.png to logo-bazar-new.png
+- ESLint passes with 0 errors
+- All API endpoints working: categories, products, search (Bangla/English), coupons, stats
+- Server stability issue: Next.js dev server (1.4GB RSS) gets OOM killed in this environment
+- Created keep-alive.sh restart script for server resilience
+- Reviewed all 15+ components for code quality and correctness
+
+Stage Summary:
+- Logo properly integrated across Header, Footer, mobile menu, favicon, OG image, and JSON-LD
+- Project name consistently "আমাদের দোকান" throughout all components
+- All code compiles without errors
+- Server serves pages correctly but gets OOM killed due to memory constraints
+- Key fix: favicon and OG image now point to correct logo file

@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Nibir Hossain" }],
   icons: {
-    icon: "/logo-bazar.png",
+    icon: "/logo-bazar-new.png",
   },
   openGraph: {
     title: "আমাদের দোকান - Online Grocery Shop in Mohammadpur, Dhaka",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     locale: "bn_BD",
     images: [
       {
-        url: "/logo-bazar.png",
+        url: "/logo-bazar-new.png",
         width: 512,
         height: 512,
         alt: "আমাদের দোকান - Online Grocery Shop",
@@ -76,7 +76,7 @@ const jsonLd = {
     "Mohammadpur, Dhaka-এর সেরা অনলাইন গ্রোসারি শপ। তাজা শাকসবজি, ফলমূল, মাছ, মাংস সহ সব পণ্য ঘরে বসে অর্ডার করুন।",
   url: "https://amardokaan.com.bd",
   telephone: "+8801700000000",
-  image: "https://amardokaan.com.bd/logo-bazar.png",
+  image: "https://amardokaan.com.bd/logo-bazar-new.png",
   priceRange: "৳৳",
   address: {
     "@type": "PostalAddress",
