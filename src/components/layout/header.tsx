@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useSyncExternalStore } from 'react'
+import React, { useState, useEffect, useSyncExternalStore, useRef } from 'react'
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -54,6 +54,8 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
+  const [headerVisible, setHeaderVisible] = useState(true)
+  const lastScrollY = useRef(0)
 
   const {
     language,
@@ -69,9 +71,19 @@ export function Header() {
   const isBn = language === 'bn'
   const cartItemCount = getCartItemCount()
 
+  // Scroll-based hide/show header (like YouTube mobile)
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10)
+      const currentScrollY = window.scrollY
+      setScrolled(currentScrollY > 10)
+
+      // Hide header when scrolling down, show when scrolling up
+      if (currentScrollY > 200) {
+        setHeaderVisible(currentScrollY < lastScrollY.current)
+      } else {
+        setHeaderVisible(true)
+      }
+      lastScrollY.current = currentScrollY
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
@@ -91,7 +103,11 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full">
+    <motion.header
+      className="sticky top-0 z-50 w-full"
+      animate={{ y: headerVisible ? 0 : -120 }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
+    >
       {/* Delivery Promise Bar */}
       <div className="bg-gradient-to-r from-green-600 via-green-500 to-emerald-600 dark:from-green-800 dark:via-green-700 dark:to-emerald-800 text-white">
         <div className="overflow-hidden">
@@ -143,7 +159,11 @@ export function Header() {
               onClick={() => handleNavClick('home')}
               className="flex items-center gap-2 shrink-0 group"
             >
-              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden bg-green-50 dark:bg-green-900/30 border-2 border-green-500/20 group-hover:border-green-500/50 transition-colors">
+              <motion.div
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.6, ease: 'easeInOut' }}
+                className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden bg-green-50 dark:bg-green-900/30 border-2 border-green-500/20 group-hover:border-green-500/50 transition-colors"
+              >
                 <Image
                   src="/logo-bazar.png"
                   alt="আমাদের বাজার"
@@ -151,7 +171,7 @@ export function Header() {
                   className="object-contain p-0.5"
                   priority
                 />
-              </div>
+              </motion.div>
               <div className="hidden sm:block">
                 <h1 className="text-lg sm:text-xl font-bold text-green-700 dark:text-green-400 leading-tight">
                   আমাদের বাজার
@@ -167,25 +187,32 @@ export function Header() {
               {navLinks.map((link) => {
                 const Icon = link.icon
                 return (
-                  <button
+                  <motion.button
                     key={link.key}
                     onClick={() => handleNavClick(link.key)}
+                    whileHover={{ y: -1 }}
+                    whileTap={{ scale: 0.97 }}
                     className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-foreground/80 hover:text-green-700 dark:hover:text-green-400 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20 transition-all"
                   >
                     <Icon className="w-4 h-4" />
                     {isBn ? link.labelBn : link.labelEn}
-                  </button>
+                  </motion.button>
                 )
               })}
             </nav>
 
             {/* Desktop Search Bar */}
             <div className="hidden md:flex items-center flex-1 max-w-md mx-4">
-              <div className="relative w-full">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <div className="relative w-full group">
+                <motion.div
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-green-500" />
+                </motion.div>
                 <Input
                   placeholder={isBn ? 'পণ্য খুঁজুন...' : 'Search products...'}
-                  className="pl-9 pr-4 h-9 bg-muted/50 border-green-200/50 dark:border-green-800/30 focus-visible:border-green-500 focus-visible:ring-green-500/20"
+                  className="pl-9 pr-4 h-9 bg-muted/50 border-green-200/50 dark:border-green-800/30 focus-visible:border-green-500 focus-visible:ring-green-500/20 transition-all duration-200 focus-visible:shadow-md focus-visible:shadow-green-500/10"
                   onFocus={() => setIsSearchOpen(true)}
                   onChange={(e) => useStore.getState().setSearchQuery(e.target.value)}
                 />
@@ -194,17 +221,22 @@ export function Header() {
 
             {/* Action Buttons */}
             <div className="flex items-center gap-1 sm:gap-2">
-              {/* Mobile Search */}
+              {/* Mobile Search - Pulse Animation */}
               <Button
                 variant="ghost"
                 size="icon"
                 className="md:hidden text-foreground/70 hover:text-green-700 dark:hover:text-green-400"
                 onClick={() => setIsSearchOpen(true)}
               >
-                <Search className="w-5 h-5" />
+                <motion.div
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <Search className="w-5 h-5" />
+                </motion.div>
               </Button>
 
-              {/* Language Toggle */}
+              {/* Language Toggle - Smooth Transition */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -212,7 +244,9 @@ export function Header() {
                     size="icon"
                     className="text-foreground/70 hover:text-green-700 dark:hover:text-green-400"
                   >
-                    <Globe className="w-4 h-4" />
+                    <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.3 }}>
+                      <Globe className="w-4 h-4" />
+                    </motion.div>
                     <span className="sr-only">Toggle language</span>
                   </Button>
                 </DropdownMenuTrigger>
@@ -232,7 +266,7 @@ export function Header() {
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              {/* Theme Toggle */}
+              {/* Theme Toggle - Smooth Icon Transition */}
               {mounted && (
                 <Button
                   variant="ghost"
@@ -240,30 +274,59 @@ export function Header() {
                   onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                   className="text-foreground/70 hover:text-green-700 dark:hover:text-green-400"
                 >
-                  {theme === 'dark' ? (
-                    <Sun className="w-5 h-5" />
-                  ) : (
-                    <Moon className="w-5 h-5" />
-                  )}
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.div
+                      key={theme}
+                      initial={{ rotate: -90, scale: 0, opacity: 0 }}
+                      animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                      exit={{ rotate: 90, scale: 0, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {theme === 'dark' ? (
+                        <Sun className="w-5 h-5" />
+                      ) : (
+                        <Moon className="w-5 h-5" />
+                      )}
+                    </motion.div>
+                  </AnimatePresence>
                   <span className="sr-only">
                     {theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
                   </span>
                 </Button>
               )}
 
-              {/* Cart Button */}
+              {/* Cart Button - Bounce Animation */}
               <Button
                 variant="ghost"
                 size="icon"
                 className="relative text-foreground/70 hover:text-green-700 dark:hover:text-green-400"
                 onClick={() => setIsCartOpen(true)}
               >
-                <ShoppingCart className="w-5 h-5" />
-                {cartItemCount > 0 && (
-                  <Badge className="absolute -top-1 -right-1 h-5 min-w-5 px-1 flex items-center justify-center bg-accent text-white text-[10px] font-bold border-0 animate-in zoom-in-50 duration-200">
-                    {cartItemCount > 99 ? '99+' : cartItemCount}
-                  </Badge>
-                )}
+                <AnimatePresence mode="popLayout">
+                  <motion.div
+                    key={cartItemCount}
+                    initial={{ scale: 0.6, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.6, opacity: 0 }}
+                    transition={{ type: 'spring', stiffness: 500, damping: 25 }}
+                  >
+                    <ShoppingCart className="w-5 h-5" />
+                  </motion.div>
+                </AnimatePresence>
+                <AnimatePresence>
+                  {cartItemCount > 0 && (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: [0, 1.3, 1] }}
+                      exit={{ scale: 0 }}
+                      transition={{ type: 'spring', stiffness: 500, damping: 15 }}
+                    >
+                      <Badge className="absolute -top-1 -right-1 h-5 min-w-5 px-1 flex items-center justify-center bg-accent text-white text-[10px] font-bold border-0">
+                        {cartItemCount > 99 ? '99+' : cartItemCount}
+                      </Badge>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
                 <span className="sr-only">
                   {isBn ? `কার্ট (${cartItemCount} আইটেম)` : `Cart (${cartItemCount} items)`}
                 </span>
@@ -331,18 +394,21 @@ export function Header() {
           <div className="flex flex-col h-[calc(100%-120px)]">
             {/* Navigation Links */}
             <nav className="flex-1 py-2">
-              {navLinks.map((link) => {
+              {navLinks.map((link, i) => {
                 const Icon = link.icon
                 return (
-                  <button
+                  <motion.button
                     key={link.key}
                     onClick={() => handleNavClick(link.key)}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
                     className="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium text-foreground/80 hover:text-green-700 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors"
                   >
                     <Icon className="w-5 h-5" />
                     {isBn ? link.labelBn : link.labelEn}
                     <ChevronRight className="w-4 h-4 ml-auto text-muted-foreground" />
-                  </button>
+                  </motion.button>
                 )
               })}
             </nav>
@@ -436,6 +502,6 @@ export function Header() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   )
 }

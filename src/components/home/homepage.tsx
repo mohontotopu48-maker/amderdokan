@@ -2,7 +2,9 @@
 
 import { useEffect } from 'react'
 import { HeroSection } from './hero-section'
+import { ServicesMarquee } from './services-marquee'
 import { CategorySection } from './category-section'
+import { BillPaymentSection } from '@/components/bill-payment/bill-payment-section'
 import { TrendingProducts } from './trending-products'
 import { PromoBanner } from './promo-banner'
 import { FeaturedProducts } from './featured-products'
@@ -37,7 +39,9 @@ export function Homepage() {
   return (
     <main className="min-h-screen">
       <HeroSection />
+      <ServicesMarquee />
       <CategorySection />
+      <BillPaymentSection />
       <TrendingProducts />
       <PromoBanner />
       <FeaturedProducts />

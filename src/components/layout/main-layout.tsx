@@ -8,6 +8,7 @@ import { ProductDetail } from '@/components/product/product-detail'
 import { ProductGrid } from '@/components/product/product-grid'
 import { CartSheet } from '@/components/cart/cart-sheet'
 import { CheckoutDialog } from '@/components/checkout/checkout-dialog'
+import { BillPaymentDialog } from '@/components/bill-payment/bill-payment-dialog'
 import { SearchDialog } from '@/components/search/search-dialog'
 import { AdminLogin } from '@/components/admin/admin-login'
 import { AdminDashboard } from '@/components/admin/admin-dashboard'
@@ -80,7 +81,6 @@ function ProductsView() {
       <ProductGrid
         title={title}
         products={products}
-        showViewAll={false}
       />
     </div>
   )
@@ -172,7 +172,7 @@ export function MainLayout() {
         return <ProductsView />
       case 'product-detail':
         return selectedProductId ? (
-          <ProductDetail productId={selectedProductId} />
+          <ProductDetail />
         ) : (
           <ProductsView />
         )
@@ -198,11 +198,7 @@ export function MainLayout() {
                 variant="ghost"
                 size="sm"
                 onClick={() => {
-                  if (currentView === 'admin') {
-                    setCurrentView('home')
-                  } else {
-                    setCurrentView('home')
-                  }
+                  setCurrentView('home')
                 }}
                 className="text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 gap-1"
               >
@@ -219,6 +215,7 @@ export function MainLayout() {
       {/* Global overlays */}
       <CartSheet />
       <CheckoutDialog />
+      <BillPaymentDialog />
       <SearchDialog />
 
       {/* Admin access button on home */}

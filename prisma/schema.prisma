@@ -25,6 +25,19 @@ model Category {
   updatedAt   DateTime @updatedAt
 }
 
+model Brand {
+  id          String    @id @default(cuid())
+  nameBn      String
+  nameEn      String
+  slug        String    @unique
+  logo        String
+  description String?
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
+}
+
 model Product {
   id            String     @id @default(cuid())
   nameBn        String
@@ -39,6 +52,8 @@ model Product {
   images        String     @default("[]")
   categoryId    String
   category      Category   @relation(fields: [categoryId], references: [id])
+  brandId       String?
+  brand         Brand?     @relation(fields: [brandId], references: [id])
   isOrganic     Boolean    @default(false)
   isFeatured    Boolean    @default(false)
   isTrending    Boolean    @default(false)
@@ -51,6 +66,21 @@ model Product {
   isActive      Boolean    @default(true)
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
+}
+
+model BillPayment {
+  id              String   @id @default(cuid())
+  type            String   // bkash_cashout, nagad_cashout, dpdc_electric
+  providerNameBn  String
+  providerNameEn  String
+  amount          Float
+  fee             Float    @default(0)
+  customerAccount String
+  customerName    String
+  status          String   @default("pending") // pending, completed, failed
+  userId          String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model User {

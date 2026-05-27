@@ -13,7 +13,9 @@ async function main() {
   await db.order.deleteMany();
   await db.cartItem.deleteMany();
   await db.coupon.deleteMany();
+  await db.billPayment.deleteMany();
   await db.product.deleteMany();
+  await db.brand.deleteMany();
   await db.user.deleteMany();
   await db.category.deleteMany();
   await db.contactMessage.deleteMany();
@@ -49,6 +51,44 @@ async function main() {
   }
 
   console.log(`✅ ${categoriesData.length} categories created.`);
+
+  // ============================================================
+  // Step 2.5: Create Brands
+  // ============================================================
+  console.log('🏷️ Creating brands...');
+
+  const brandsData = [
+    { nameBn: 'প্রাণ', nameEn: 'PRAN', slug: 'pran', logo: '🥭', description: 'প্রাণ-আরএফএল গ্রুপ, বাংলাদেশের শীর্ষ খাদ্য ও পানীয় ব্র্যান্ড' },
+    { nameBn: 'এসিআই', nameEn: 'ACI', slug: 'aci', logo: '🧪', description: 'এসিআই লিমিটেড, বাংলাদেশের অন্যতম শীর্ষ কনজ্যুমার গুডস কোম্পানি' },
+    { nameBn: 'স্কয়ার', nameEn: 'Square', slug: 'square', logo: '🔷', description: 'স্কয়ার টয়লেট্রিজ, হাইজিন ও হেলথকেয়ার পণ্য' },
+    { nameBn: 'ইউনিলিভার', nameEn: 'Unilever BD', slug: 'unilever-bd', logo: '🧴', description: 'ইউনিলিভার বাংলাদেশ, পার্সোনাল কেয়ার ও হাউজহোল্ড পণ্য' },
+    { nameBn: 'রাধুনী', nameEn: 'Radhuni', slug: 'radhuni', logo: '🌶️', description: 'রাধুনী মসলা, বাংলাদেশের জনপ্রিয় মসলা ব্র্যান্ড' },
+    { nameBn: 'ফ্রেশ', nameEn: 'Fresh', slug: 'fresh', logo: '🫒', description: 'ফ্রেশ মসলা ও তেল, বিশুদ্ধ মসলার আস্থার ব্র্যান্ড' },
+    { nameBn: 'আড়ং', nameEn: 'Aarong', slug: 'aarong', logo: '🐄', description: 'আড়ং ডেইরি, বাংলাদেশের শীর্ষ দুগ্ধ ব্র্যান্ড' },
+    { nameBn: 'ডেটল', nameEn: 'Dettol', slug: 'dettol', logo: '🛡️', description: 'ডেটল, বিশ্বস্ত হাইজিন ও অ্যান্টিসেপটিক ব্র্যান্ড' },
+    { nameBn: 'মার্কস', nameEn: 'Marks', slug: 'marks', logo: '🥛', description: 'মার্কস ডেইরি, বাংলাদেশের জনপ্রিয় দুগ্ধ ব্র্যান্ড' },
+    { nameBn: 'ইগলু', nameEn: 'Igloo', slug: 'igloo', logo: '🍦', description: 'ইগলু আইসক্রিম ও ডেইরি, বাংলাদেশের শীর্ষ আইসক্রিম ব্র্যান্ড' },
+    { nameBn: 'অ্যারিস্টোক্রেট', nameEn: 'Aristocrat', slug: 'aristocrat', logo: '👑', description: 'অ্যারিস্টোক্রেট, প্রিমিয়াম টয়লেট্রিজ ও বডি স্প্রে' },
+    { nameBn: 'তিব্বত', nameEn: 'Tibet', slug: 'tibet', logo: '🏔️', description: 'তিব্বত, বাংলাদেশের ঐতিহ্যবাহী পার্সোনাল কেয়ার ব্র্যান্ড' },
+    { nameBn: 'মেরিল', nameEn: 'Meril', slug: 'meril', logo: '💐', description: 'মেরিল, বিউটি ও কেয়ার পণ্য' },
+    { nameBn: 'লাক্স', nameEn: 'Lux', slug: 'lux', logo: '✨', description: 'লাক্স, বিশ্বের অন্যতম জনপ্রিয় পার্সোনাল কেয়ার ব্র্যান্ড' },
+    { nameBn: 'স্যাভলন', nameEn: 'Savlon', slug: 'savlon', logo: '🧬', description: 'স্যাভলন, অ্যান্টিসেপটিক ও হাইজিন পণ্য' },
+    { nameBn: 'আরএফএল', nameEn: 'RFL', slug: 'rfl', logo: '🏠', description: 'আরএফএল, হাউজহোল্ড ও প্লাস্টিক পণ্য' },
+    { nameBn: 'ওয়ালটন', nameEn: 'Walton', slug: 'walton', logo: '📱', description: 'ওয়ালটন, বাংলাদেশের শীর্ষ ইলেকট্রনিক্স ব্র্যান্ড' },
+    { nameBn: 'সিঙ্গার', nameEn: 'Singer', slug: 'singer', logo: '🎛️', description: 'সিঙ্গার, ইলেকট্রনিক্স ও হোম অ্যাপ্লায়েন্সেস' },
+    { nameBn: 'বেবি', nameEn: 'BABY', slug: 'baby', logo: '👶', description: 'বেবি, শিশু যত্নের বিশ্বস্ত ব্র্যান্ড' },
+    { nameBn: 'প্রাণ-আরএফএল', nameEn: 'PRAN-RFL', slug: 'pran-rfl', logo: '🏭', description: 'প্রাণ-আরএফএল গ্রুপ, ডাইভার্সিফাইড কনগ্লোমারেট' },
+  ];
+
+  const brands: Record<string, string> = {};
+
+  for (const brand of brandsData) {
+    const created = await db.brand.create({ data: brand });
+    brands[brand.slug] = created.id;
+    console.log(`  ✓ ${brand.nameBn} (${brand.nameEn})`);
+  }
+
+  console.log(`✅ ${brandsData.length} brands created.`);
 
   // ============================================================
   // Step 3: Create Products (150+)
@@ -1195,6 +1235,454 @@ async function main() {
       categoryId: categories['frozen'], isOrganic: false, isFeatured: false, isTrending: false,
       discount: 11, rating: 4.3, reviewCount: 48,
     },
+
+    // ═══════════════════════════════════════════════════════════
+    // ব্র্যান্ড পণ্য (Branded Products) - 65+ products
+    // ═══════════════════════════════════════════════════════════
+
+    // --- PRAN (প্রাণ) - Food & Beverage ---
+    {
+      nameBn: 'প্রাণ আমের জুস', nameEn: 'PRAN Mango Juice', slug: 'pran-mango-juice',
+      descriptionBn: 'প্রাণ আমের জুস, ১ লিটার', descriptionEn: 'PRAN Mango Juice, 1 liter',
+      price: 65, originalPrice: 75, unit: 'লিটার', stock: 250, images: '["🧃"]',
+      categoryId: categories['beverages'], brandId: brands['pran'], isOrganic: false, isFeatured: true, isTrending: true,
+      discount: 13, rating: 4.4, reviewCount: 156,
+    },
+    {
+      nameBn: 'প্রাণ লেমন জুস', nameEn: 'PRAN Lemon Juice', slug: 'pran-lemon-juice',
+      descriptionBn: 'প্রাণ লেমন জুস, তাজা লেবুর স্বাদ', descriptionEn: 'PRAN Lemon Juice, fresh lemon taste',
+      price: 55, originalPrice: 65, unit: 'লিটার', stock: 200, images: '["🍋"]',
+      categoryId: categories['beverages'], brandId: brands['pran'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 15, rating: 4.2, reviewCount: 89,
+    },
+    {
+      nameBn: 'প্রাণ চানাচুর', nameEn: 'PRAN Chanachur', slug: 'pran-chanachur',
+      descriptionBn: 'প্রাণ চানাচুর, ঝাল ও মুক্তা', descriptionEn: 'PRAN Chanachur, spicy and crunchy',
+      price: 40, originalPrice: 45, unit: 'প্যাকেট', stock: 350, images: '["🥜"]',
+      categoryId: categories['snacks'], brandId: brands['pran'], isOrganic: false, isFeatured: false, isTrending: true,
+      discount: 11, rating: 4.5, reviewCount: 201,
+    },
+    {
+      nameBn: 'প্রাণ বিস্কুট', nameEn: 'PRAN Biscuit', slug: 'pran-biscuit',
+      descriptionBn: 'প্রাণ বিস্কুট, চায়ের সাথে', descriptionEn: 'PRAN Biscuit, great with tea',
+      price: 25, originalPrice: 30, unit: 'প্যাকেট', stock: 400, images: '["🍪"]',
+      categoryId: categories['snacks'], brandId: brands['pran'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 17, rating: 4.1, reviewCount: 134,
+    },
+    {
+      nameBn: 'প্রাণ কেচাপ', nameEn: 'PRAN Tomato Ketchup', slug: 'pran-ketchup',
+      descriptionBn: 'প্রাণ টমেটো কেচাপ, স্ন্যাকসের সাথে', descriptionEn: 'PRAN Tomato Ketchup, great with snacks',
+      price: 85, originalPrice: 95, unit: 'বোতল', stock: 180, images: '["🥫"]',
+      categoryId: categories['spices-oil'], brandId: brands['pran'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.3, reviewCount: 87,
+    },
+    {
+      nameBn: 'প্রাণ সয়াবিন তেল', nameEn: 'PRAN Soybean Oil', slug: 'pran-soybean-oil',
+      descriptionBn: 'প্রাণ সয়াবিন তেল, রিফাইন্ড', descriptionEn: 'PRAN Soybean Oil, refined',
+      price: 190, originalPrice: 210, unit: 'লিটার', stock: 200, images: '["🫙"]',
+      categoryId: categories['spices-oil'], brandId: brands['pran'], isOrganic: false, isFeatured: true, isTrending: false,
+      discount: 10, rating: 4.3, reviewCount: 112,
+    },
+    {
+      nameBn: 'প্রাণ সরিষার তেল', nameEn: 'PRAN Mustard Oil', slug: 'pran-mustard-oil',
+      descriptionBn: 'প্রাণ সরিষার তেল, খাঁটি ও ঘ্রাণযুক্ত', descriptionEn: 'PRAN Mustard Oil, pure and aromatic',
+      price: 230, originalPrice: 260, unit: 'লিটার', stock: 150, images: '["🫗"]',
+      categoryId: categories['spices-oil'], brandId: brands['pran'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.4, reviewCount: 98,
+    },
+    {
+      nameBn: 'প্রাণ চায়না বাদাম', nameEn: 'PRAN Peanut', slug: 'pran-peanut',
+      descriptionBn: 'প্রাণ চায়না বাদাম, ভাজা ও লবণযুক্ত', descriptionEn: 'PRAN Peanut, roasted and salted',
+      price: 60, originalPrice: 70, unit: 'প্যাকেট', stock: 250, images: '["🥜"]',
+      categoryId: categories['snacks'], brandId: brands['pran'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.2, reviewCount: 76,
+    },
+    {
+      nameBn: 'প্রাণ ফ্রুট জুস', nameEn: 'PRAN Fruit Juice', slug: 'pran-fruit-juice',
+      descriptionBn: 'প্রাণ ফ্রুট জুস, মিশ্র ফলের স্বাদ', descriptionEn: 'PRAN Fruit Juice, mixed fruit flavor',
+      price: 55, originalPrice: 65, unit: 'লিটার', stock: 180, images: '["🧃"]',
+      categoryId: categories['beverages'], brandId: brands['pran'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 15, rating: 4.1, reviewCount: 62,
+    },
+    {
+      nameBn: 'প্রাণ মশলা', nameEn: 'PRAN Spice Mix', slug: 'pran-spice-mix',
+      descriptionBn: 'প্রাণ মশলা মিশ্রণ, রান্নার জন্য', descriptionEn: 'PRAN Spice Mix, for cooking',
+      price: 45, originalPrice: 55, unit: 'প্যাকেট', stock: 200, images: '["🟫"]',
+      categoryId: categories['spices-oil'], brandId: brands['pran'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 18, rating: 4.0, reviewCount: 45,
+    },
+
+    // --- ACI (এসিআই) - Consumer Goods ---
+    {
+      nameBn: 'এসিআই আয়োডিন লবণ', nameEn: 'ACI Iodized Salt', slug: 'aci-iodized-salt',
+      descriptionBn: 'এসিআই আয়োডিন লবণ, বিশুদ্ধ ও স্বাস্থ্যকর', descriptionEn: 'ACI Iodized Salt, pure and healthy',
+      price: 35, originalPrice: 40, unit: 'কেজি', stock: 400, images: '["🧂"]',
+      categoryId: categories['spices-oil'], brandId: brands['aci'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.3, reviewCount: 123,
+    },
+    {
+      nameBn: 'এসিআই মসলা', nameEn: 'ACI Pure Spice', slug: 'aci-pure-spice',
+      descriptionBn: 'এসিআই খাঁটি মসলা, গুঁড়া মসলার মিশ্রণ', descriptionEn: 'ACI Pure Spice, powdered spice blend',
+      price: 90, originalPrice: 100, unit: 'প্যাকেট', stock: 200, images: '["🟫"]',
+      categoryId: categories['spices-oil'], brandId: brands['aci'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 10, rating: 4.2, reviewCount: 78,
+    },
+    {
+      nameBn: 'এসিআই হলুদ গুঁড়া', nameEn: 'ACI Turmeric', slug: 'aci-turmeric',
+      descriptionBn: 'এসিআই হলুদ গুঁড়া, বিশুদ্ধ ও উজ্জ্বল রঙের', descriptionEn: 'ACI Turmeric Powder, pure and bright color',
+      price: 85, originalPrice: 95, unit: '২৫০ গ্রাম', stock: 250, images: '["🟨"]',
+      categoryId: categories['spices-oil'], brandId: brands['aci'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.4, reviewCount: 92,
+    },
+    {
+      nameBn: 'এসিআই জিরা গুঁড়া', nameEn: 'ACI Cumin Powder', slug: 'aci-cumin-powder',
+      descriptionBn: 'এসিআই জিরা গুঁড়া, সুগন্ধি ও তাজা', descriptionEn: 'ACI Cumin Powder, aromatic and fresh',
+      price: 125, originalPrice: 140, unit: '২৫০ গ্রাম', stock: 180, images: '["🟫"]',
+      categoryId: categories['spices-oil'], brandId: brands['aci'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.5, reviewCount: 85,
+    },
+    {
+      nameBn: 'এসিআই মরিচ গুঁড়া', nameEn: 'ACI Chili Powder', slug: 'aci-chili-powder',
+      descriptionBn: 'এসিআই মরিচ গুঁড়া, ঝাল ও লাল রঙের', descriptionEn: 'ACI Chili Powder, hot and red colored',
+      price: 95, originalPrice: 110, unit: '২৫০ গ্রাম', stock: 220, images: '["🌶️"]',
+      categoryId: categories['spices-oil'], brandId: brands['aci'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.3, reviewCount: 76,
+    },
+    {
+      nameBn: 'এসিআই কাসুন্দি', nameEn: 'ACI Kasundi', slug: 'aci-kasundi',
+      descriptionBn: 'এসিআই কাসুন্দি, ঐতিহ্যবাহী সরিষার সস', descriptionEn: 'ACI Kasundi, traditional mustard sauce',
+      price: 70, originalPrice: 80, unit: 'বোতল', stock: 160, images: '["🫙"]',
+      categoryId: categories['spices-oil'], brandId: brands['aci'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.4, reviewCount: 68,
+    },
+
+    // --- Radhuni (রাধুনী) - Spices ---
+    {
+      nameBn: 'রাধুনী হলুদ গুঁড়া', nameEn: 'Radhuni Turmeric', slug: 'radhuni-turmeric',
+      descriptionBn: 'রাধুনী হলুদ গুঁড়া, বিশুদ্ধ ও ভালো মানের', descriptionEn: 'Radhuni Turmeric, pure and quality',
+      price: 75, originalPrice: 85, unit: '২৫০ গ্রাম', stock: 280, images: '["🟨"]',
+      categoryId: categories['spices-oil'], brandId: brands['radhuni'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.5, reviewCount: 134,
+    },
+    {
+      nameBn: 'রাধুনী মরিচ গুঁড়া', nameEn: 'Radhuni Chili Powder', slug: 'radhuni-chili-powder',
+      descriptionBn: 'রাধুনী মরিচ গুঁড়া, ঝাল ও লাল রঙের', descriptionEn: 'Radhuni Chili Powder, hot and red',
+      price: 85, originalPrice: 95, unit: '২৫০ গ্রাম', stock: 260, images: '["🌶️"]',
+      categoryId: categories['spices-oil'], brandId: brands['radhuni'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.4, reviewCount: 112,
+    },
+    {
+      nameBn: 'রাধুনী জিরা গুঁড়া', nameEn: 'Radhuni Cumin', slug: 'radhuni-cumin',
+      descriptionBn: 'রাধুনী জিরা গুঁড়া, সুগন্ধি ও তাজা', descriptionEn: 'Radhuni Cumin, aromatic and fresh',
+      price: 110, originalPrice: 125, unit: '২৫০ গ্রাম', stock: 200, images: '["🟫"]',
+      categoryId: categories['spices-oil'], brandId: brands['radhuni'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.5, reviewCount: 96,
+    },
+    {
+      nameBn: 'রাধুনী গরম মসলা', nameEn: 'Radhuni Garam Masala', slug: 'radhuni-garam-masala',
+      descriptionBn: 'রাধুনী গরম মসলা, রান্নায় সুগন্ধের জন্য', descriptionEn: 'Radhuni Garam Masala, for aroma in cooking',
+      price: 130, originalPrice: 150, unit: '১০০ গ্রাম', stock: 180, images: '["🟫"]',
+      categoryId: categories['spices-oil'], brandId: brands['radhuni'], isOrganic: false, isFeatured: true, isTrending: false,
+      discount: 13, rating: 4.6, reviewCount: 108,
+    },
+    {
+      nameBn: 'রাধুনী পাঁচফোড়ন', nameEn: 'Radhuni Panch Phoron', slug: 'radhuni-panch-phoron',
+      descriptionBn: 'রাধুনী পাঁচফোড়ন, বাংলাদেশি পাঁচ মসলা', descriptionEn: 'Radhuni Panch Phoron, Bengali five spice',
+      price: 55, originalPrice: 65, unit: '১০০ গ্রাম', stock: 160, images: '["🌰"]',
+      categoryId: categories['spices-oil'], brandId: brands['radhuni'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 15, rating: 4.2, reviewCount: 56,
+    },
+    {
+      nameBn: 'রাধুনী কাসুন্দি', nameEn: 'Radhuni Kasundi', slug: 'radhuni-kasundi',
+      descriptionBn: 'রাধুনী কাসুন্দি, সরিষার তৈরি সস', descriptionEn: 'Radhuni Kasundi, mustard sauce',
+      price: 65, originalPrice: 75, unit: 'বোতল', stock: 150, images: '["🫙"]',
+      categoryId: categories['spices-oil'], brandId: brands['radhuni'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 13, rating: 4.3, reviewCount: 62,
+    },
+
+    // --- Fresh (ফ্রেশ) - Spices & Oil ---
+    {
+      nameBn: 'ফ্রেশ সয়াবিন তেল', nameEn: 'Fresh Soybean Oil', slug: 'fresh-soybean-oil',
+      descriptionBn: 'ফ্রেশ সয়াবিন তেল, রিফাইন্ড ও বিশুদ্ধ', descriptionEn: 'Fresh Soybean Oil, refined and pure',
+      price: 195, originalPrice: 215, unit: 'লিটার', stock: 200, images: '["🫙"]',
+      categoryId: categories['spices-oil'], brandId: brands['fresh'], isOrganic: false, isFeatured: true, isTrending: false,
+      discount: 9, rating: 4.3, reviewCount: 98,
+    },
+    {
+      nameBn: 'ফ্রেশ সরিষার তেল', nameEn: 'Fresh Mustard Oil', slug: 'fresh-mustard-oil',
+      descriptionBn: 'ফ্রেশ সরিষার তেল, খাঁটি ও ঘ্রাণযুক্ত', descriptionEn: 'Fresh Mustard Oil, pure and aromatic',
+      price: 225, originalPrice: 250, unit: 'লিটার', stock: 150, images: '["🫗"]',
+      categoryId: categories['spices-oil'], brandId: brands['fresh'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 10, rating: 4.4, reviewCount: 86,
+    },
+    {
+      nameBn: 'ফ্রেশ চাল', nameEn: 'Fresh Rice', slug: 'fresh-rice',
+      descriptionBn: 'ফ্রেশ চাল, মিনিকেট প্রিমিয়াম', descriptionEn: 'Fresh Rice, premium miniket',
+      price: 90, originalPrice: 100, unit: 'কেজি', stock: 300, images: '["🌾"]',
+      categoryId: categories['rice-lentils'], brandId: brands['fresh'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 10, rating: 4.2, reviewCount: 67,
+    },
+    {
+      nameBn: 'ফ্রেশ ডাল', nameEn: 'Fresh Dal', slug: 'fresh-dal',
+      descriptionBn: 'ফ্রেশ মসুর ডাল, পরিষ্কার ও বাছাই', descriptionEn: 'Fresh Masoor Dal, cleaned and sorted',
+      price: 130, originalPrice: 145, unit: 'কেজি', stock: 250, images: '["🫘"]',
+      categoryId: categories['rice-lentils'], brandId: brands['fresh'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 10, rating: 4.3, reviewCount: 72,
+    },
+    {
+      nameBn: 'ফ্রেশ মসলা', nameEn: 'Fresh Spices', slug: 'fresh-spices',
+      descriptionBn: 'ফ্রেশ মসলা মিশ্রণ, রান্নার জন্য', descriptionEn: 'Fresh Spice Mix, for cooking',
+      price: 95, originalPrice: 110, unit: 'প্যাকেট', stock: 180, images: '["🟫"]',
+      categoryId: categories['spices-oil'], brandId: brands['fresh'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.1, reviewCount: 54,
+    },
+
+    // --- Square / Meril / Aristocrat ---
+    {
+      nameBn: 'মেরিল শ্যাম্পু', nameEn: 'Meril Shampoo', slug: 'meril-shampoo',
+      descriptionBn: 'মেরিল শ্যাম্পু, চুলের পুষ্টি ও উজ্জ্বলতা', descriptionEn: 'Meril Shampoo, hair nourishment and shine',
+      price: 160, originalPrice: 180, unit: 'বোতল', stock: 180, images: '["🧴"]',
+      categoryId: categories['personal-care'], brandId: brands['meril'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.3, reviewCount: 87,
+    },
+    {
+      nameBn: 'মেরিল ফেস ওয়াশ', nameEn: 'Meril Face Wash', slug: 'meril-face-wash',
+      descriptionBn: 'মেরিল ফেস ওয়াশ, মুখ পরিষ্কারের জন্য', descriptionEn: 'Meril Face Wash, for facial cleansing',
+      price: 140, originalPrice: 160, unit: 'টিউব', stock: 200, images: '["✨"]',
+      categoryId: categories['personal-care'], brandId: brands['meril'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.2, reviewCount: 65,
+    },
+    {
+      nameBn: 'অ্যারিস্টোক্রেট বডি স্প্রে', nameEn: 'Aristocrat Body Spray', slug: 'aristocrat-body-spray',
+      descriptionBn: 'অ্যারিস্টোক্রেট বডি স্প্রে, দীর্ঘস্থায়ী সুগন্ধ', descriptionEn: 'Aristocrat Body Spray, long lasting fragrance',
+      price: 200, originalPrice: 230, unit: 'বোতল', stock: 150, images: '["💨"]',
+      categoryId: categories['personal-care'], brandId: brands['aristocrat'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 13, rating: 4.4, reviewCount: 92,
+    },
+    {
+      nameBn: 'স্কয়ার টয়লেট ক্লিনার', nameEn: 'Square Toilet Cleaner', slug: 'square-toilet-cleaner',
+      descriptionBn: 'স্কয়ার টয়লেট ক্লিনার, জীবাণুমুক্তি', descriptionEn: 'Square Toilet Cleaner, germ protection',
+      price: 145, originalPrice: 165, unit: 'বোতল', stock: 120, images: '["🚽"]',
+      categoryId: categories['household'], brandId: brands['square'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.3, reviewCount: 56,
+    },
+    {
+      nameBn: 'স্কয়ার ডিটার্জেন্ট', nameEn: 'Square Detergent', slug: 'square-detergent',
+      descriptionBn: 'স্কয়ার ডিটার্জেন্ট, কাপড় পরিষ্কারের জন্য', descriptionEn: 'Square Detergent, for laundry cleaning',
+      price: 95, originalPrice: 110, unit: 'প্যাকেট', stock: 200, images: '["🧴"]',
+      categoryId: categories['household'], brandId: brands['square'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.2, reviewCount: 78,
+    },
+
+    // --- Unilever BD ---
+    {
+      nameBn: 'সারফ এক্সেল', nameEn: 'Surf Excel', slug: 'surf-excel',
+      descriptionBn: 'সারফ এক্সেল, কঠিন দাগ দূর করে', descriptionEn: 'Surf Excel, removes tough stains',
+      price: 90, originalPrice: 105, unit: 'প্যাকেট', stock: 300, images: '["🧴"]',
+      categoryId: categories['household'], brandId: brands['unilever-bd'], isOrganic: false, isFeatured: true, isTrending: false,
+      discount: 14, rating: 4.5, reviewCount: 145,
+    },
+    {
+      nameBn: 'রিন ডিটার্জেন্ট', nameEn: 'Rin Detergent', slug: 'rin-detergent',
+      descriptionBn: 'রিন ডিটার্জেন্ট, উজ্জ্বল সাদা কাপড়', descriptionEn: 'Rin Detergent, bright white clothes',
+      price: 80, originalPrice: 90, unit: 'প্যাকেট', stock: 250, images: '["🧴"]',
+      categoryId: categories['household'], brandId: brands['unilever-bd'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.3, reviewCount: 98,
+    },
+    {
+      nameBn: 'লাক্স সাবান', nameEn: 'Lux Soap', slug: 'lux-soap',
+      descriptionBn: 'লাক্স সাবান, ত্বকের যত্নে বিশ্বস্ত', descriptionEn: 'Lux Soap, trusted skin care',
+      price: 55, originalPrice: 65, unit: 'পিস', stock: 350, images: '["🧼"]',
+      categoryId: categories['personal-care'], brandId: brands['lux'], isOrganic: false, isFeatured: false, isTrending: true,
+      discount: 15, rating: 4.4, reviewCount: 167,
+    },
+    {
+      nameBn: 'লাক্স শ্যাম্পু', nameEn: 'Lux Shampoo', slug: 'lux-shampoo',
+      descriptionBn: 'লাক্স শ্যাম্পু, সিল্কি ও চকচকে চুল', descriptionEn: 'Lux Shampoo, silky and shiny hair',
+      price: 175, originalPrice: 200, unit: 'বোতল', stock: 180, images: '["🧴"]',
+      categoryId: categories['personal-care'], brandId: brands['lux'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.3, reviewCount: 89,
+    },
+    {
+      nameBn: 'ক্লোজআপ টুথপেস্ট', nameEn: 'Closeup Toothpaste', slug: 'closeup-toothpaste',
+      descriptionBn: 'ক্লোজআপ টুথপেস্ট, তাজা শ্বাস ও উজ্জ্বল হাসি', descriptionEn: 'Closeup Toothpaste, fresh breath and bright smile',
+      price: 85, originalPrice: 95, unit: 'টিউব', stock: 280, images: '["🪥"]',
+      categoryId: categories['personal-care'], brandId: brands['unilever-bd'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.4, reviewCount: 112,
+    },
+    {
+      nameBn: 'পিপসডেন্ট', nameEn: 'Pepsodent Toothpaste', slug: 'pepsodent-toothpaste',
+      descriptionBn: 'পিপসডেন্ট টুথপেস্ট, দাঁত ও মাড়ি রক্ষায়', descriptionEn: 'Pepsodent Toothpaste, teeth and gum protection',
+      price: 80, originalPrice: 90, unit: 'টিউব', stock: 250, images: '["🪥"]',
+      categoryId: categories['personal-care'], brandId: brands['unilever-bd'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.3, reviewCount: 89,
+    },
+    {
+      nameBn: 'ডাভ সাবান', nameEn: 'Dove Soap', slug: 'dove-soap',
+      descriptionBn: 'ডাভ সাবান, নরম ও মসৃণ ত্বক', descriptionEn: 'Dove Soap, soft and smooth skin',
+      price: 65, originalPrice: 75, unit: 'পিস', stock: 220, images: '["🧼"]',
+      categoryId: categories['personal-care'], brandId: brands['unilever-bd'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 13, rating: 4.5, reviewCount: 98,
+    },
+    {
+      nameBn: 'ডাভ শ্যাম্পু', nameEn: 'Dove Shampoo', slug: 'dove-shampoo',
+      descriptionBn: 'ডাভ শ্যাম্পু, ক্ষতিগ্রস্ত চুলের মেরামত', descriptionEn: 'Dove Shampoo, damaged hair repair',
+      price: 195, originalPrice: 220, unit: 'বোতল', stock: 150, images: '["🧴"]',
+      categoryId: categories['personal-care'], brandId: brands['unilever-bd'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 11, rating: 4.5, reviewCount: 76,
+    },
+
+    // --- Aarong / Marks / Igloo ---
+    {
+      nameBn: 'আড়ং দুধ', nameEn: 'Aarong Milk', slug: 'aarong-milk',
+      descriptionBn: 'আড়ং ফুল ক্রিম দুধ, খাঁটি ও পুষ্টিকর', descriptionEn: 'Aarong Full Cream Milk, pure and nutritious',
+      price: 85, originalPrice: 90, unit: 'লিটার', stock: 300, images: '["🥛"]',
+      categoryId: categories['dairy-eggs'], brandId: brands['aarong'], isOrganic: false, isFeatured: true, isTrending: true,
+      discount: 6, rating: 4.7, reviewCount: 234,
+    },
+    {
+      nameBn: 'আড়ং ঘি', nameEn: 'Aarong Ghee', slug: 'aarong-ghee',
+      descriptionBn: 'আড়ং গাওয়া ঘি, খাঁটি ও সুগন্ধি', descriptionEn: 'Aarong Cow Ghee, pure and aromatic',
+      price: 680, originalPrice: 750, unit: '৫০০ মিলি', stock: 80, images: '["🧈"]',
+      categoryId: categories['dairy-eggs'], brandId: brands['aarong'], isOrganic: false, isFeatured: true, isTrending: false,
+      discount: 9, rating: 4.8, reviewCount: 189,
+    },
+    {
+      nameBn: 'আড়ং দই', nameEn: 'Aarong Yogurt', slug: 'aarong-yogurt',
+      descriptionBn: 'আড়ং মিষ্টি দই, ঘন ও সুস্বাদু', descriptionEn: 'Aarong Sweet Yogurt, thick and delicious',
+      price: 65, originalPrice: 70, unit: 'পিস', stock: 200, images: '["🥣"]',
+      categoryId: categories['dairy-eggs'], brandId: brands['aarong'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 7, rating: 4.6, reviewCount: 156,
+    },
+    {
+      nameBn: 'আড়ং মাখন', nameEn: 'Aarong Butter', slug: 'aarong-butter',
+      descriptionBn: 'আড়ং মাখন, তাজা ও ক্রিমি', descriptionEn: 'Aarong Butter, fresh and creamy',
+      price: 190, originalPrice: 210, unit: '২০০ গ্রাম', stock: 100, images: '["🧈"]',
+      categoryId: categories['dairy-eggs'], brandId: brands['aarong'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 10, rating: 4.5, reviewCount: 87,
+    },
+    {
+      nameBn: 'মার্কস ফুলক্রিম দুধ', nameEn: 'Marks Full Cream Milk', slug: 'marks-full-cream-milk',
+      descriptionBn: 'মার্কস ফুলক্রিম দুধ, পুষ্টিকর', descriptionEn: 'Marks Full Cream Milk, nutritious',
+      price: 80, originalPrice: 85, unit: 'লিটার', stock: 250, images: '["🥛"]',
+      categoryId: categories['dairy-eggs'], brandId: brands['marks'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 6, rating: 4.4, reviewCount: 98,
+    },
+    {
+      nameBn: 'মার্কস দই', nameEn: 'Marks Yogurt', slug: 'marks-yogurt',
+      descriptionBn: 'মার্কস মিষ্টি দই, সুস্বাদু ও ঘন', descriptionEn: 'Marks Sweet Yogurt, delicious and thick',
+      price: 55, originalPrice: 60, unit: 'পিস', stock: 180, images: '["🥣"]',
+      categoryId: categories['dairy-eggs'], brandId: brands['marks'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 8, rating: 4.3, reviewCount: 76,
+    },
+    {
+      nameBn: 'ইগলু আইসক্রিম', nameEn: 'Igloo Ice Cream', slug: 'igloo-ice-cream',
+      descriptionBn: 'ইগলু আইসক্রিম, ক্রিমি ও মিষ্টি', descriptionEn: 'Igloo Ice Cream, creamy and sweet',
+      price: 120, originalPrice: 140, unit: 'বক্স', stock: 100, images: '["🍦"]',
+      categoryId: categories['dairy-eggs'], brandId: brands['igloo'], isOrganic: false, isFeatured: false, isTrending: true,
+      discount: 14, rating: 4.5, reviewCount: 134,
+    },
+    {
+      nameBn: 'ইগলু কুলফি', nameEn: 'Igloo Kulfi', slug: 'igloo-kulfi',
+      descriptionBn: 'ইগলু কুলফি, ঐতিহ্যবাহী মিষ্টি', descriptionEn: 'Igloo Kulfi, traditional dessert',
+      price: 30, originalPrice: 35, unit: 'পিস', stock: 200, images: '["🧊"]',
+      categoryId: categories['dairy-eggs'], brandId: brands['igloo'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.2, reviewCount: 65,
+    },
+
+    // --- Dettol / Savlon ---
+    {
+      nameBn: 'ডেটল সাবান', nameEn: 'Dettol Soap', slug: 'dettol-soap',
+      descriptionBn: 'ডেটল সাবান, জীবাণুমুক্তি ও সুরক্ষা', descriptionEn: 'Dettol Soap, germ protection',
+      price: 55, originalPrice: 65, unit: 'পিস', stock: 300, images: '["🧼"]',
+      categoryId: categories['personal-care'], brandId: brands['dettol'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 15, rating: 4.5, reviewCount: 134,
+    },
+    {
+      nameBn: 'ডেটল হ্যান্ডওয়াশ', nameEn: 'Dettol Handwash', slug: 'dettol-handwash',
+      descriptionBn: 'ডেটল হ্যান্ডওয়াশ, হাত পরিষ্কারের তরল', descriptionEn: 'Dettol Handwash, hand cleaning liquid',
+      price: 140, originalPrice: 160, unit: 'বোতল', stock: 200, images: '["🧴"]',
+      categoryId: categories['personal-care'], brandId: brands['dettol'], isOrganic: false, isFeatured: true, isTrending: false,
+      discount: 12, rating: 4.6, reviewCount: 156,
+    },
+    {
+      nameBn: 'স্যাভলন সাবান', nameEn: 'Savlon Soap', slug: 'savlon-soap',
+      descriptionBn: 'স্যাভলন সাবান, অ্যান্টিসেপটিক সুরক্ষা', descriptionEn: 'Savlon Soap, antiseptic protection',
+      price: 50, originalPrice: 58, unit: 'পিস', stock: 250, images: '["🧼"]',
+      categoryId: categories['personal-care'], brandId: brands['savlon'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.3, reviewCount: 89,
+    },
+    {
+      nameBn: 'স্যাভলন অ্যান্টিসেপটিক', nameEn: 'Savlon Antiseptic', slug: 'savlon-antiseptic',
+      descriptionBn: 'স্যাভলন অ্যান্টিসেপটিক তরল, ক্ষত সুরক্ষা', descriptionEn: 'Savlon Antiseptic liquid, wound protection',
+      price: 120, originalPrice: 140, unit: 'বোতল', stock: 150, images: '["🧬"]',
+      categoryId: categories['personal-care'], brandId: brands['savlon'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.5, reviewCount: 76,
+    },
+
+    // --- Tibet ---
+    {
+      nameBn: 'তিব্বত টুথপেস্ট', nameEn: 'Tibet Toothpaste', slug: 'tibet-toothpaste',
+      descriptionBn: 'তিব্বত টুথপেস্ট, দাঁতের যত্নে বিশ্বস্ত', descriptionEn: 'Tibet Toothpaste, trusted dental care',
+      price: 65, originalPrice: 75, unit: 'টিউব', stock: 250, images: '["🪥"]',
+      categoryId: categories['personal-care'], brandId: brands['tibet'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 13, rating: 4.2, reviewCount: 98,
+    },
+    {
+      nameBn: 'তিব্বত হেয়ার অয়েল', nameEn: 'Tibet Hair Oil', slug: 'tibet-hair-oil',
+      descriptionBn: 'তিব্বত হেয়ার অয়েল, চুলের পুষ্টি ও বৃদ্ধি', descriptionEn: 'Tibet Hair Oil, hair nourishment and growth',
+      price: 95, originalPrice: 110, unit: 'বোতল', stock: 180, images: '["💧"]',
+      categoryId: categories['personal-care'], brandId: brands['tibet'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.3, reviewCount: 72,
+    },
+
+    // --- RFL (আরএফএল) - Household ---
+    {
+      nameBn: 'আরএফএল প্লাস্টিক বালতি', nameEn: 'RFL Plastic Bucket', slug: 'rfl-plastic-bucket',
+      descriptionBn: 'আরএফএল প্লাস্টিক বালতি, মজবুত ও টেকসই', descriptionEn: 'RFL Plastic Bucket, strong and durable',
+      price: 180, originalPrice: 210, unit: 'পিস', stock: 100, images: '["🪣"]',
+      categoryId: categories['household'], brandId: brands['rfl'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.3, reviewCount: 56,
+    },
+    {
+      nameBn: 'আরএফএল স্টোরেজ কন্টেইনার', nameEn: 'RFL Storage Container', slug: 'rfl-storage-container',
+      descriptionBn: 'আরএফএল খাবার সংরক্ষণ কন্টেইনার, এয়ারটাইট', descriptionEn: 'RFL Food Storage Container, airtight',
+      price: 120, originalPrice: 140, unit: 'সেট', stock: 150, images: '["📦"]',
+      categoryId: categories['household'], brandId: brands['rfl'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 14, rating: 4.2, reviewCount: 48,
+    },
+
+    // --- BABY (বেবি) - Baby Care ---
+    {
+      nameBn: 'বেবি ডায়াপার', nameEn: 'Baby Diaper', slug: 'baby-diaper',
+      descriptionBn: 'বেবি ডায়াপার, শিশুদের জন্য আরামদায়ক', descriptionEn: 'Baby Diaper, comfortable for babies',
+      price: 350, originalPrice: 400, unit: 'প্যাকেট', stock: 120, images: '["👶"]',
+      categoryId: categories['personal-care'], brandId: brands['baby'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 12, rating: 4.4, reviewCount: 78,
+    },
+    {
+      nameBn: 'বেবি লোশন', nameEn: 'Baby Lotion', slug: 'baby-lotion',
+      descriptionBn: 'বেবি লোশন, শিশুর ত্বকের যত্নে', descriptionEn: 'Baby Lotion, for baby skin care',
+      price: 180, originalPrice: 200, unit: 'বোতল', stock: 100, images: '["🧴"]',
+      categoryId: categories['personal-care'], brandId: brands['baby'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 10, rating: 4.3, reviewCount: 56,
+    },
+
+    // --- PRAN-RFL (প্রাণ-আরএফএল) - Diversified ---
+    {
+      nameBn: 'প্রাণ-আরএফএল চায়ের কাপ সেট', nameEn: 'PRAN-RFL Tea Cup Set', slug: 'pran-rfl-tea-cup-set',
+      descriptionBn: 'প্রাণ-আরএফএল চায়ের কাপ সেট, ৬ পিস', descriptionEn: 'PRAN-RFL Tea Cup Set, 6 pieces',
+      price: 250, originalPrice: 300, unit: 'সেট', stock: 80, images: '["☕"]',
+      categoryId: categories['household'], brandId: brands['pran-rfl'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 17, rating: 4.1, reviewCount: 34,
+    },
+    {
+      nameBn: 'প্রাণ-আরএফএল ডিনার সেট', nameEn: 'PRAN-RFL Dinner Set', slug: 'pran-rfl-dinner-set',
+      descriptionBn: 'প্রাণ-আরএফএল ডিনার সেট, মেলামাইন', descriptionEn: 'PRAN-RFL Dinner Set, melamine',
+      price: 850, originalPrice: 1000, unit: 'সেট', stock: 40, images: '["🍽️"]',
+      categoryId: categories['household'], brandId: brands['pran-rfl'], isOrganic: false, isFeatured: false, isTrending: false,
+      discount: 15, rating: 4.2, reviewCount: 28,
+    },
   ];
 
   // Bulk create products for performance
@@ -1352,14 +1840,83 @@ async function main() {
   console.log(`✅ ${couponsData.length} coupons created.`);
 
   // ============================================================
+  // Step 7: Create Bill Payment Demo Data
+  // ============================================================
+  console.log('💳 Creating bill payment demo data...');
+
+  const billPaymentsData = [
+    {
+      type: 'bkash_cashout',
+      providerNameBn: 'বিকাশ',
+      providerNameEn: 'bKash',
+      amount: 5000,
+      fee: 18.75,
+      customerAccount: '01712345678',
+      customerName: 'রহিম উদ্দিন',
+      status: 'completed',
+      userId: demoUser.id,
+    },
+    {
+      type: 'nagad_cashout',
+      providerNameBn: 'নগদ',
+      providerNameEn: 'Nagad',
+      amount: 3000,
+      fee: 10.00,
+      customerAccount: '01898765432',
+      customerName: 'করিম হাসান',
+      status: 'completed',
+      userId: demoUser.id,
+    },
+    {
+      type: 'dpdc_electric',
+      providerNameBn: 'ডিপিডিসি বিদ্যুৎ',
+      providerNameEn: 'DPDC Electric',
+      amount: 1520,
+      fee: 5.00,
+      customerAccount: '54-1234-5678',
+      customerName: 'নিবির হোসেন',
+      status: 'pending',
+      userId: demoUser.id,
+    },
+    {
+      type: 'bkash_cashout',
+      providerNameBn: 'বিকাশ',
+      providerNameEn: 'bKash',
+      amount: 10000,
+      fee: 37.50,
+      customerAccount: '01654321098',
+      customerName: 'সাইফুল ইসলাম',
+      status: 'pending',
+    },
+    {
+      type: 'nagad_cashout',
+      providerNameBn: 'নগদ',
+      providerNameEn: 'Nagad',
+      amount: 7500,
+      fee: 25.00,
+      customerAccount: '01911223344',
+      customerName: 'জাহিদ হোসেন',
+      status: 'completed',
+    },
+  ];
+
+  for (const bill of billPaymentsData) {
+    await db.billPayment.create({ data: bill });
+  }
+
+  console.log(`✅ ${billPaymentsData.length} bill payment demo records created.`);
+
+  // ============================================================
   // Final Summary
   // ============================================================
   console.log('\n🎉 Database seeding completed!');
   console.log(`  📂 ${categoriesData.length} categories`);
+  console.log(`  🏷️ ${brandsData.length} brands`);
   console.log(`  🛒 ${productCount} products`);
   console.log(`  👤 1 admin user`);
   console.log(`  ⭐ ${reviewsData.length} reviews`);
   console.log(`  🎫 ${couponsData.length} coupons`);
+  console.log(`  💳 ${billPaymentsData.length} bill payments`);
   console.log('\n  Admin: phone=01700000000, password=demo123456');
 }
 

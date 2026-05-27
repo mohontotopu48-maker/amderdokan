@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { useTheme } from 'next-themes'
+import { motion } from 'framer-motion'
 import {
   MapPin,
   Phone,
@@ -38,6 +38,15 @@ const quickLinks = {
     { labelBn: 'রিটার্ন নীতি', labelEn: 'Return Policy', view: 'about' as const },
     { labelBn: 'গোপনীয়তা নীতি', labelEn: 'Privacy Policy', view: 'about' as const },
   ],
+}
+
+const footerSectionVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: i * 0.1, ease: 'easeOut' as const },
+  }),
 }
 
 export function Footer() {
@@ -82,13 +91,21 @@ export function Footer() {
             ].map((item, i) => {
               const Icon = item.icon
               return (
-                <div
+                <motion.div
                   key={i}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
                   className="flex items-center gap-2 sm:gap-3 p-2 rounded-lg bg-green-800/30 dark:bg-green-900/20"
                 >
-                  <div className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-green-700/40 dark:bg-green-800/30 flex items-center justify-center">
+                  <motion.div
+                    whileHover={{ scale: 1.15, rotate: 5 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                    className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-green-700/40 dark:bg-green-800/30 flex items-center justify-center"
+                  >
                     <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-green-300" />
-                  </div>
+                  </motion.div>
                   <div className="min-w-0">
                     <p className="text-xs sm:text-sm font-semibold text-green-100 truncate">
                       {isBn ? item.labelBn : item.labelEn}
@@ -97,18 +114,28 @@ export function Footer() {
                       {isBn ? item.subBn : item.subEn}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               )
             })}
           </div>
         </div>
       </div>
 
+      {/* Animated Gradient Separator */}
+      <div className="h-[2px] animate-gradient-line" />
+
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 lg:px-8 py-8 sm:py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand Info */}
-          <div className="sm:col-span-2 lg:col-span-1">
+          <motion.div
+            custom={0}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-30px' }}
+            variants={footerSectionVariants}
+            className="sm:col-span-2 lg:col-span-1"
+          >
             <div className="flex items-center gap-3 mb-4">
               <div className="relative w-12 h-12 rounded-full overflow-hidden bg-white/10 border-2 border-green-400/30">
                 <Image
@@ -161,10 +188,16 @@ export function Footer() {
             <p className="mt-3 text-xs text-green-300/60">
               {isBn ? 'মালিক:' : 'Owner:'} Nibir Hossain
             </p>
-          </div>
+          </motion.div>
 
           {/* Categories */}
-          <div>
+          <motion.div
+            custom={1}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-30px' }}
+            variants={footerSectionVariants}
+          >
             <h3 className="text-sm font-semibold text-green-100 mb-3 flex items-center gap-2">
               <div className="w-1 h-4 bg-accent rounded-full" />
               {isBn ? 'ক্যাটাগরি' : 'Categories'}
@@ -181,10 +214,16 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Info Links */}
-          <div>
+          <motion.div
+            custom={2}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-30px' }}
+            variants={footerSectionVariants}
+          >
             <h3 className="text-sm font-semibold text-green-100 mb-3 flex items-center gap-2">
               <div className="w-1 h-4 bg-accent rounded-full" />
               {isBn ? 'তথ্য' : 'Information'}
@@ -202,37 +241,45 @@ export function Footer() {
               ))}
             </ul>
 
-            {/* Social Media */}
+            {/* Social Media - Animated Icons */}
             <div className="mt-5">
               <h4 className="text-sm font-semibold text-green-100 mb-2">
                 {isBn ? 'ফলো করুন' : 'Follow Us'}
               </h4>
               <div className="flex gap-2">
                 {[
-                  { icon: Facebook, href: 'https://facebook.com/amarbazar', label: 'Facebook' },
-                  { icon: Instagram, href: 'https://instagram.com/amarbazar', label: 'Instagram' },
-                  { icon: Youtube, href: 'https://youtube.com/@amarbazar', label: 'YouTube' },
+                  { icon: Facebook, href: 'https://facebook.com/amarbazar', label: 'Facebook', hoverColor: 'hover:bg-blue-600', hoverText: 'hover:text-white' },
+                  { icon: Instagram, href: 'https://instagram.com/amarbazar', label: 'Instagram', hoverColor: 'hover:bg-pink-600', hoverText: 'hover:text-white' },
+                  { icon: Youtube, href: 'https://youtube.com/@amarbazar', label: 'YouTube', hoverColor: 'hover:bg-red-600', hoverText: 'hover:text-white' },
                 ].map((social) => {
                   const Icon = social.icon
                   return (
-                    <a
+                    <motion.a
                       key={social.label}
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-8 h-8 rounded-full bg-green-800/40 dark:bg-green-900/30 flex items-center justify-center hover:bg-green-700/60 transition-colors"
+                      whileHover={{ scale: 1.2, y: -3 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`w-8 h-8 rounded-full bg-green-800/40 dark:bg-green-900/30 flex items-center justify-center transition-colors duration-200 ${social.hoverColor} ${social.hoverText}`}
                       aria-label={social.label}
                     >
                       <Icon className="w-4 h-4 text-green-300" />
-                    </a>
+                    </motion.a>
                   )
                 })}
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Payment Methods */}
-          <div>
+          <motion.div
+            custom={3}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-30px' }}
+            variants={footerSectionVariants}
+          >
             <h3 className="text-sm font-semibold text-green-100 mb-3 flex items-center gap-2">
               <div className="w-1 h-4 bg-accent rounded-full" />
               {isBn ? 'পেমেন্ট পদ্ধতি' : 'Payment Methods'}
@@ -270,7 +317,7 @@ export function Footer() {
                 </Button>
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 

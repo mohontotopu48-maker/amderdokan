@@ -91,6 +91,8 @@ interface AppState {
   isSearchOpen: boolean
   isCartOpen: boolean
   isCheckoutOpen: boolean
+  isBillPaymentOpen: boolean
+  billPaymentType: string | null
   language: 'bn' | 'en'
 
   // Cart
@@ -101,6 +103,9 @@ interface AppState {
   products: Product[]
   categories: Category[]
   orders: Order[]
+
+  // Coupon
+  couponCode: string | null
 
   // Admin
   isAdminMode: boolean
@@ -113,6 +118,8 @@ interface AppState {
   setIsSearchOpen: (open: boolean) => void
   setIsCartOpen: (open: boolean) => void
   setIsCheckoutOpen: (open: boolean) => void
+  setIsBillPaymentOpen: (open: boolean) => void
+  setBillPaymentType: (type: string | null) => void
   setLanguage: (lang: 'bn' | 'en') => void
   setCartItems: (items: CartItem[]) => void
   setCartLoading: (loading: boolean) => void
@@ -140,6 +147,8 @@ export const useStore = create<AppState>((set, get) => ({
   isSearchOpen: false,
   isCartOpen: false,
   isCheckoutOpen: false,
+  isBillPaymentOpen: false,
+  billPaymentType: null,
   language: 'bn',
 
   // Cart
@@ -150,6 +159,9 @@ export const useStore = create<AppState>((set, get) => ({
   products: [],
   categories: [],
   orders: [],
+
+  // Coupon
+  couponCode: null,
 
   // Admin
   isAdminMode: false,
@@ -162,6 +174,8 @@ export const useStore = create<AppState>((set, get) => ({
   setIsSearchOpen: (open) => set({ isSearchOpen: open }),
   setIsCartOpen: (open) => set({ isCartOpen: open }),
   setIsCheckoutOpen: (open) => set({ isCheckoutOpen: open }),
+  setIsBillPaymentOpen: (open) => set({ isBillPaymentOpen: open }),
+  setBillPaymentType: (type) => set({ billPaymentType: type }),
   setLanguage: (lang) => set({ language: lang }),
   setCartItems: (items) => set({ cartItems: items }),
   setCartLoading: (loading) => set({ cartLoading: loading }),
