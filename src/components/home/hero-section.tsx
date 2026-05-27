@@ -58,20 +58,28 @@ function TypingText({ text, delay = 0 }: { text: string; delay?: number }) {
   const [showCursor, setShowCursor] = useState(true)
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    let timeout: ReturnType<typeof setTimeout>
+    let interval: ReturnType<typeof setInterval>
+    let cursorTimeout: ReturnType<typeof setTimeout>
+
+    timeout = setTimeout(() => {
       let index = 0
-      const interval = setInterval(() => {
+      interval = setInterval(() => {
         if (index < text.length) {
           setDisplayedText(text.slice(0, index + 1))
           index++
         } else {
           clearInterval(interval)
-          setTimeout(() => setShowCursor(false), 2000)
+          cursorTimeout = setTimeout(() => setShowCursor(false), 2000)
         }
       }, 60)
-      return () => clearInterval(interval)
     }, delay)
-    return () => clearTimeout(timeout)
+
+    return () => {
+      clearTimeout(timeout)
+      clearInterval(interval)
+      clearTimeout(cursorTimeout)
+    }
   }, [text, delay])
 
   return (

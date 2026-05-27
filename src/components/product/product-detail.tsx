@@ -50,6 +50,7 @@ export function ProductDetail() {
     products,
     categories,
     addToCart,
+    updateCartItemId,
     setCurrentView,
     setSelectedCategoryId,
     setSelectedProductId,
@@ -84,14 +85,14 @@ export function ProductDetail() {
         const data = await res.json()
         setProduct(data)
       } else {
-        setProduct(storeProduct || null)
+        setProduct(null)
       }
     } catch {
-      setProduct(storeProduct || null)
+      setProduct(null)
     } finally {
       setLoading(false)
     }
-  }, [selectedProductId, storeProduct])
+  }, [selectedProductId])
 
   const fetchReviews = useCallback(async () => {
     if (!selectedProductId) return
@@ -160,7 +161,7 @@ export function ProductDetail() {
     })
 
     try {
-      await fetch('/api/cart', {
+      const res = await fetch('/api/cart', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -169,6 +170,12 @@ export function ProductDetail() {
           quantity,
         }),
       })
+      if (res.ok) {
+        const data = await res.json()
+        if (data.cartItem?.id) {
+          updateCartItemId(displayProduct.id, data.cartItem.id)
+        }
+      }
     } catch {
       // API call failed
     }

@@ -1,5 +1,6 @@
 import { db } from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
+import { isAdminAuthenticated } from '@/lib/admin-auth';
 
 export async function GET(request: NextRequest) {
   try {
@@ -150,6 +151,10 @@ export async function GET(request: NextRequest) {
 
 // POST /api/products - Create a new product
 export async function POST(request: NextRequest) {
+  if (!(await isAdminAuthenticated())) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const body = await request.json();
     const {

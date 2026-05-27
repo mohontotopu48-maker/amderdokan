@@ -161,7 +161,7 @@
 }
 
 .animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
+  animation: pulse-glow 2s ease-in-out 5;
 }
 
 /* Shimmer loading effect */
@@ -201,11 +201,11 @@
 }
 
 .animate-glow {
-  animation: glow 2s ease-in-out infinite;
+  animation: glow 2s ease-in-out 3;
 }
 
 .animate-glow-orange {
-  animation: glow-orange 2s ease-in-out infinite;
+  animation: glow-orange 2s ease-in-out 3;
 }
 
 @keyframes glow-orange {
@@ -242,7 +242,7 @@
 }
 
 .animate-cta-pulse {
-  animation: cta-pulse 2.5s ease-in-out infinite;
+  animation: cta-pulse 2.5s ease-in-out 3;
 }
 
 @keyframes cta-pulse-orange {
@@ -251,7 +251,7 @@
 }
 
 .animate-cta-pulse-orange {
-  animation: cta-pulse-orange 2.5s ease-in-out infinite 0.5s;
+  animation: cta-pulse-orange 2.5s ease-in-out 3 0.5s;
 }
 
 /* Discount badge glow */
@@ -261,7 +261,7 @@
 }
 
 .animate-discount-glow {
-  animation: discount-glow 1.5s ease-in-out infinite;
+  animation: discount-glow 3s ease-in-out infinite;
 }
 
 /* Gradient border animation */
@@ -273,7 +273,7 @@
 }
 
 .animate-gradient-border {
-  animation: gradient-border 3s ease-in-out infinite;
+  animation: gradient-border 3s ease-in-out 5;
 }
 
 /* Confetti mini burst */

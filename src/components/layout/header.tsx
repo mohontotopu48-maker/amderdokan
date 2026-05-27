@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useSyncExternalStore, useRef } from 'react'
+import React, { useState, useEffect, useSyncExternalStore, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -19,6 +19,8 @@ import {
   Info,
   ChevronRight,
   Globe,
+  Loader2,
+  Star,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -44,6 +46,37 @@ const navLinks = [
   { key: 'about', labelBn: 'আমাদের সম্পর্কে', labelEn: 'About', icon: Info },
 ] as const
 
+interface SearchResultProduct {
+  id: string
+  nameBn: string
+  nameEn: string
+  slug: string
+  price: number
+  originalPrice: number | null
+  discount: number
+  unit: string
+  images: string[]
+  rating: number
+  discountedPrice: number
+  category?: { nameBn: string; nameEn: string; slug: string }
+  brand?: { nameBn: string; nameEn: string; slug: string }
+}
+
+interface SearchResultCategory {
+  id: string
+  nameBn: string
+  nameEn: string
+  slug: string
+  icon: string
+  productCount: number
+}
+
+interface SearchResults {
+  products: SearchResultProduct[]
+  categories: SearchResultCategory[]
+  query: string
+}
+
 export function Header() {
   const { theme, setTheme } = useTheme()
   const mounted = useSyncExternalStore(
@@ -53,9 +86,14 @@ export function Header() {
   )
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [searchOpen, setSearchOpen] = useState(false)
   const [headerVisible, setHeaderVisible] = useState(true)
   const lastScrollY = useRef(0)
+
+  // Search state
+  const [searchInput, setSearchInput] = useState('')
+  const [searchResults, setSearchResults] = useState<SearchResults | null>(null)
+  const [searchLoading, setSearchLoading] = useState(false)
+  const searchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const {
     language,
@@ -65,11 +103,65 @@ export function Header() {
     isSearchOpen,
     setIsSearchOpen,
     setCurrentView,
+    setSelectedProductId,
+    setSelectedCategoryId,
     getCartItemCount,
   } = useStore()
 
   const isBn = language === 'bn'
   const cartItemCount = getCartItemCount()
+
+  // Debounced search function
+  const performSearch = useCallback(async (query: string) => {
+    if (!query || query.trim().length < 2) {
+      setSearchResults(null)
+      return
+    }
+
+    setSearchLoading(true)
+    try {
+      const res = await fetch(`/api/search?q=${encodeURIComponent(query.trim())}`)
+      if (res.ok) {
+        const data = await res.json()
+        setSearchResults(data)
+      }
+    } catch {
+      // silently fail
+    } finally {
+      setSearchLoading(false)
+    }
+  }, [])
+
+  // Debounce search input
+  const handleSearchChange = useCallback((value: string) => {
+    setSearchInput(value)
+    useStore.getState().setSearchQuery(value)
+
+    if (searchDebounceRef.current) {
+      clearTimeout(searchDebounceRef.current)
+    }
+    searchDebounceRef.current = setTimeout(() => {
+      performSearch(value)
+    }, 300)
+  }, [performSearch])
+
+  // Clean up debounce on unmount
+  useEffect(() => {
+    return () => {
+      if (searchDebounceRef.current) {
+        clearTimeout(searchDebounceRef.current)
+      }
+    }
+  }, [])
+
+  // Reset search when overlay opens/closes
+  useEffect(() => {
+    if (isSearchOpen) {
+      setSearchInput('')
+      setSearchResults(null)
+      setSearchLoading(false)
+    }
+  }, [isSearchOpen])
 
   // Scroll-based hide/show header (like YouTube mobile)
   useEffect(() => {
@@ -100,6 +192,18 @@ export function Header() {
       setCurrentView('about')
     }
     setMobileMenuOpen(false)
+  }
+
+  const handleProductClick = (productId: string) => {
+    setSelectedProductId(productId)
+    setIsSearchOpen(false)
+    setCurrentView('product-detail')
+  }
+
+  const handleCategoryClick = (categoryId: string) => {
+    setSelectedCategoryId(categoryId)
+    setIsSearchOpen(false)
+    setCurrentView('products')
   }
 
   return (
@@ -214,7 +318,8 @@ export function Header() {
                   placeholder={isBn ? 'পণ্য খুঁজুন...' : 'Search products...'}
                   className="pl-9 pr-4 h-9 bg-muted/50 border-green-200/50 dark:border-green-800/30 focus-visible:border-green-500 focus-visible:ring-green-500/20 transition-all duration-200 focus-visible:shadow-md focus-visible:shadow-green-500/10"
                   onFocus={() => setIsSearchOpen(true)}
-                  onChange={(e) => useStore.getState().setSearchQuery(e.target.value)}
+                  value={searchInput}
+                  onChange={(e) => handleSearchChange(e.target.value)}
                 />
               </div>
             </div>
@@ -464,7 +569,8 @@ export function Header() {
                       autoFocus
                       placeholder={isBn ? 'পণ্য খুঁজুন... (যেমন: আলু, পেঁয়াজ, চাল)' : 'Search products... (e.g., potato, onion, rice)'}
                       className="pl-10 pr-4 h-12 text-base border-green-200 dark:border-green-800 focus-visible:border-green-500 focus-visible:ring-green-500/20"
-                      onChange={(e) => useStore.getState().setSearchQuery(e.target.value)}
+                      value={searchInput}
+                      onChange={(e) => handleSearchChange(e.target.value)}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter') {
                           setIsSearchOpen(false)
@@ -482,21 +588,116 @@ export function Header() {
                     <X className="w-5 h-5" />
                   </Button>
                 </div>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {['আলু', 'পেঁয়াজ', 'চাল', 'মাছ', 'দুধ', 'মসলা'].map((term) => (
-                    <button
-                      key={term}
-                      onClick={() => {
-                        useStore.getState().setSearchQuery(term)
-                        setIsSearchOpen(false)
-                        setCurrentView('products')
-                      }}
-                      className="px-3 py-1 text-xs rounded-full bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/40 transition-colors"
-                    >
-                      {term}
-                    </button>
-                  ))}
-                </div>
+
+                {/* Search Results */}
+                {searchLoading && (
+                  <div className="mt-4 flex items-center justify-center py-8">
+                    <Loader2 className="size-6 animate-spin text-green-600" />
+                    <span className="ml-2 text-sm text-muted-foreground">
+                      {isBn ? 'খুঁজছি...' : 'Searching...'}
+                    </span>
+                  </div>
+                )}
+
+                {!searchLoading && searchResults && (searchResults.products.length > 0 || searchResults.categories.length > 0) && (
+                  <div className="mt-4 max-h-80 overflow-y-auto rounded-lg border bg-background">
+                    {/* Category Results */}
+                    {searchResults.categories.length > 0 && (
+                      <div className="border-b p-3">
+                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                          {isBn ? 'বিভাগ' : 'Categories'}
+                        </p>
+                        {searchResults.categories.map((cat) => (
+                          <button
+                            key={cat.id}
+                            onClick={() => handleCategoryClick(cat.id)}
+                            className="flex items-center gap-3 w-full px-2 py-2 rounded-md hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors text-left"
+                          >
+                            <span className="text-xl">{cat.icon || '📁'}</span>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium truncate">
+                                {isBn ? cat.nameBn : cat.nameEn}
+                              </p>
+                              <p className="text-xs text-muted-foreground">
+                                {cat.productCount} {isBn ? 'পণ্য' : 'products'}
+                              </p>
+                            </div>
+                            <ChevronRight className="size-4 text-muted-foreground shrink-0" />
+                          </button>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Product Results */}
+                    {searchResults.products.length > 0 && (
+                      <div className="p-3">
+                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                          {isBn ? 'পণ্য' : 'Products'}
+                        </p>
+                        {searchResults.products.map((product) => (
+                          <button
+                            key={product.id}
+                            onClick={() => handleProductClick(product.id)}
+                            className="flex items-center gap-3 w-full px-2 py-2 rounded-md hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors text-left"
+                          >
+                            <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-primary/10 text-lg">
+                              {Array.isArray(product.images) ? product.images[0] || '🛒' : '🛒'}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium truncate">
+                                {isBn ? product.nameBn : product.nameEn}
+                              </p>
+                              <div className="flex items-center gap-2">
+                                <span className="text-sm font-semibold text-primary">
+                                  ৳{product.discountedPrice}
+                                </span>
+                                {product.discount > 0 && product.originalPrice && (
+                                  <span className="text-xs text-muted-foreground line-through">
+                                    ৳{product.originalPrice}
+                                  </span>
+                                )}
+                                {product.discount > 0 && (
+                                  <Badge className="bg-orange-500 text-[9px] text-white px-1 py-0">
+                                    -{product.discount}%
+                                  </Badge>
+                                )}
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-0.5 shrink-0">
+                              <Star className="size-3 fill-amber-400 text-amber-400" />
+                              <span className="text-xs text-muted-foreground">{product.rating.toFixed(1)}</span>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {!searchLoading && searchInput.trim().length >= 2 && searchResults && searchResults.products.length === 0 && searchResults.categories.length === 0 && (
+                  <div className="mt-4 text-center py-8">
+                    <p className="text-sm text-muted-foreground">
+                      {isBn ? `"${searchInput}" এর জন্য কোনো ফলাফল পাওয়া যায়নি` : `No results found for "${searchInput}"`}
+                    </p>
+                  </div>
+                )}
+
+                {/* Suggestion Buttons (shown when no search is active) */}
+                {(!searchInput || searchInput.trim().length < 2) && !searchResults && (
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {['আলু', 'পেঁয়াজ', 'চাল', 'মাছ', 'দুধ', 'মসলা'].map((term) => (
+                      <button
+                        key={term}
+                        onClick={() => {
+                          handleSearchChange(term)
+                        }}
+                        className="px-3 py-1 text-xs rounded-full bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/40 transition-colors"
+                      >
+                        {term}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             </motion.div>
           </motion.div>

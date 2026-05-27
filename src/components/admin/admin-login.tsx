@@ -21,13 +21,20 @@ export function AdminLogin() {
     setError('')
     setIsLoading(true)
 
-    // Simulate loading
-    await new Promise((resolve) => setTimeout(resolve, 500))
-
-    if (password === 'admin123') {
-      setIsAdminMode(true)
-    } else {
-      setError(isBn ? 'ভুল পাসওয়ার্ড। আবার চেষ্টা করুন।' : 'Wrong password. Try again.')
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      })
+      const data = await res.json()
+      if (res.ok && data.success) {
+        setIsAdminMode(true)
+      } else {
+        setError(isBn ? 'ভুল পাসওয়ার্ড।' : 'Wrong password.')
+      }
+    } catch {
+      setError(isBn ? 'সংযোগ সমস্যা' : 'Connection error')
     }
 
     setIsLoading(false)

@@ -80,7 +80,10 @@ export function CheckoutDialog() {
     getCartSavings,
     language,
     clearCart,
-    couponCode: appliedCoupon,
+    appliedCoupon,
+    couponDiscountAmount,
+    setAppliedCoupon,
+    setCouponDiscountAmount,
   } = useStore()
 
   const isBn = language === 'bn'
@@ -102,10 +105,11 @@ export function CheckoutDialog() {
   const [paymentMethod, setPaymentMethod] = useState('cod')
   const [paymentPhone, setPaymentPhone] = useState('')
   const [formErrors, setFormErrors] = useState<FormErrors>({})
-  const [couponDiscount, setCouponDiscount] = useState(0)
-  const [checkoutCoupon, setCheckoutCoupon] = useState('')
+  // Initialize with coupon from store (applied in cart)
+  const [couponDiscount, setCouponDiscount] = useState(couponDiscountAmount)
+  const [checkoutCoupon, setCheckoutCoupon] = useState(appliedCoupon || '')
   const [couponLoading, setCouponLoading] = useState(false)
-  const [couponApplied, setCouponApplied] = useState(false)
+  const [couponApplied, setCouponApplied] = useState(!!appliedCoupon)
   const [couponError, setCouponError] = useState('')
 
   const subtotal = getCartTotal()
@@ -225,11 +229,14 @@ export function CheckoutDialog() {
         setDeliveryForm({ name: '', phone: '', address: '', area: '', notes: '' })
         setPaymentMethod('cod')
         setPaymentPhone('')
+        // Reset coupon state but keep store values as fallback
         setCouponDiscount(0)
         setCheckoutCoupon('')
         setCouponLoading(false)
         setCouponApplied(false)
         setCouponError('')
+        setAppliedCoupon(null)
+        setCouponDiscountAmount(0)
       }, 300)
     }
   }

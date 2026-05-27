@@ -1,8 +1,13 @@
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
+import { isAdminAuthenticated } from '@/lib/admin-auth';
 
 // GET /api/admin/revenue - Revenue data for last 7 days
 export async function GET() {
+  if (!(await isAdminAuthenticated())) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const now = new Date();
     const sevenDaysAgo = new Date(now);

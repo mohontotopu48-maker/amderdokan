@@ -43,6 +43,9 @@ export function CartSheet() {
     getCartItemCount,
     getCartSavings,
     setIsCheckoutOpen,
+    appliedCoupon,
+    setAppliedCoupon,
+    setCouponDiscountAmount,
   } = useStore()
 
   const [couponCode, setCouponCode] = useState('')
@@ -167,6 +170,9 @@ export function CartSheet() {
       if (data.valid) {
         setCouponDiscount(data.discountAmount)
         setCouponApplied(true)
+        // Sync coupon to store so CheckoutDialog can read it
+        setAppliedCoupon(couponCode.trim())
+        setCouponDiscountAmount(data.discountAmount)
         toast({
           title: isBn ? 'কুপন প্রয়োগ হয়েছে!' : 'Coupon applied!',
           description: isBn
@@ -177,6 +183,8 @@ export function CartSheet() {
         setCouponError(data.error || 'Invalid coupon')
         setCouponDiscount(0)
         setCouponApplied(false)
+        setAppliedCoupon(null)
+        setCouponDiscountAmount(0)
       }
     } catch {
       setCouponError(isBn ? 'কুপন যাচাই করতে সমস্যা হয়েছে' : 'Failed to validate coupon')

@@ -487,3 +487,126 @@ Stage Summary:
 - Many products have discount > 0, originalPrice set, isFeatured/isTrending flags
 - Database re-seeded successfully with no errors
 - Lint passes with zero errors
+
+---
+Task ID: 6a-6c
+Agent: Main
+Task: Fix 3 critical bugs - Search API, Cart state desync, Admin auth
+
+Work Log:
+
+Bug 1: Search API Returns Empty Results for Bangla Text
+- Root cause: The search overlay in header.tsx only set `searchQuery` in the Zustand store but never called `/api/search?q=`. The overlay only had hardcoded suggestion buttons.
+- Rewrote the search overlay in header.tsx:
+  - Added local `searchInput` state (controlled input) instead of uncontrolled
+  - Added `searchResults` and `searchLoading` state for API results
+  - Implemented debounced API call to `/api/search?q=` with 300ms delay using `useRef` timeout
+  - Added `SearchResultProduct` and `SearchResultCategory` TypeScript interfaces
+  - Search results section shows categories (with icon, name, product count) and products (with image, name, price, discount, rating)
+  - Clicking a category navigates to products view filtered by that category
+  - Clicking a product navigates to product detail view
+  - Added "no results found" message when search returns empty
+  - Suggestion buttons (আলু, পেঁয়াজ, etc.) now trigger search via `handleSearchChange` instead of just setting store query
+  - Search input is reset when overlay opens/closes
+  - Debounce timer cleaned up on unmount
+
+Bug 2: Cart Local/API State Desync
+- Root cause: ProductCard and ProductDetail add to cart with `id: 'temp-xxx'` locally, then POST to `/api/cart`. The API returns the real DB cart item ID, but it was never used. This meant cart operations (PUT/DELETE on `/api/cart/[id]`) failed because they used the temp ID.
+- Added `updateCartItemId(productId, newId)` action to the Zustand store in `use-store.ts`
+- Updated ProductCard's `handleAddToCart`: After successful POST to `/api/cart`, reads `data.cartItem.id` from API response and calls `updateCartItemId` to replace the temp ID with the real DB ID
+- Updated ProductDetail's `handleAddToCart`: Same fix as ProductCard
+- Now when a user adds to cart and then tries to update quantity or remove, the correct DB ID is used for API calls
+
+Bug 3: Admin API Routes Have No Auth
+- Created `/src/lib/admin-auth.ts`:
+  - `isAdminAuthenticated()` function checks `admin_session` cookie via `next/headers` cookies()
+  - Exports `ADMIN_PASSWORD` and `ADMIN_COOKIE` constants
+- Created `/src/app/api/admin/login/route.ts`:
+  - POST endpoint that validates password against ADMIN_PASSWORD
+  - Sets `admin_session` HTTP-only cookie with 24h maxAge on success
+  - Returns 401 on invalid password
+- Created `/src/app/api/admin/logout/route.ts`:
+  - POST endpoint that clears the `admin_session` cookie (maxAge=0)
+- Updated `admin-login.tsx`:
+  - Changed from local password check to API call (`POST /api/admin/login`)
+  - Handles connection errors with bilingual error messages
+- Added auth checks to all admin API routes:
+  - `/api/admin/coupons/route.ts` (GET)
+  - `/api/admin/coupons/[id]/route.ts` (PATCH)
+  - `/api/admin/reviews/route.ts` (GET)
+  - `/api/admin/reviews/[id]/route.ts` (DELETE)
+  - `/api/admin/revenue/route.ts` (GET)
+- Added auth checks to product/order write operations:
+  - `POST /api/products` (create product)
+  - `PUT /api/products/[id]` (update product)
+  - `DELETE /api/products/[id]` (delete product)
+  - `PATCH /api/orders/[id]` (update order status)
+- All protected routes return 401 Unauthorized when cookie is missing/invalid
+
+Stage Summary:
+- Search overlay now calls `/api/search` API with debouncing and displays real results (products + categories)
+- Cart temp IDs are immediately replaced with real DB IDs after add-to-cart API call
+- All admin and write API routes protected with cookie-based authentication
+- Admin login now goes through server-side API instead of client-side password check
+- ESLint passes with zero errors
+
+---
+Task ID: 6d-6g
+Agent: Main
+Task: Fix 7 HIGH priority issues - Footer sticky, Coupon sync, Footer filtering, ProductCard shimmer, TypingText leak, fetchProduct loop, Animation performance
+
+Work Log:
+
+Issue 1: Footer Not Sticky to Bottom
+- Root cause: The layout structure with `min-h-screen flex flex-col` + `flex-1` on main was correct, but Footer could be compressed by flex shrink in edge cases
+- Added `flex-shrink-0` to the Footer's `<footer>` element in footer.tsx to prevent it from being compressed
+- This ensures the footer always stays at the bottom of the viewport on short pages
+
+Issue 2: Coupon Code Not Synced Between Cart and Checkout
+- Root cause: CartSheet had local coupon state, and CheckoutDialog also had separate local coupon state. The store's `couponCode` was never set, so `couponCode: appliedCoupon` in CheckoutDialog always read `null`
+- Added `appliedCoupon: string | null` and `couponDiscountAmount: number` fields to the Zustand store (use-store.ts)
+- Added `setAppliedCoupon`, `setCouponDiscountAmount` actions to the store
+- Updated CartSheet: When a coupon is applied, calls `setAppliedCoupon(code)` and `setCouponDiscountAmount(amount)` to sync to store. On coupon failure, resets store values
+- Updated CheckoutDialog: Reads `appliedCoupon` and `couponDiscountAmount` from store to initialize local state, so a coupon applied in cart carries over to checkout
+- Updated `clearCart` to also reset `appliedCoupon` and `couponDiscountAmount` in store
+
+Issue 3: Footer Category Links Don't Filter
+- Root cause: Footer category links only called `setCurrentView('products')` without setting `selectedCategoryId`, so all products showed instead of filtering by category
+- Added `setSelectedCategoryId` and `categories` to the Footer's store destructuring
+- Created `handleCategoryClick(slug)` function that looks up the category by slug from the store's categories array, then calls `setSelectedCategoryId(cat.id)` before navigating
+- Updated category button onClick to use `handleCategoryClick(cat.slug)`
+
+Issue 4: ProductCard imageLoaded Never Fires for Emoji
+- Root cause: The `onLoad` handler was on a `<motion.span>` element, but `<span>` elements don't fire `onLoad` events. This meant `imageLoaded` stayed `false` and the shimmer overlay was permanently visible
+- Changed `imageLoaded` initial state from `false` to `true` since product images are just emoji strings that are always "loaded"
+- Removed the `onLoad={() => setImageLoaded(true)}` handler from the `<motion.span>`
+
+Issue 5: TypingText Memory Leak in HeroSection
+- Root cause: The `setTimeout` cleanup only cleared the outer timeout, but the inner `setInterval` and the `setTimeout` for cursor hiding were never cleaned up when the component unmounted before typing completed
+- Rewrote the `TypingText` component with proper cleanup for all three timers: `timeout`, `interval`, and `cursorTimeout`
+- All three are declared with `let` at the top of the effect, assigned in the callback, and cleaned up in the return function
+
+Issue 6: fetchProduct Infinite Re-render Loop
+- Root cause: `fetchProduct` depended on `storeProduct` in its `useCallback` dependency array. Since `storeProduct` was derived from store state and changed on every render, the callback was recreated infinitely, triggering the `useEffect` that called `fetchProduct`
+- Removed `storeProduct` from the `useCallback` dependency array (only `selectedProductId` remains)
+- Changed error fallback from `setProduct(storeProduct || null)` to `setProduct(null)` since `displayProduct = product || storeProduct` already handles the fallback
+
+Issue 7: Performance - Reduce Infinite Animations
+- Updated globals.css to limit infinite animations that cause constant repaints:
+  - `.animate-pulse-glow` (WhatsApp button): `infinite` → `5` iterations
+  - `.animate-glow` (hero offer cards): `infinite` → `3` iterations
+  - `.animate-glow-orange` (hero offer cards): `infinite` → `3` iterations
+  - `.animate-cta-pulse` (hero CTA buttons): `infinite` → `3` iterations
+  - `.animate-cta-pulse-orange` (hero CTA buttons): `infinite` → `3` iterations
+  - `.animate-discount-glow` (discount badges): kept `infinite` but increased duration from `1.5s` to `3s`
+  - `.animate-gradient-border` (category cards): `infinite` → `5` iterations
+
+Stage Summary:
+- Footer now sticks to bottom on short pages with flex-shrink-0
+- Coupon code syncs between Cart and Checkout via Zustand store
+- Footer category links now filter products correctly by looking up category ID from slug
+- ProductCard shimmer overlay no longer stuck; emoji images render immediately
+- TypingText properly cleans up all timers on unmount (no memory leak)
+- fetchProduct no longer causes infinite re-render loops
+- 6 CSS animations changed from infinite to finite iterations, reducing constant repaints
+- ESLint passes with zero errors

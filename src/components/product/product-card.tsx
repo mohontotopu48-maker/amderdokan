@@ -62,7 +62,7 @@ function MiniConfetti({ show }: { show: boolean }) {
 }
 
 export function ProductCard({ product, onClick }: ProductCardProps) {
-  const { language, addToCart, setSelectedProductId, setCurrentView } = useStore()
+  const { language, addToCart, updateCartItemId, setSelectedProductId, setCurrentView } = useStore()
   const isBn = language === 'bn'
   const { toast } = useToast()
 
@@ -70,7 +70,7 @@ export function ProductCard({ product, onClick }: ProductCardProps) {
   const [addedToCart, setAddedToCart] = useState(false)
   const [showConfetti, setShowConfetti] = useState(false)
   const [quantity, setQuantity] = useState(1)
-  const [imageLoaded, setImageLoaded] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(true) // Emoji images are always "loaded"
   const [starsVisible, setStarsVisible] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
 
@@ -118,7 +118,7 @@ export function ProductCard({ product, onClick }: ProductCardProps) {
 
     // Sync with API
     try {
-      await fetch('/api/cart', {
+      const res = await fetch('/api/cart', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -127,6 +127,12 @@ export function ProductCard({ product, onClick }: ProductCardProps) {
           quantity,
         }),
       })
+      if (res.ok) {
+        const data = await res.json()
+        if (data.cartItem?.id) {
+          updateCartItemId(product.id, data.cartItem.id)
+        }
+      }
     } catch {
       // API call failed, local state already updated
     }
@@ -246,7 +252,6 @@ export function ProductCard({ product, onClick }: ProductCardProps) {
             initial={{ scale: 1 }}
             whileHover={{ scale: 1.2 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            onLoad={() => setImageLoaded(true)}
           >
             {productImage || '🛒'}
           </motion.span>

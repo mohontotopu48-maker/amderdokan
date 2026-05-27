@@ -50,11 +50,19 @@ const footerSectionVariants = {
 }
 
 export function Footer() {
-  const { language, setCurrentView } = useStore()
+  const { language, setCurrentView, setSelectedCategoryId, categories } = useStore()
   const isBn = language === 'bn'
 
+  const handleCategoryClick = (slug: string) => {
+    const cat = categories.find(c => c.slug === slug)
+    if (cat) {
+      setSelectedCategoryId(cat.id)
+    }
+    setCurrentView('products')
+  }
+
   return (
-    <footer className="bg-gradient-to-b from-green-900 to-green-950 dark:from-[#0a110d] dark:to-[#060d08] text-green-50">
+    <footer className="flex-shrink-0 bg-gradient-to-b from-green-900 to-green-950 dark:from-[#0a110d] dark:to-[#060d08] text-green-50">
       {/* Trust Badges */}
       <div className="border-b border-green-800/50 dark:border-green-900/50">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 py-4">
@@ -206,7 +214,7 @@ export function Footer() {
               {quickLinks.categories.map((cat) => (
                 <li key={cat.slug}>
                   <button
-                    onClick={() => setCurrentView('products')}
+                    onClick={() => handleCategoryClick(cat.slug)}
                     className="text-sm text-green-200/70 hover:text-green-300 transition-colors"
                   >
                     {isBn ? cat.labelBn : cat.labelEn}

@@ -115,6 +115,8 @@ interface AppState {
 
   // Coupon
   couponCode: string | null
+  appliedCoupon: string | null
+  couponDiscountAmount: number
 
   // Admin
   isAdminMode: boolean
@@ -136,10 +138,14 @@ interface AppState {
   setCategories: (categories: Category[]) => void
   setOrders: (orders: Order[]) => void
   setIsAdminMode: (mode: boolean) => void
+  setCouponCode: (code: string | null) => void
+  setAppliedCoupon: (code: string | null) => void
+  setCouponDiscountAmount: (amount: number) => void
 
   addToCart: (item: CartItem) => void
   removeFromCart: (productId: string) => void
   updateCartItemQuantity: (productId: string, quantity: number) => void
+  updateCartItemId: (productId: string, newId: string) => void
   clearCart: () => void
 
   getCartTotal: () => number
@@ -171,6 +177,8 @@ export const useStore = create<AppState>((set, get) => ({
 
   // Coupon
   couponCode: null,
+  appliedCoupon: null,
+  couponDiscountAmount: 0,
 
   // Admin
   isAdminMode: false,
@@ -192,6 +200,9 @@ export const useStore = create<AppState>((set, get) => ({
   setCategories: (categories) => set({ categories }),
   setOrders: (orders) => set({ orders }),
   setIsAdminMode: (mode) => set({ isAdminMode: mode }),
+  setCouponCode: (code) => set({ couponCode: code }),
+  setAppliedCoupon: (code) => set({ appliedCoupon: code }),
+  setCouponDiscountAmount: (amount) => set({ couponDiscountAmount: amount }),
 
   addToCart: (item) => {
     const { cartItems } = get()
@@ -225,7 +236,15 @@ export const useStore = create<AppState>((set, get) => ({
     })
   },
 
-  clearCart: () => set({ cartItems: [] }),
+  updateCartItemId: (productId, newId) => {
+    set({
+      cartItems: get().cartItems.map((i) =>
+        i.productId === productId ? { ...i, id: newId } : i
+      ),
+    })
+  },
+
+  clearCart: () => set({ cartItems: [], appliedCoupon: null, couponDiscountAmount: 0 }),
 
   getCartTotal: () => {
     return get().cartItems.reduce(
